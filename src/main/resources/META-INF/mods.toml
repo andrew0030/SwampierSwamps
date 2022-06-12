@@ -1,0 +1,28 @@
+modLoader="javafml"
+loaderVersion="[41,)"
+issueTrackerURL="https://github.com/andrew0030/SwampierSwamps/issues"
+logoFile="logo.png"
+license="GNU Lesser General Public License v3.0"
+
+[[mods]]
+    modId="swampier_swamps"
+    version="1.19-1.0.0"
+    displayName="Swampier Swamps"
+    displayURL="https://www.curseforge.com/minecraft/mc-mods/swampier-swamps"
+    credits=""
+    authors="andrew0030"
+    description='''Swampier Swamps is a Mod that aims to overhaul and improve the Swamp Biome, and some of the features added in the Wild Update'''
+
+[[dependencies.swampier_swamps]]
+    modId="forge"
+    mandatory=true
+    versionRange="[41,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.swampier_swamps]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.19,1.20)"
+    ordering="NONE"
+    side="BOTH"
