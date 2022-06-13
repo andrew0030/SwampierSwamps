@@ -22,7 +22,11 @@ public class FrogMixin
     public void finalizeSpawn(ServerLevelAccessor serverLevelAccessor, DifficultyInstance difficultyInstance, MobSpawnType spawnType, SpawnGroupData spawnGroupData, CompoundTag compound, CallbackInfoReturnable<SpawnGroupData> cir)
     {
         Holder<Biome> holder = serverLevelAccessor.getBiome(((Frog)(Object)this).blockPosition());
-        if(holder.is(Biomes.DESERT))
+        if(holder.is(Biomes.TAIGA))
+        {
+            ((Frog)(Object)this).setVariant(SSFrogVariants.WHITE_VARIANT.get());
+        }
+        else if(holder.is(Biomes.DESERT))
         {
             ((Frog)(Object)this).setVariant(SSFrogVariants.RED_VARIANT.get());
         }

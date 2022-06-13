@@ -1,7 +1,13 @@
 package andrews.swampier_swamps;
 
+import andrews.swampier_swamps.registry.SSBlocks;
 import andrews.swampier_swamps.registry.SSFrogVariants;
+import andrews.swampier_swamps.registry.SSItems;
 import andrews.swampier_swamps.util.Reference;
+import net.minecraft.client.animation.AnimationChannel;
+import net.minecraft.client.animation.AnimationDefinition;
+import net.minecraft.client.animation.Keyframe;
+import net.minecraft.client.animation.KeyframeAnimations;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -18,8 +24,8 @@ public class SwampierSwamps
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         SSFrogVariants.FROG_VARIANTS.register(modEventBus);
-        //SSItems.ITEMS.register(modEventBus);
-        //SSBlocks.BLOCKS.register(modEventBus);
+        SSItems.ITEMS.register(modEventBus);
+        SSBlocks.BLOCKS.register(modEventBus);
 
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
         {

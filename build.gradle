@@ -1,16 +1,9 @@
-buildscript {
-    // Can't use the newer 'plugins' block for Mixin, need to use the old 'apply plugin' method
-    dependencies {
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-    }
-}
 plugins {
     id 'eclipse'
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '5.+'
+    id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
 }
-// Can't use the newer 'plugins' block for Mixin, need to use the old 'apply plugin' method
-apply plugin: 'org.spongepowered.mixin'
 
 version = '1.19-1.0.0'
 group = 'com.andrews.swampier_swamps'

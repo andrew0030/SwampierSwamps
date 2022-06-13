@@ -1,0 +1,9 @@
+{
+"_comment1": "Items",
+  "item.swampier_swamps.frog_leg": "Frog Leg",
+  "item.swampier_swamps.cooked_frog_leg": "Cooked Frog Leg",
+
+"_comment2": "Blocks",
+  "block.swampier_swamps.mud_slab": "Mud Slab",
+  "block.swampier_swamps.mud_stairs": "Mud Stairs"
+}
