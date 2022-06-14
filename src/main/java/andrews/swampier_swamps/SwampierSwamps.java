@@ -48,5 +48,6 @@ public class SwampierSwamps
 //            SSBlockEntities.registerBlockEntityRenderers();
         });
         // Thread Safe Stuff Bellow
+        SSBlocks.registerBlockRenderTypes();
     }
 }

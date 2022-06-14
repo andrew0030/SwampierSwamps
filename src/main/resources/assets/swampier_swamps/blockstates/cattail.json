@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "waterlogged=true": {
+      "model": "swampier_swamps:block/cattail"
+    },
+    "waterlogged=false": {
+      "model": "swampier_swamps:block/cattail_top"
+    }
+  }
+}

@@ -5,7 +5,10 @@
   "package": "andrews.swampier_swamps.mixins",
   "refmap": "swampier_swamps.refmap.json",
   "mixins": [
-    "FrogMixin"
+    "BlockBehaviourMixin",
+    "BoneMealItemMixin",
+    "FrogMixin",
+    "VineBlockMixin"
   ],
   "client": [
   ],

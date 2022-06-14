@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "swampier_swamps:cattail"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "swampier_swamps:cattail",
+          "properties": {
+            "waterlogged": "false"
+          }
+        }
+      ]
+    }
+  ]
+}

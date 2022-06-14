@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "cookingtime": 100,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "swampier_swamps:frog_leg"
+  },
+  "result": "swampier_swamps:cooked_frog_leg"
+}

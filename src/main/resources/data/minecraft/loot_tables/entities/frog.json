@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "chance": 0.5,
+          "condition": "minecraft:random_chance_with_looting",
+          "looting_multiplier": 0.0625
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "swampier_swamps:frog_leg"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ]
+}
