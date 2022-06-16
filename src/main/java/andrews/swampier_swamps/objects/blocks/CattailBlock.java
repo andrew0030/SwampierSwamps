@@ -1,11 +1,13 @@
 package andrews.swampier_swamps.objects.blocks;
 
+import andrews.swampier_swamps.registry.SSBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -63,50 +65,39 @@ public class CattailBlock extends BushBlock
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState state1, boolean p_60570_)
     {
-        FluidState fluidstate = level.getFluidState(pos);
-        BlockState blockStateAbove = level.getBlockState(pos.above());
+        BlockState blockStateBelow1 = level.getBlockState(pos.below());
+        BlockState blockStateAbove1 = level.getBlockState(pos.above());
+        BlockState blockStateAbove2 = level.getBlockState(pos.above(2));
 
-        if(fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8)
+        if (!blockStateBelow1.is(this) && blockStateAbove1.is(Blocks.WATER) && blockStateAbove2.is(Blocks.AIR))
         {
-            if(blockStateAbove.is(Blocks.WATER) && level.getBlockState(pos.above(2)).is(Blocks.AIR))
-            {
-                level.setBlock(pos.above(2), this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false), 2); // Top Block (Above Water)
-                level.setBlock(pos.above(), this.defaultBlockState(), 2);                                                    // Middle Block (In Water)
-            }
-            else if(blockStateAbove.is(Blocks.AIR) && !level.getBlockState(pos.below()).is(this))
-            {
-                level.setBlock(pos.above(), this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false), 2); // Top Block (Above Water)
-            }
+            level.setBlock(pos.above(), this.defaultBlockState(), 2);                                                    // Middle Block (In Water)
+            level.setBlock(pos.above(2), this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false), 2); // Top Block (Above Water)
+        }
+        else if (!blockStateBelow1.is(this) && blockStateAbove1.is(Blocks.AIR))
+        {
+            level.setBlock(pos.above(), this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false), 2); // Top Block (Above Water)
         }
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
-        FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
-        BlockState blockStateAbove = context.getLevel().getBlockState(context.getClickedPos().above());
-
-        if(fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == 8)
-        {
-            if(blockStateAbove.is(Blocks.WATER) && context.getLevel().getBlockState(context.getClickedPos().above(2)).is(Blocks.AIR))
-            {
-                return super.getStateForPlacement(context);                                                                                                  // Bottom Block (In Water)
-            }
-            else if(blockStateAbove.is(Blocks.AIR) && !context.getLevel().getBlockState(context.getClickedPos().below()).is(this))
-            {
-                return super.getStateForPlacement(context);                                                                                                  // Bottom Block (In Water)
-            }
-        }
+        if(isValidCattailPosition(context.getLevel(), context.getClickedPos()))
+            return super.getStateForPlacement(context);
         return null;
     }
 
+    /**
+     * Gets called inside BoneMealItem to check if the Block can be placed at a randomly determined BlockPos
+     * around the area that was BoneMealed
+     */
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos)
     {
         BlockPos posBelow = pos.below();
         if (state.getBlock() == this)
-            return level.getBlockState(posBelow).canSustainPlant(level, posBelow, Direction.UP, this) ||
-                    level.getBlockState(posBelow).getBlock().equals(this);
+            return level.getBlockState(posBelow).canSustainPlant(level, posBelow, Direction.UP, this) || level.getBlockState(posBelow).is(this);
 
         return this.mayPlaceOn(level.getBlockState(posBelow), level, posBelow);
     }
@@ -123,14 +114,39 @@ public class CattailBlock extends BushBlock
         return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
-//    @Override
-//    public BlockState updateShape(BlockState p_154530_, Direction p_154531_, BlockState p_154532_, LevelAccessor p_154533_, BlockPos p_154534_, BlockPos p_154535_)
-//    {
-//        BlockState blockstate = super.updateShape(p_154530_, p_154531_, p_154532_, p_154533_, p_154534_, p_154535_);
-//        if (!blockstate.isAir()) {
-//            p_154533_.scheduleTick(p_154534_, Fluids.WATER, Fluids.WATER.getTickDelay(p_154533_));
-//        }
-//
-//        return blockstate;
-//    }
+    @Override
+    protected boolean mayPlaceOn(BlockState state, BlockGetter blockGetter, BlockPos pos)
+    {
+        return state.isFaceSturdy(blockGetter, pos, Direction.UP) && !state.is(Blocks.MAGMA_BLOCK);
+    }
+
+    @Override
+    public BlockState updateShape(BlockState state, Direction direction, BlockState state1, LevelAccessor levelAccessor, BlockPos pos, BlockPos pos1)
+    {
+        BlockState blockstate = super.updateShape(state, direction, state1, levelAccessor, pos, pos1);
+        if (!blockstate.isAir())
+            levelAccessor.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(levelAccessor));
+        return blockstate;
+    }
+
+    /**
+     * Used to determine if the position we want to place Cattail at, is a valid one
+     * @param level The Level
+     * @param pos The BlockPosition to check around
+     * @return Whether the position is Valid
+     */
+    public static boolean isValidCattailPosition(Level level, BlockPos pos)
+    {
+        FluidState fluidstate = level.getFluidState(pos);
+        BlockState blockStateBelow1 = level.getBlockState(pos.below());
+        BlockState blockStateAbove1 = level.getBlockState(pos.above());
+        BlockState blockStateAbove2 = level.getBlockState(pos.above(2));
+
+        if(fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == FluidState.AMOUNT_FULL)
+        {
+            return (!blockStateBelow1.is(SSBlocks.CATTAIL.get()) && blockStateAbove1.is(Blocks.WATER) && blockStateAbove2.is(Blocks.AIR)) ||
+                    (!blockStateBelow1.is(SSBlocks.CATTAIL.get()) && blockStateAbove1.is(Blocks.AIR));
+        }
+        return false;
+    }
 }

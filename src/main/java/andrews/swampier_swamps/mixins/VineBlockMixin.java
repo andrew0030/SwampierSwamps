@@ -30,12 +30,11 @@ public abstract class VineBlockMixin implements SimpleWaterloggedBlock
 {
     @Shadow protected abstract BlockState copyRandomFaces(BlockState state1, BlockState state2, RandomSource random);
     @Shadow protected abstract boolean hasHorizontalConnection(BlockState state);
-    @Shadow protected abstract boolean canSupportAtFace(BlockGetter blockGetter, BlockPos pos, Direction direction);
 
     @Inject(method = "<init>", at = @At(value = "TAIL"))
     public void VineBlock(BlockBehaviour.Properties properties, CallbackInfo ci)
     {
-        ((VineBlock)(Object)this).defaultBlockState = ((VineBlock)(Object) this).stateDefinition.any().setValue(VineBlock.UP, false).setValue(VineBlock.NORTH, false).setValue(VineBlock.EAST, false).setValue(VineBlock.SOUTH, false).setValue(VineBlock.WEST, false).setValue(BlockStateProperties.WATERLOGGED, false);
+        ((VineBlock)(Object)this).registerDefaultState(((VineBlock)(Object) this).stateDefinition.any().setValue(VineBlock.UP, false).setValue(VineBlock.NORTH, false).setValue(VineBlock.EAST, false).setValue(VineBlock.SOUTH, false).setValue(VineBlock.WEST, false).setValue(BlockStateProperties.WATERLOGGED, false));
     }
 
     @Inject(method = "randomTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;getBlockState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;", ordinal = 1, shift = At.Shift.AFTER))
