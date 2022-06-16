@@ -6,6 +6,7 @@
   "refmap": "swampier_swamps.refmap.json",
   "mixins": [
     "BlockBehaviourMixin",
+    "BlockMixin",
     "BoneMealItemMixin",
     "FrogMixin",
     "VineBlockMixin"

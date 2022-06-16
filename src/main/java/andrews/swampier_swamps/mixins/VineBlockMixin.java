@@ -42,14 +42,14 @@ public abstract class VineBlockMixin implements SimpleWaterloggedBlock
     public void randomTick(BlockState state, ServerLevel serverLevel, BlockPos pos, RandomSource random, CallbackInfo ci)
     {
         BlockPos posBelow = pos.below();
-        BlockState blockstate = serverLevel.getBlockState(posBelow);
-        if (blockstate.isAir() || blockstate.getBlock().equals(Blocks.WATER) || blockstate.is(((VineBlock)(Object)this)))
+        BlockState blockStateBelow = serverLevel.getBlockState(posBelow);
+        if (blockStateBelow.is(Blocks.WATER) || blockStateBelow.is(((VineBlock)(Object)this)))
         {
-            BlockState blockstate1 = (blockstate.isAir() || blockstate.getBlock().equals(Blocks.WATER)) ? ((VineBlock)(Object)this).defaultBlockState() : blockstate;
-            BlockState blockstate2 = copyRandomFaces(state, blockstate1, random);
-            if (blockstate1 != blockstate2 && hasHorizontalConnection(blockstate2))
+            BlockState newWaterVineOrCopy = blockStateBelow.is(Blocks.WATER) ? ((VineBlock)(Object)this).defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, true) : blockStateBelow;
+            BlockState stateForPlacement = copyRandomFaces(state, newWaterVineOrCopy, random);
+            if (newWaterVineOrCopy != stateForPlacement && hasHorizontalConnection(stateForPlacement))
             {
-                serverLevel.setBlock(posBelow, blockstate2.setValue(BlockStateProperties.WATERLOGGED, true), 2);
+                serverLevel.setBlock(posBelow, stateForPlacement, 2);
             }
         }
     }

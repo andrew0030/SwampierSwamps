@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "swampier_swamps:block/black_froglight_top",
+    "side": "swampier_swamps:block/black_froglight_side"
+  }
+}
