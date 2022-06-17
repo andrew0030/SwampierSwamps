@@ -5,23 +5,21 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.VineBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -31,10 +29,10 @@ public abstract class VineBlockMixin implements SimpleWaterloggedBlock
     @Shadow protected abstract BlockState copyRandomFaces(BlockState state1, BlockState state2, RandomSource random);
     @Shadow protected abstract boolean hasHorizontalConnection(BlockState state);
 
-    @Inject(method = "<init>", at = @At(value = "TAIL"))
-    public void VineBlock(BlockBehaviour.Properties properties, CallbackInfo ci)
+    @ModifyArg(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/VineBlock;registerDefaultState(Lnet/minecraft/world/level/block/state/BlockState;)V"))
+    public BlockState registerDefaultState(BlockState state)
     {
-        ((VineBlock)(Object)this).registerDefaultState(((VineBlock)(Object) this).stateDefinition.any().setValue(VineBlock.UP, false).setValue(VineBlock.NORTH, false).setValue(VineBlock.EAST, false).setValue(VineBlock.SOUTH, false).setValue(VineBlock.WEST, false).setValue(BlockStateProperties.WATERLOGGED, false));
+        return state.setValue(BlockStateProperties.WATERLOGGED, false);
     }
 
     @Inject(method = "randomTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/server/level/ServerLevel;getBlockState(Lnet/minecraft/core/BlockPos;)Lnet/minecraft/world/level/block/state/BlockState;", ordinal = 1, shift = At.Shift.AFTER))

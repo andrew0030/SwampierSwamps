@@ -24,7 +24,7 @@ public class FrogMixin
         Holder<Biome> holder = serverLevelAccessor.getBiome(((Frog)(Object)this).blockPosition());
         if(holder.is(Biomes.TAIGA))
         {
-            //((Frog)(Object)this).setVariant(SSFrogVariants.WHITE_VARIANT.get());
+//            ((Frog)(Object)this).setVariant(SSFrogVariants.WHITE_VARIANT.get());
         }
         else if(holder.is(Biomes.DESERT))
         {

@@ -17,7 +17,7 @@ public class BlockBehaviourMixin
     @Inject(method = "getFluidState", at = @At(value = "HEAD"), cancellable = true)
     public void getFluidState(BlockState state, CallbackInfoReturnable<FluidState> cir)
     {
-        if(state.getBlock().equals(Blocks.VINE))
+        if(state.is(Blocks.VINE))
         {
             cir.setReturnValue(state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : Fluids.EMPTY.defaultFluidState());
         }
