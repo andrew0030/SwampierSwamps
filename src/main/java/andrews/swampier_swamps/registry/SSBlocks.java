@@ -1,8 +1,6 @@
 package andrews.swampier_swamps.registry;
 
-import andrews.swampier_swamps.objects.blocks.CattailBlock;
-import andrews.swampier_swamps.objects.blocks.MudSlabBlock;
-import andrews.swampier_swamps.objects.blocks.MudStairsBlock;
+import andrews.swampier_swamps.objects.blocks.*;
 import andrews.swampier_swamps.util.Reference;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -20,7 +18,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import javax.annotation.Nullable;
 import java.util.function.Supplier;
 
 public class SSBlocks
@@ -44,19 +41,28 @@ public class SSBlocks
     public static final RegistryObject<Block> BROWN_FROG_LIGHT      = createBlock("brown_froglight", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.FROGLIGHT, MaterialColor.COLOR_BROWN).strength(0.3F).lightLevel((brightness) -> 15).sound(SoundType.FROGLIGHT)), CreativeModeTab.TAB_DECORATIONS);
     public static final RegistryObject<Block> RED_FROG_LIGHT        = createBlock("red_froglight", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.FROGLIGHT, MaterialColor.COLOR_RED).strength(0.3F).lightLevel((brightness) -> 15).sound(SoundType.FROGLIGHT)), CreativeModeTab.TAB_DECORATIONS);
     public static final RegistryObject<Block> BLACK_FROG_LIGHT      = createBlock("black_froglight", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.FROGLIGHT, MaterialColor.COLOR_BLACK).strength(0.3F).lightLevel((brightness) -> 15).sound(SoundType.FROGLIGHT)), CreativeModeTab.TAB_DECORATIONS);
-
+    // Vines
+    public static final RegistryObject<Block> SWAMP_VINE            = createBlock("swamp_vine", () -> new SwampVineBlock(BlockBehaviour.Properties.of(Material.REPLACEABLE_PLANT).noCollission().randomTicks().strength(0.2F).sound(SoundType.VINE)), CreativeModeTab.TAB_DECORATIONS);
     // Plants
-    public static final RegistryObject<Block> CATTAIL               = createBlock("cattail", CattailBlock::new, CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> CATTAIL               = createBlock("cattail", CattailBlock::new, CreativeModeTab.TAB_DECORATIONS);
+    public static final RegistryObject<Block> SINKING_LILY_PAD      = createBlockNoItem("sinking_lily_pad", () -> new SinkingLilyPad(BlockBehaviour.Properties.copy(Blocks.LILY_PAD)));
 
-    private static <B extends Block> RegistryObject<B> createBlock(String name, Supplier<? extends B> supplier, @Nullable CreativeModeTab group)
+    private static <B extends Block> RegistryObject<B> createBlock(String name, Supplier<? extends B> supplier, CreativeModeTab group)
     {
-        RegistryObject<B> block = BLOCKS.register(name, supplier);
+        RegistryObject<B> block = createBlockNoItem(name, supplier);
         SSItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(group)));
         return block;
     }
 
+    private static <B extends Block> RegistryObject<B> createBlockNoItem(String name, Supplier<? extends B> supplier)
+    {
+        return BLOCKS.register(name, supplier);
+    }
+
     public static void registerBlockRenderTypes()
     {
+        ItemBlockRenderTypes.setRenderLayer(SWAMP_VINE.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(CATTAIL.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(SINKING_LILY_PAD.get(), RenderType.cutout());
     }
 }

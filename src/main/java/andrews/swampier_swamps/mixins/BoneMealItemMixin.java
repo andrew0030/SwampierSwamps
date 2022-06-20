@@ -15,18 +15,18 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-import javax.annotation.Nullable;
 import java.util.Random;
 
 @Mixin(BoneMealItem.class)
 public class BoneMealItemMixin
 {
-    @Unique private static Level level;
+    @Unique
+    private static Level level;
     @Unique private static BlockPos pos;
 
     // I would use modifyArgs instead but for some reason its broken
     @ModifyVariable(method = "growWaterPlant", at = @At("STORE"), ordinal = 1)
-    private static BlockPos inject(BlockPos newPos, ItemStack stack, Level originalLevel, BlockPos originalPos, @Nullable Direction direction)
+    private static BlockPos inject(BlockPos newPos, ItemStack stack, Level originalLevel, BlockPos originalPos, Direction direction)
     {
         level = originalLevel;
         pos = newPos;

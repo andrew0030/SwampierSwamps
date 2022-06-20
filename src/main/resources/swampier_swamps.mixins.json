@@ -9,7 +9,7 @@
     "BlockMixin",
     "BoneMealItemMixin",
     "FrogMixin",
-    "VineBlockMixin"
+    "WaterlilyBlockMixin"
   ],
   "client": [
   ],

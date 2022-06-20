@@ -3,8 +3,22 @@
     "waterlogged=true": {
       "model": "swampier_swamps:block/cattail"
     },
-    "waterlogged=false": {
-      "model": "swampier_swamps:block/cattail_top"
-    }
+    "waterlogged=false": [
+      {
+        "model": "swampier_swamps:block/cattail_top"
+      },
+      {
+        "model": "swampier_swamps:block/cattail_top",
+        "y": 90
+      },
+      {
+        "model": "swampier_swamps:block/cattail_top",
+        "y": 180
+      },
+      {
+        "model": "swampier_swamps:block/cattail_top",
+        "y": 270
+      }
+    ]
   }
 }

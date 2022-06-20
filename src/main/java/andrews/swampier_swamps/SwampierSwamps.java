@@ -1,8 +1,10 @@
 package andrews.swampier_swamps;
 
+import andrews.swampier_swamps.network.SSNetwork;
 import andrews.swampier_swamps.registry.SSBlocks;
 import andrews.swampier_swamps.registry.SSFrogVariants;
 import andrews.swampier_swamps.registry.SSItems;
+import andrews.swampier_swamps.registry.SSTreeDecorators;
 import andrews.swampier_swamps.util.Reference;
 import net.minecraft.client.animation.AnimationChannel;
 import net.minecraft.client.animation.AnimationDefinition;
@@ -26,6 +28,7 @@ public class SwampierSwamps
         SSFrogVariants.FROG_VARIANTS.register(modEventBus);
         SSItems.ITEMS.register(modEventBus);
         SSBlocks.BLOCKS.register(modEventBus);
+        SSTreeDecorators.TREE_DECORATORS.register(modEventBus);
 
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
         {
@@ -38,7 +41,7 @@ public class SwampierSwamps
     {
         event.enqueueWork(() -> {});
         //Thread Safe Stuff Bellow
-//      SSNetwork.setupMessages();
+        SSNetwork.setupMessages();
     }
 
     void setupClient(final FMLClientSetupEvent event)

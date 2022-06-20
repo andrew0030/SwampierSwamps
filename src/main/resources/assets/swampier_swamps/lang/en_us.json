@@ -4,6 +4,7 @@
   "item.swampier_swamps.cooked_frog_leg": "Cooked Frog Leg",
 
 "_comment2": "Blocks",
+  "block.swampier_swamps.swamp_vine": "Swamp Vines",
   "block.swampier_swamps.mud_slab": "Mud Slab",
   "block.swampier_swamps.mud_stairs": "Mud Stairs",
   "block.swampier_swamps.white_froglight": "White Froglight",
@@ -19,5 +20,6 @@
   "block.swampier_swamps.brown_froglight": "Brown Froglight",
   "block.swampier_swamps.red_froglight": "Red Froglight",
   "block.swampier_swamps.black_froglight": "Black Froglight",
-  "block.swampier_swamps.cattail": "Cattail"
+  "block.swampier_swamps.cattail": "Cattail",
+  "block.swampier_swamps.sinking_lily_pad": "Sinking Lily Pad"
 }

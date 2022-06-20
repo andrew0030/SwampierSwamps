@@ -1,0 +1,55 @@
+{
+  "variants": {
+    "sink_stage=0": [
+      {
+        "model": "swampier_swamps:block/sinking_lily_pad"
+      },
+      {
+        "model": "swampier_swamps:block/sinking_lily_pad",
+        "y": 90
+      },
+      {
+        "model": "swampier_swamps:block/sinking_lily_pad",
+        "y": 180
+      },
+      {
+        "model": "swampier_swamps:block/sinking_lily_pad",
+        "y": 270
+      }
+    ],
+    "sink_stage=1": [
+      {
+        "model": "swampier_swamps:block/sinking_lily_pad_partial_sunk"
+      },
+      {
+        "model": "swampier_swamps:block/sinking_lily_pad_partial_sunk",
+        "y": 90
+      },
+      {
+        "model": "swampier_swamps:block/sinking_lily_pad_partial_sunk",
+        "y": 180
+      },
+      {
+        "model": "swampier_swamps:block/sinking_lily_pad_partial_sunk",
+        "y": 270
+      }
+    ],
+    "sink_stage=2": [
+      {
+        "model": "swampier_swamps:block/sinking_lily_pad_sunk"
+      },
+      {
+        "model": "swampier_swamps:block/sinking_lily_pad_sunk",
+        "y": 90
+      },
+      {
+        "model": "swampier_swamps:block/sinking_lily_pad_sunk",
+        "y": 180
+      },
+      {
+        "model": "swampier_swamps:block/sinking_lily_pad_sunk",
+        "y": 270
+      }
+    ]
+  }
+}
