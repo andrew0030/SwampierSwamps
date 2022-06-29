@@ -1,0 +1,96 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "swampier_swamps:block/small_lily_pad1"
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad1",
+        "y": 90
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad1",
+        "y": 180
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad1",
+        "y": 270
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad2"
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad2",
+        "y": 90
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad2",
+        "y": 180
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad2",
+        "y": 270
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad3"
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad3",
+        "y": 90
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad3",
+        "y": 180
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad3",
+        "y": 270
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad4"
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad4",
+        "y": 90
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad4",
+        "y": 180
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad4",
+        "y": 270
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad5"
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad5",
+        "y": 90
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad5",
+        "y": 180
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad5",
+        "y": 270
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad6"
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad6",
+        "y": 90
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad6",
+        "y": 180
+      },
+      {
+        "model": "swampier_swamps:block/small_lily_pad6",
+        "y": 270
+      }
+    ]
+  }
+}

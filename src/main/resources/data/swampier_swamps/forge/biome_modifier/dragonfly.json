@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#swampier_swamps:has_dragonfly",
+  "spawners": {
+    "type": "swampier_swamps:dragonfly",
+    "weight": 15,
+    "minCount": 3,
+    "maxCount": 6
+  },
+  "category": "creature"
+}

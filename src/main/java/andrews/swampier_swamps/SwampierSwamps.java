@@ -1,15 +1,9 @@
 package andrews.swampier_swamps;
 
 import andrews.swampier_swamps.network.SSNetwork;
-import andrews.swampier_swamps.registry.SSBlocks;
-import andrews.swampier_swamps.registry.SSFrogVariants;
-import andrews.swampier_swamps.registry.SSItems;
-import andrews.swampier_swamps.registry.SSTreeDecorators;
+import andrews.swampier_swamps.registry.*;
+import andrews.swampier_swamps.util.PotionRecipeChanger;
 import andrews.swampier_swamps.util.Reference;
-import net.minecraft.client.animation.AnimationChannel;
-import net.minecraft.client.animation.AnimationDefinition;
-import net.minecraft.client.animation.Keyframe;
-import net.minecraft.client.animation.KeyframeAnimations;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
@@ -28,6 +22,7 @@ public class SwampierSwamps
         SSFrogVariants.FROG_VARIANTS.register(modEventBus);
         SSItems.ITEMS.register(modEventBus);
         SSBlocks.BLOCKS.register(modEventBus);
+        SSEntities.ENTITIES.register(modEventBus);
         SSTreeDecorators.TREE_DECORATORS.register(modEventBus);
 
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
@@ -39,7 +34,12 @@ public class SwampierSwamps
 
     void setupCommon(final FMLCommonSetupEvent event)
     {
-        event.enqueueWork(() -> {});
+        event.enqueueWork(() ->
+        {
+            PotionRecipeChanger.alterLeapingPotionRecipe();
+            PotionRecipeChanger.registerRecipes();
+            SSEntities.registerSpawnPlacements();
+        });
         //Thread Safe Stuff Bellow
         SSNetwork.setupMessages();
     }

@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.PlaceOnWaterBlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -46,6 +47,20 @@ public class SSBlocks
     // Plants
     public static final RegistryObject<Block> CATTAIL               = createBlock("cattail", CattailBlock::new, CreativeModeTab.TAB_DECORATIONS);
     public static final RegistryObject<Block> SINKING_LILY_PAD      = createBlockNoItem("sinking_lily_pad", () -> new SinkingLilyPad(BlockBehaviour.Properties.copy(Blocks.LILY_PAD)));
+    public static final RegistryObject<Block> BIG_LILY_PAD          = createWaterPlacementBlock("big_lily_pad", () -> new BigLilyPadBlock(BlockBehaviour.Properties.copy(Blocks.LILY_PAD)), CreativeModeTab.TAB_DECORATIONS);
+    public static final RegistryObject<Block> SMALL_LILY_PAD        = createWaterPlacementBlock("small_lily_pad", () -> new SmallLilyPadBlock(BlockBehaviour.Properties.copy(Blocks.LILY_PAD).noCollission()), CreativeModeTab.TAB_DECORATIONS);
+
+    /**
+     * Used to register the RenderType for some Blocks
+     */
+    public static void registerBlockRenderTypes()
+    {
+        ItemBlockRenderTypes.setRenderLayer(SWAMP_VINE.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(CATTAIL.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(SINKING_LILY_PAD.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(BIG_LILY_PAD.get(), RenderType.cutout());
+        ItemBlockRenderTypes.setRenderLayer(SMALL_LILY_PAD.get(), RenderType.cutout());
+    }
 
     private static <B extends Block> RegistryObject<B> createBlock(String name, Supplier<? extends B> supplier, CreativeModeTab group)
     {
@@ -59,10 +74,10 @@ public class SSBlocks
         return BLOCKS.register(name, supplier);
     }
 
-    public static void registerBlockRenderTypes()
+    private static <B extends Block> RegistryObject<B> createWaterPlacementBlock(String name, Supplier<? extends B> supplier, CreativeModeTab group)
     {
-        ItemBlockRenderTypes.setRenderLayer(SWAMP_VINE.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CATTAIL.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(SINKING_LILY_PAD.get(), RenderType.cutout());
+        RegistryObject<B> block = createBlockNoItem(name, supplier);
+        SSItems.ITEMS.register(name, () -> new PlaceOnWaterBlockItem(block.get(), new Item.Properties().tab(group)));
+        return block;
     }
 }

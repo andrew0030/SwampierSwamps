@@ -83,11 +83,11 @@ public class SinkingLilyPad extends WaterlilyBlock
     private int getLivingEntitiesAtPos(Level level, BlockPos pos)
     {
         int livingEntityCount = 0;
-        for(Entity entity : level.getEntities(null, new AABB(pos)))
+        for(Entity entity : level.getEntities(null, new AABB(pos.getX() + 0.0625D, pos.getY(), pos.getZ() + 0.0625D, pos.getX() + 0.9375, pos.getY() + 1D, pos.getZ() + 0.9375D)))
         {
             if (entity instanceof LivingEntity livingEntity)
                 if (livingEntity.getBbHeight() > 1.2F)
-//                    if(livingEntity.isOnGround())
+                    if(livingEntity.isOnGround())
                         if(livingEntity.position().y > (double)((float)pos.below().getY() + 0.6875F))
                             ++livingEntityCount;
         }

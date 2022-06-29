@@ -1,19 +1,36 @@
 {
-  "replace": false,
   "type": "minecraft:entity",
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "chance": 0.5,
-          "condition": "minecraft:random_chance_with_looting",
-          "looting_multiplier": 0.0625
-        }
-      ],
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 2.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            },
+            {
+              "conditions": [
+                {
+                  "condition": "minecraft:entity_properties",
+                  "entity": "this",
+                  "predicate": {
+                    "flags": {
+                      "is_on_fire": true
+                    }
+                  }
+                }
+              ],
+              "function": "minecraft:furnace_smelt"
+            }
+          ],
           "name": "swampier_swamps:frog_leg"
         }
       ],

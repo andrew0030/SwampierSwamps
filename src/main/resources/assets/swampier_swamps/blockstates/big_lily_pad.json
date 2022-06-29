@@ -1,0 +1,55 @@
+{
+  "variants": {
+    "lily_pad_part=0,facing=north": {
+      "model": "swampier_swamps:block/big_lily_pad"
+    },
+    "lily_pad_part=1,facing=north": {
+      "model": "swampier_swamps:block/big_lily_pad_empty"
+    },
+    "lily_pad_part=2,facing=north": {
+      "model": "swampier_swamps:block/big_lily_pad_empty"
+    },
+    "lily_pad_part=3,facing=north": {
+      "model": "swampier_swamps:block/big_lily_pad_empty"
+    },
+    "lily_pad_part=0,facing=east": {
+      "model": "swampier_swamps:block/big_lily_pad",
+      "y": 90
+    },
+    "lily_pad_part=1,facing=east": {
+      "model": "swampier_swamps:block/big_lily_pad_empty"
+    },
+    "lily_pad_part=2,facing=east": {
+      "model": "swampier_swamps:block/big_lily_pad_empty"
+    },
+    "lily_pad_part=3,facing=east": {
+      "model": "swampier_swamps:block/big_lily_pad_empty"
+    },
+    "lily_pad_part=0,facing=south": {
+      "model": "swampier_swamps:block/big_lily_pad",
+      "y": 180
+    },
+    "lily_pad_part=1,facing=south": {
+      "model": "swampier_swamps:block/big_lily_pad_empty"
+    },
+    "lily_pad_part=2,facing=south": {
+      "model": "swampier_swamps:block/big_lily_pad_empty"
+    },
+    "lily_pad_part=3,facing=south": {
+      "model": "swampier_swamps:block/big_lily_pad_empty"
+    },
+    "lily_pad_part=0,facing=west": {
+      "model": "swampier_swamps:block/big_lily_pad",
+      "y": 270
+    },
+    "lily_pad_part=1,facing=west": {
+      "model": "swampier_swamps:block/big_lily_pad_empty"
+    },
+    "lily_pad_part=2,facing=west": {
+      "model": "swampier_swamps:block/big_lily_pad_empty"
+    },
+    "lily_pad_part=3,facing=west": {
+      "model": "swampier_swamps:block/big_lily_pad_empty"
+    }
+  }
+}

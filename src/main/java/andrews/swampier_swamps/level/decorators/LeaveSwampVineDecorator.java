@@ -5,7 +5,9 @@ import andrews.swampier_swamps.registry.SSTreeDecorators;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.VineBlock;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
@@ -66,9 +68,9 @@ public class LeaveSwampVineDecorator extends TreeDecorator
         context.setBlock(pos, SSBlocks.SWAMP_VINE.get().defaultBlockState().setValue(property, true));
         int i = 4;
 
-        for(BlockPos blockpos = pos.below(); context.isAir(blockpos) && i > 0; --i)
+        for(BlockPos blockpos = pos.below(); (context.isAir(blockpos) || context.level().isStateAtPosition(blockpos, state -> state.is(Blocks.WATER))) && i > 0; --i)
         {
-            context.setBlock(blockpos, SSBlocks.SWAMP_VINE.get().defaultBlockState().setValue(property, true));
+            context.setBlock(blockpos, SSBlocks.SWAMP_VINE.get().defaultBlockState().setValue(property, true).setValue(BlockStateProperties.WATERLOGGED, context.level().isStateAtPosition(blockpos, state -> state.is(Blocks.WATER))));
             blockpos = blockpos.below();
         }
     }
