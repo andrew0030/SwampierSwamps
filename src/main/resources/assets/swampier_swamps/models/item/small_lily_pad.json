@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "swampier_swamps:block/small_lily_pad1"
+    "layer0": "swampier_swamps:block/small_lily_pad6"
   }
 }

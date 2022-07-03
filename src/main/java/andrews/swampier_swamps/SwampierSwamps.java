@@ -22,6 +22,7 @@ public class SwampierSwamps
         SSFrogVariants.FROG_VARIANTS.register(modEventBus);
         SSItems.ITEMS.register(modEventBus);
         SSBlocks.BLOCKS.register(modEventBus);
+        SSFeatures.FEATURES.register(modEventBus);
         SSEntities.ENTITIES.register(modEventBus);
         SSTreeDecorators.TREE_DECORATORS.register(modEventBus);
 

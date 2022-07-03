@@ -208,7 +208,7 @@ public class Dragonfly extends Animal implements FlyingAnimal
         private Vec3 findPos()
         {
             Vec3 viewVector = mob.getViewVector(0.0F);
-            Vec3 hoverPos = HoverRandomPos.getPos(mob, 8, 7, viewVector.x, viewVector.z, ((float) Math.PI / 2F), 3, 1);
+            Vec3 hoverPos = HoverRandomPos.getPos(mob, 8, 7, viewVector.x, viewVector.z, ((float) Math.PI / 2F), 3, 2);
             return hoverPos != null ? hoverPos : AirAndWaterRandomPos.getPos(mob, 8, 4, -1, viewVector.x, viewVector.z, (float) Math.PI / 2F);
         }
     }

@@ -1,0 +1,6 @@
+{
+  "type": "swampier_swamps:patch_cattail",
+  "config": {
+    "probability": 0.5
+  }
+}
