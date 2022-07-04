@@ -40,6 +40,7 @@ public class SwampierSwamps
             PotionRecipeChanger.alterLeapingPotionRecipe();
             PotionRecipeChanger.registerRecipes();
             SSEntities.registerSpawnPlacements();
+            SSFlammables.registerFlammables();
         });
         //Thread Safe Stuff Bellow
         SSNetwork.setupMessages();

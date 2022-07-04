@@ -5,16 +5,11 @@ import andrews.swampier_swamps.registry.SSBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.WaterlilyBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.Tilt;
 import net.minecraft.world.level.material.FluidState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -37,7 +32,7 @@ public class BlockBehaviourMixin
                 level.setBlock(pos, SSBlocks.SINKING_LILY_PAD.get().defaultBlockState(), 2);
     }
 
-    @Inject(method = "randomTick", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "randomTick", at = @At(value = "HEAD"))
     public void injectRandomTickHead(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand, CallbackInfo ci)
     {
         if(state.is(Blocks.LILY_PAD))
@@ -93,7 +88,6 @@ public class BlockBehaviourMixin
                     level.setBlock(pos.relative(direction).relative(direction.getClockWise()), SSBlocks.BIG_LILY_PAD.get().defaultBlockState().setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 3), 2);
                 }
             }
-            ci.cancel();
         }
     }
 
