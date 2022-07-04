@@ -3,6 +3,7 @@ package andrews.swampier_swamps.objects.blocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.vehicle.Boat;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.WaterlilyBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
@@ -35,10 +37,32 @@ public class SmallLilyPadBlock extends WaterlilyBlock
     }
 
     @Override
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand)
+    {
+        // We reduce how often the Block attempts to grow
+        if (rand.nextInt(25) == 0)
+        {
+            int lilyPadLimiter = 5; // We use this to determine if there are less than a given amount of Lily Pads around
+            // We check 5 Blocks in all directions
+            for(BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-5, -1, -5), pos.offset(5, 1, 5)))
+            {
+                if (level.getBlockState(blockpos).is(Blocks.LILY_PAD))
+                {
+                    --lilyPadLimiter;
+                    if (lilyPadLimiter <= 0)
+                        return; // If there are too many Lily Pads we return
+                }
+            }
+            // If everything went well we grow the Small Lily Pad into a normal one
+            level.setBlock(pos, Blocks.LILY_PAD.defaultBlockState(), 2);
+        }
+    }
+
+    @Override
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity)
     {
         super.entityInside(state, level, pos, entity);
-        if (level instanceof ServerLevel && (entity instanceof Boat || (entity instanceof LivingEntity livingEntity && livingEntity.getBbHeight() > 1F)))
+        if (level instanceof ServerLevel && entity instanceof Boat)
         {
             level.destroyBlock(new BlockPos(pos), false, entity);
         }

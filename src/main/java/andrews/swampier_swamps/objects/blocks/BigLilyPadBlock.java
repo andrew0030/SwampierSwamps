@@ -3,6 +3,8 @@ package andrews.swampier_swamps.objects.blocks;
 import andrews.swampier_swamps.registry.SSBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -32,6 +34,39 @@ public class BigLilyPadBlock extends WaterlilyBlock
     {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LILY_PAD_PART, 0));
+    }
+
+    @Override
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand)
+    {
+        if (rand.nextInt(25) == 0)
+        {
+            int smallLilyPadLimit = 30;
+
+            for(BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-5, -1, -5), pos.offset(5, 1, 5)))
+            {
+                if (level.getBlockState(blockpos).is(SSBlocks.SMALL_LILY_PAD.get()))
+                {
+                    --smallLilyPadLimit;
+                    if (smallLilyPadLimit <= 0)
+                        return;
+                }
+            }
+
+            BlockPos randPosForPlacement = pos.offset(rand.nextInt(4) - rand.nextInt(4), 0, rand.nextInt(4) - rand.nextInt(4));
+            BlockState smallLilyPadState = SSBlocks.SMALL_LILY_PAD.get().defaultBlockState();
+
+            for(int i = 0; i < 4; ++i)
+            {
+                if (level.isEmptyBlock(randPosForPlacement) && smallLilyPadState.canSurvive(level, randPosForPlacement))
+                    pos = randPosForPlacement;
+
+                randPosForPlacement = pos.offset(rand.nextInt(4) - rand.nextInt(4), 0, rand.nextInt(4) - rand.nextInt(4));
+            }
+
+            if (level.isEmptyBlock(randPosForPlacement) && smallLilyPadState.canSurvive(level, randPosForPlacement))
+                level.setBlock(randPosForPlacement, smallLilyPadState, 2);
+        }
     }
 
     @Override

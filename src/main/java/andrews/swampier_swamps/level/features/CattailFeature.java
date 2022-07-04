@@ -1,12 +1,10 @@
 package andrews.swampier_swamps.level.features;
 
-import andrews.swampier_swamps.objects.blocks.CattailBlock;
 import andrews.swampier_swamps.registry.SSBlocks;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;

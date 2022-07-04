@@ -47,8 +47,8 @@ public class SSBlocks
     // Plants
     public static final RegistryObject<Block> CATTAIL               = createBlock("cattail", CattailBlock::new, CreativeModeTab.TAB_DECORATIONS);
     public static final RegistryObject<Block> SINKING_LILY_PAD      = createBlockNoItem("sinking_lily_pad", () -> new SinkingLilyPad(BlockBehaviour.Properties.copy(Blocks.LILY_PAD)));
-    public static final RegistryObject<Block> BIG_LILY_PAD          = createWaterPlacementBlock("big_lily_pad", () -> new BigLilyPadBlock(BlockBehaviour.Properties.copy(Blocks.LILY_PAD)), CreativeModeTab.TAB_DECORATIONS);
-    public static final RegistryObject<Block> SMALL_LILY_PAD        = createWaterPlacementBlock("small_lily_pad", () -> new SmallLilyPadBlock(BlockBehaviour.Properties.copy(Blocks.LILY_PAD).noCollission()), CreativeModeTab.TAB_DECORATIONS);
+    public static final RegistryObject<Block> BIG_LILY_PAD          = createWaterPlacementBlock("big_lily_pad", () -> new BigLilyPadBlock(BlockBehaviour.Properties.copy(Blocks.LILY_PAD).randomTicks()), CreativeModeTab.TAB_DECORATIONS);
+    public static final RegistryObject<Block> SMALL_LILY_PAD        = createWaterPlacementBlock("small_lily_pad", () -> new SmallLilyPadBlock(BlockBehaviour.Properties.copy(Blocks.LILY_PAD).noCollission().randomTicks()), CreativeModeTab.TAB_DECORATIONS);
 
     /**
      * Used to register the RenderType for some Blocks

@@ -1,0 +1,19 @@
+{
+  "feature": "swampier_swamps:patch_big_lily_pad",
+  "placement": [
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "WORLD_SURFACE_WG"
+    },
+    {
+      "type": "minecraft:count",
+      "count": 8
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}
