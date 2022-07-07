@@ -2,22 +2,19 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "rolls": 1,
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
           "name": "swampier_swamps:cattail"
         }
       ],
-      "conditions": [
-        {
-          "condition": "minecraft:block_state_property",
-          "block": "swampier_swamps:cattail",
-          "properties": {
-            "waterlogged": "false"
-          }
-        }
-      ]
+      "rolls": 1.0
     }
   ]
 }

@@ -1,12 +1,15 @@
 package andrews.swampier_swamps.level.features;
 
+import andrews.swampier_swamps.registry.SSTags;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
@@ -63,7 +66,6 @@ public class MudPuddleFeature extends Feature<NoneFeatureConfiguration>
             }
 
             BlockState waterState = Blocks.WATER.defaultBlockState();
-
             for(int waterXOffset = 0; waterXOffset < 16; ++waterXOffset)
             {
                 for(int waterZOffset = 0; waterZOffset < 16; ++waterZOffset)
@@ -96,10 +98,23 @@ public class MudPuddleFeature extends Feature<NoneFeatureConfiguration>
                             {
                                 boolean placeAir = waterYOffset >= 4;
                                 level.setBlock(posAtTarget, placeAir ? Blocks.AIR.defaultBlockState() : waterState, 2);
-                                if (placeAir)
+                                // If there is a Log (Tree) above, we extend the Tree Logs down
+                                if(level.getBlockState(posAtTarget.above()).is(Blocks.OAK_LOG) && level.getBlockState(posAtTarget.above()).getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y)
                                 {
-                                    level.scheduleTick(posAtTarget, Blocks.AIR, 0);
-                                    this.markAboveForPostProcessing(level, posAtTarget);
+                                    BlockPos extraLogsPos = posAtTarget;
+                                    while(!level.getBlockState(extraLogsPos).getMaterial().isSolid())
+                                    {
+                                        level.setBlock(extraLogsPos, Blocks.OAK_LOG.defaultBlockState(), 2);
+                                        extraLogsPos = extraLogsPos.below();
+                                    }
+                                }
+                                else
+                                {
+                                    if (placeAir)
+                                    {
+                                        level.scheduleTick(posAtTarget, Blocks.AIR, 0);
+                                        this.markAboveForPostProcessing(level, posAtTarget);
+                                    }
                                 }
                             }
                         }
@@ -134,7 +149,7 @@ public class MudPuddleFeature extends Feature<NoneFeatureConfiguration>
                                     int zRimOffset = rand.nextInt(4) - rand.nextInt(4);
                                     BlockPos fadeInPos = pos.offset(mudXOffset + xRimOffset, mudYOffset, mudZOffset + zRimOffset);
                                     BlockState stateAtRim = level.getBlockState(fadeInPos);
-                                    if(stateAtRim.getMaterial().isSolid() && !stateAtRim.is(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE))
+                                    if(stateAtRim.is(SSTags.Blocks.MUD_PUDDLE_CAN_REPLACE))
                                     {
                                         level.setBlock(fadeInPos, rand.nextInt(15) == 0 ? mudRootState : mudState, 2);
                                         this.markAboveForPostProcessing(level, fadeInPos);

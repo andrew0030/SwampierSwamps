@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "minecraft:swamp",
+  "features": "swampier_swamps:decaying_log",
+  "step": "vegetal_decoration"
+}

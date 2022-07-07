@@ -47,18 +47,18 @@ public class CattailBlock extends BushBlock
         if(!state.getValue(BlockStateProperties.WATERLOGGED))
         {
             if(level.getBlockState(pos.below()).is(this))
-                level.destroyBlock(pos.below(), true);
+                level.destroyBlock(pos.below(), false);
             if(level.getBlockState(pos.below(2)).is(this))
-                level.destroyBlock(pos.below(2), true);
+                level.destroyBlock(pos.below(2), false);
         }
         else
         {
             if(level.getBlockState(pos.below()).is(this))
-                level.destroyBlock(pos.below(), true);
+                level.destroyBlock(pos.below(), false);
             if(level.getBlockState(pos.above()).is(this))
-                level.destroyBlock(pos.above(), true);
+                level.destroyBlock(pos.above(), false);
             if(level.getBlockState(pos.above(2)).is(this))
-                level.destroyBlock(pos.above(2), true);
+                level.destroyBlock(pos.above(2), false);
         }
     }
 

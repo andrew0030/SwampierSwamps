@@ -13,6 +13,7 @@ public class SSTags
     {
         public static final TagKey<Block> FROGLIGHTS                = createTag("froglights");
         public static final TagKey<Block> DRAGONFLIES_SPAWNABLE_ON  = createTag("dragonflies_spawnable_on");
+        public static final TagKey<Block> MUD_PUDDLE_CAN_REPLACE    = createTag("mud_puddle_can_replace");
 
         private static TagKey<Block> createTag(String name)
         {

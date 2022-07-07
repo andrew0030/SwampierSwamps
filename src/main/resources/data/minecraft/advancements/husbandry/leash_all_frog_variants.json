@@ -1,0 +1,438 @@
+{
+  "parent": "minecraft:husbandry/tadpole_in_a_bucket",
+  "criteria": {
+    "swampier_swamps:white_variant": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:frog",
+              "type_specific": {
+                "type": "frog",
+                "variant": "swampier_swamps:white_variant"
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "minecraft:lead"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "swampier_swamps:magenta_variant": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:frog",
+              "type_specific": {
+                "type": "frog",
+                "variant": "swampier_swamps:magenta_variant"
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "minecraft:lead"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "swampier_swamps:light_blue_variant": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:frog",
+              "type_specific": {
+                "type": "frog",
+                "variant": "swampier_swamps:light_blue_variant"
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "minecraft:lead"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "swampier_swamps:yellow_variant": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:frog",
+              "type_specific": {
+                "type": "frog",
+                "variant": "swampier_swamps:yellow_variant"
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "minecraft:lead"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "swampier_swamps:lime_variant": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:frog",
+              "type_specific": {
+                "type": "frog",
+                "variant": "swampier_swamps:lime_variant"
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "minecraft:lead"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "swampier_swamps:pink_variant": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:frog",
+              "type_specific": {
+                "type": "frog",
+                "variant": "swampier_swamps:pink_variant"
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "minecraft:lead"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "swampier_swamps:gray_variant": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:frog",
+              "type_specific": {
+                "type": "frog",
+                "variant": "swampier_swamps:gray_variant"
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "minecraft:lead"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "swampier_swamps:cyan_variant": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:frog",
+              "type_specific": {
+                "type": "frog",
+                "variant": "swampier_swamps:cyan_variant"
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "minecraft:lead"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "swampier_swamps:purple_variant": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:frog",
+              "type_specific": {
+                "type": "frog",
+                "variant": "swampier_swamps:purple_variant"
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "minecraft:lead"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "swampier_swamps:blue_variant": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:frog",
+              "type_specific": {
+                "type": "frog",
+                "variant": "swampier_swamps:blue_variant"
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "minecraft:lead"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "swampier_swamps:brown_variant": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:frog",
+              "type_specific": {
+                "type": "frog",
+                "variant": "swampier_swamps:brown_variant"
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "minecraft:lead"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "swampier_swamps:red_variant": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:frog",
+              "type_specific": {
+                "type": "frog",
+                "variant": "swampier_swamps:red_variant"
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "minecraft:lead"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "swampier_swamps:black_variant": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:frog",
+              "type_specific": {
+                "type": "frog",
+                "variant": "swampier_swamps:black_variant"
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "minecraft:lead"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "minecraft:cold": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:frog",
+              "type_specific": {
+                "type": "frog",
+                "variant": "minecraft:cold"
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "minecraft:lead"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "minecraft:temperate": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:frog",
+              "type_specific": {
+                "type": "frog",
+                "variant": "minecraft:temperate"
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "minecraft:lead"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    },
+    "minecraft:warm": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "minecraft:frog",
+              "type_specific": {
+                "type": "frog",
+                "variant": "minecraft:warm"
+              }
+            }
+          }
+        ],
+        "item": {
+          "items": [
+            "minecraft:lead"
+          ]
+        }
+      },
+      "trigger": "minecraft:player_interacted_with_entity"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.husbandry.leash_all_frog_variants.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:lead"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.husbandry.leash_all_frog_variants.title"
+    }
+  },
+  "requirements": [
+    [
+      "swampier_swamps:white_variant"
+    ],
+    [
+      "swampier_swamps:magenta_variant"
+    ],
+    [
+      "swampier_swamps:light_blue_variant"
+    ],
+    [
+      "swampier_swamps:yellow_variant"
+    ],
+    [
+      "swampier_swamps:lime_variant"
+    ],
+    [
+      "swampier_swamps:pink_variant"
+    ],
+    [
+      "swampier_swamps:gray_variant"
+    ],
+    [
+      "swampier_swamps:cyan_variant"
+    ],
+    [
+      "swampier_swamps:purple_variant"
+    ],
+    [
+      "swampier_swamps:blue_variant"
+    ],
+    [
+      "swampier_swamps:brown_variant"
+    ],
+    [
+      "swampier_swamps:red_variant"
+    ],
+    [
+      "swampier_swamps:black_variant"
+    ],
+    [
+      "minecraft:temperate"
+    ],
+    [
+      "minecraft:warm"
+    ],
+    [
+      "minecraft:cold"
+    ]
+  ]
+}

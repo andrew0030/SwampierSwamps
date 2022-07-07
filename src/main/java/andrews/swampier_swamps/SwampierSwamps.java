@@ -25,6 +25,7 @@ public class SwampierSwamps
         SSFeatures.FEATURES.register(modEventBus);
         SSEntities.ENTITIES.register(modEventBus);
         SSTreeDecorators.TREE_DECORATORS.register(modEventBus);
+        SSPlacements.PLACEMENT_MODIFIER.register(modEventBus);
 
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
         {

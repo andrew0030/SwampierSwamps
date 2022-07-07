@@ -1,12 +1,12 @@
 {
-  "feature": "swampier_swamps:mud_puddle",
+  "feature": "swampier_swamps:decaying_log",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 10
+      "chance": 15
     },
     {
-      "type": "swampier_swamps:mud_puddle_placer"
+      "type": "minecraft:in_square"
     },
     {
       "type": "minecraft:heightmap",
