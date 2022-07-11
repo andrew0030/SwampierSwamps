@@ -3,6 +3,7 @@ package andrews.swampier_swamps.level.decorators;
 import andrews.swampier_swamps.registry.SSBlocks;
 import andrews.swampier_swamps.registry.SSTreeDecorators;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Blocks;
@@ -14,17 +15,24 @@ import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorTy
 
 public class LeaveSwampVineDecorator extends TreeDecorator
 {
-    public static final Codec<LeaveSwampVineDecorator> CODEC = Codec.floatRange(0.0F, 1.0F).fieldOf("probability").xmap(LeaveSwampVineDecorator::new, (decorator) -> decorator.probability).codec();
-    private final float probability;
+    public static final Codec<LeaveSwampVineDecorator> CODEC = RecordCodecBuilder.create((builder) ->
+    builder.group(
+        Codec.floatRange(0.0F, 1.0F).fieldOf("probability").forGetter((getter) -> getter.probability),
+        Codec.intRange(1, 8).fieldOf("length").forGetter((getter) -> getter.length))
+    .apply(builder, LeaveSwampVineDecorator::new));
+    // Values
+    protected final float probability;
+    protected final int length;
 
     protected TreeDecoratorType<?> type()
     {
         return SSTreeDecorators.LEAVE_SWAMP_VINE.get();
     }
 
-    public LeaveSwampVineDecorator(float probability)
+    public LeaveSwampVineDecorator(float probability, int length)
     {
         this.probability = probability;
+        this.length = length;
     }
 
     public void place(TreeDecorator.Context context)
@@ -63,10 +71,10 @@ public class LeaveSwampVineDecorator extends TreeDecorator
         });
     }
 
-    private static void addHangingVine(BlockPos pos, BooleanProperty property, TreeDecorator.Context context)
+    private void addHangingVine(BlockPos pos, BooleanProperty property, TreeDecorator.Context context)
     {
         context.setBlock(pos, SSBlocks.SWAMP_VINE.get().defaultBlockState().setValue(property, true));
-        int i = 4;
+        int i = this.length;
 
         for(BlockPos blockpos = pos.below(); (context.isAir(blockpos) || context.level().isStateAtPosition(blockpos, state -> state.is(Blocks.WATER))) && i > 0; --i)
         {

@@ -1,5 +1,6 @@
 package andrews.swampier_swamps.objects.blocks;
 
+import andrews.swampier_swamps.config.SSConfigs;
 import andrews.swampier_swamps.network.NetworkUtil;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.core.BlockPos;
@@ -39,7 +40,7 @@ public class SinkingLilyPad extends WaterlilyBlock
     {
         if(level instanceof ServerLevel)
             if (!(state.getValue(SINK_STAGE) > 0))
-                level.scheduleTick(pos, this, 5);
+                level.scheduleTick(pos, this, SSConfigs.commonConfig.lilyPadSinkTimeStage1.get());
     }
 
     @Override
@@ -57,17 +58,17 @@ public class SinkingLilyPad extends WaterlilyBlock
                 // If there are any LivingEntities over the Block we schedule the next tick and set
                 // the Block to its next Sinking Stage
                 if(getLivingEntitiesAtPos(level, pos) > 0) {
-                    setNextSinkStage(level, pos, 1, 5);
+                    setNextSinkStage(level, pos, 1, SSConfigs.commonConfig.lilyPadSinkTimeStage2.get());
                 } else { // If there aren't any LivingEntities over the block we revert to default (Lily Pad Block)
                     level.setBlock(pos, Blocks.LILY_PAD.defaultBlockState(), 2);
                 }
                 break;
             case 1:
                 if(getLivingEntitiesAtPos(level, pos) > 0) {
-                    setNextSinkStage(level, pos, 2, 10);
+                    setNextSinkStage(level, pos, 2, SSConfigs.commonConfig.lilyPadSinkTimeStage3.get());
                 } else { // If there aren't any LivingEntities over the block we revert to default (Lily Pad Block)
                     level.setBlock(pos, this.defaultBlockState().setValue(SINK_STAGE, 0), 2);
-                    level.scheduleTick(pos, this, 20);
+                    level.scheduleTick(pos, this, SSConfigs.commonConfig.lilyPadResetTime.get());
                 }
                 break;
             case 2:
@@ -75,7 +76,7 @@ public class SinkingLilyPad extends WaterlilyBlock
                     level.destroyBlock(pos, true);
                 } else { // If there aren't any LivingEntities over the block we revert to default (Lily Pad Block)
                     level.setBlock(pos, this.defaultBlockState().setValue(SINK_STAGE, 1), 2);
-                    level.scheduleTick(pos, this, 20);
+                    level.scheduleTick(pos, this, SSConfigs.commonConfig.lilyPadResetTime.get());
                 }
         }
     }

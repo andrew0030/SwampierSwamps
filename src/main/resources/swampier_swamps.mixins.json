@@ -5,6 +5,7 @@
   "package": "andrews.swampier_swamps.mixins",
   "refmap": "swampier_swamps.refmap.json",
   "mixins": [
+    "AbstractTreeGrowerMixin",
     "BlockBehaviourMixin",
     "BlockMixin",
     "BoneMealItemMixin",
@@ -12,7 +13,6 @@
     "WaterlilyBlockMixin"
   ],
   "client": [
-
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,5 +1,6 @@
 package andrews.swampier_swamps.entities.model;
 
+import andrews.swampier_swamps.config.SSConfigs;
 import andrews.swampier_swamps.entities.Dragonfly;
 import andrews.swampier_swamps.util.Reference;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -54,6 +55,24 @@ public class DragonflyModel<E extends Dragonfly> extends EntityModel<E>
     @Override
     public void setupAnim(E entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
     {
+        if (SSConfigs.clientConfig.randomizeDragonflySizes.get())
+        {
+            this.body.xScale = 1.16F - (0.08F * entity.getDragonflyScale());
+            this.body.yScale = 1.16F - (0.08F * entity.getDragonflyScale());
+            this.body.zScale = 1.16F - (0.08F * entity.getDragonflyScale());
+        }
+        else
+        {
+            // If the config is false we reset the scale, this is done so the value
+            // can be altered while the game is running.
+            if (this.body.xScale != 1F)
+            {
+                this.body.xScale = 1F;
+                this.body.yScale = 1F;
+                this.body.zScale = 1F;
+            }
+        }
+
         if(entity.isMoving() || entity.getBlockStateOn().is(Blocks.AIR))
         {
             // Right Wings

@@ -14,8 +14,8 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.FoliageColor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterColorHandlersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -35,7 +35,7 @@ public class ClientEvents
     }
 
     @SubscribeEvent
-    public static void registerBlockColor(ColorHandlerEvent.Block event)
+    public static void registerBlockColor(RegisterColorHandlersEvent.Block event)
     {
         BlockColors blockcolors = event.getBlockColors();
         blockcolors.register((state, level, pos, tintIndex) -> isNotNull(level, pos) ? BiomeColors.getAverageFoliageColor(level, pos) : FoliageColor.getDefaultColor(), SSBlocks.SWAMP_VINE.get());
@@ -43,7 +43,7 @@ public class ClientEvents
     }
 
     @SubscribeEvent
-    public static void registerBlockColor(ColorHandlerEvent.Item event)
+    public static void registerBlockColor(RegisterColorHandlersEvent.Item event)
     {
         BlockColors blockcolors = event.getBlockColors();
         ItemColors itemcolors = event.getItemColors();

@@ -7,9 +7,11 @@ import andrews.swampier_swamps.level.features.MudPuddleFeature;
 import andrews.swampier_swamps.util.Reference;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.RandomPatchFeature;
+import net.minecraft.world.level.levelgen.feature.TreeFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.ProbabilityFeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -26,4 +28,5 @@ public class SSFeatures
     public static final RegistryObject<Feature<NoneFeatureConfiguration>>        MUD_PUDDLE              = FEATURES.register("mud_puddle", () -> new MudPuddleFeature(NoneFeatureConfiguration.CODEC));
     // Tree Stuff
     public static final RegistryObject<Feature<NoneFeatureConfiguration>>        DECAYING_LOG            = FEATURES.register("decaying_log", () -> new DecayingLogFeature(NoneFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<TreeConfiguration>>               BALD_CYPRESS            = FEATURES.register("bald_cypress", () -> new TreeFeature(TreeConfiguration.CODEC));
 }

@@ -1,5 +1,7 @@
 package andrews.swampier_swamps.objects.blocks;
 
+import andrews.swampier_swamps.config.SSConfigs;
+import andrews.swampier_swamps.registry.SSTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -42,19 +44,23 @@ public class SmallLilyPadBlock extends WaterlilyBlock
         // We reduce how often the Block attempts to grow
         if (rand.nextInt(25) == 0)
         {
-            int lilyPadLimiter = 5; // We use this to determine if there are less than a given amount of Lily Pads around
-            // We check 5 Blocks in all directions
-            for(BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-5, -1, -5), pos.offset(5, 1, 5)))
+            int configValue = SSConfigs.commonConfig.shouldLilyPadsGrow.get();
+            if ((configValue == 1 && level.getBiome(pos).is(SSTags.Biomes.CAN_LILY_PAD_GROW_IN)) || configValue == 2)
             {
-                if (level.getBlockState(blockpos).is(Blocks.LILY_PAD))
+                int lilyPadLimiter = 5; // We use this to determine if there are less than a given amount of Lily Pads around
+                // We check 5 Blocks in all directions
+                for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-5, -1, -5), pos.offset(5, 1, 5)))
                 {
-                    --lilyPadLimiter;
-                    if (lilyPadLimiter <= 0)
-                        return; // If there are too many Lily Pads we return
+                    if (level.getBlockState(blockpos).is(Blocks.LILY_PAD))
+                    {
+                        --lilyPadLimiter;
+                        if (lilyPadLimiter <= 0)
+                            return; // If there are too many Lily Pads we return
+                    }
                 }
+                // If everything went well we grow the Small Lily Pad into a normal one
+                level.setBlock(pos, Blocks.LILY_PAD.defaultBlockState(), 2);
             }
-            // If everything went well we grow the Small Lily Pad into a normal one
-            level.setBlock(pos, Blocks.LILY_PAD.defaultBlockState(), 2);
         }
     }
 

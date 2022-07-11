@@ -1,7 +1,9 @@
 package andrews.swampier_swamps.mixins;
 
+import andrews.swampier_swamps.config.SSConfigs;
 import andrews.swampier_swamps.objects.blocks.BigLilyPadBlock;
 import andrews.swampier_swamps.registry.SSBlocks;
+import andrews.swampier_swamps.registry.SSTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -43,49 +45,53 @@ public class BlockBehaviourMixin
             // We reduce how often the Block attempts to grow
             if (rand.nextInt(25) == 0)
             {
-                boolean canGrow = true;
-                int lilyPadLimiter = 2; // We use this to determine if there are less than a given amount of Big Lily Pads around
-                // We check 8 Blocks in all directions
-                for(BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-8, -1, -8), pos.offset(8, 1, 8)))
+                int configValue = SSConfigs.commonConfig.shouldLilyPadsGrow.get();
+                if ((configValue == 1 && level.getBiome(pos).is(SSTags.Biomes.CAN_LILY_PAD_GROW_IN)) || configValue == 2)
                 {
-                    if (level.getBlockState(blockpos).is(SSBlocks.BIG_LILY_PAD.get()) && level.getBlockState(blockpos).getValue(BigLilyPadBlock.LILY_PAD_PART) == 0)
+                    boolean canGrow = true;
+                    int lilyPadLimiter = 2; // We use this to determine if there are less than a given amount of Big Lily Pads around
+                    // We check 8 Blocks in all directions
+                    for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-8, -1, -8), pos.offset(8, 1, 8)))
                     {
-                        --lilyPadLimiter;
-                        if (lilyPadLimiter <= 0)
-                            canGrow = false; // If there are too many Lily Pads we prevent it from growing
+                        if (level.getBlockState(blockpos).is(SSBlocks.BIG_LILY_PAD.get()) && level.getBlockState(blockpos).getValue(BigLilyPadBlock.LILY_PAD_PART) == 0)
+                        {
+                            --lilyPadLimiter;
+                            if (lilyPadLimiter <= 0)
+                                canGrow = false; // If there are too many Lily Pads we prevent it from growing
+                        }
                     }
-                }
 
-                // We get a random Rotation for the Big Lily Pad
-                Direction direction;
-                switch (rand.nextInt(4))
-                {
-                    default -> direction = Direction.NORTH;
-                    case 1 -> direction = Direction.SOUTH;
-                    case 2 -> direction = Direction.WEST;
-                    case 3 -> direction = Direction.EAST;
-                }
-                // We make sure there is enough space to grow
-                FluidState fluidState1 = level.getFluidState(pos.below().relative(direction));
-                BlockState blockStateAbove1 = level.getBlockState(pos.relative(direction));
-                if(!(fluidState1.is(FluidTags.WATER)) || !(fluidState1.getAmount() == FluidState.AMOUNT_FULL) || !(blockStateAbove1.is(Blocks.AIR)))
-                    canGrow = false;
-                FluidState fluidState2 = level.getFluidState(pos.below().relative(direction.getClockWise()));
-                BlockState blockStateAbove2 = level.getBlockState(pos.relative(direction.getClockWise()));
-                if(!(fluidState2.is(FluidTags.WATER)) || !(fluidState2.getAmount() == FluidState.AMOUNT_FULL) || !(blockStateAbove2.is(Blocks.AIR)))
-                    canGrow = false;
-                FluidState fluidState3 = level.getFluidState(pos.below().relative(direction).relative(direction.getClockWise()));
-                BlockState blockStateAbove3 = level.getBlockState(pos.relative(direction).relative(direction.getClockWise()));
-                if(!(fluidState3.is(FluidTags.WATER)) || !(fluidState3.getAmount() == FluidState.AMOUNT_FULL) || !(blockStateAbove3.is(Blocks.AIR)))
-                    canGrow = false;
+                    // We get a random Rotation for the Big Lily Pad
+                    Direction direction;
+                    switch (rand.nextInt(4))
+                    {
+                        default -> direction = Direction.NORTH;
+                        case 1 -> direction = Direction.SOUTH;
+                        case 2 -> direction = Direction.WEST;
+                        case 3 -> direction = Direction.EAST;
+                    }
+                    // We make sure there is enough space to grow
+                    FluidState fluidState1 = level.getFluidState(pos.below().relative(direction));
+                    BlockState blockStateAbove1 = level.getBlockState(pos.relative(direction));
+                    if (!(fluidState1.is(FluidTags.WATER)) || !(fluidState1.getAmount() == FluidState.AMOUNT_FULL) || !(blockStateAbove1.is(Blocks.AIR)))
+                        canGrow = false;
+                    FluidState fluidState2 = level.getFluidState(pos.below().relative(direction.getClockWise()));
+                    BlockState blockStateAbove2 = level.getBlockState(pos.relative(direction.getClockWise()));
+                    if (!(fluidState2.is(FluidTags.WATER)) || !(fluidState2.getAmount() == FluidState.AMOUNT_FULL) || !(blockStateAbove2.is(Blocks.AIR)))
+                        canGrow = false;
+                    FluidState fluidState3 = level.getFluidState(pos.below().relative(direction).relative(direction.getClockWise()));
+                    BlockState blockStateAbove3 = level.getBlockState(pos.relative(direction).relative(direction.getClockWise()));
+                    if (!(fluidState3.is(FluidTags.WATER)) || !(fluidState3.getAmount() == FluidState.AMOUNT_FULL) || !(blockStateAbove3.is(Blocks.AIR)))
+                        canGrow = false;
 
-                // If everything went well we grow the Lily Pad into a Big one
-                if  (canGrow)
-                {
-                    level.setBlock(pos, SSBlocks.BIG_LILY_PAD.get().defaultBlockState().setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 0), 2);
-                    level.setBlock(pos.relative(direction), SSBlocks.BIG_LILY_PAD.get().defaultBlockState().setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 1), 2);
-                    level.setBlock(pos.relative(direction.getClockWise()), SSBlocks.BIG_LILY_PAD.get().defaultBlockState().setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 2), 2);
-                    level.setBlock(pos.relative(direction).relative(direction.getClockWise()), SSBlocks.BIG_LILY_PAD.get().defaultBlockState().setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 3), 2);
+                    // If everything went well we grow the Lily Pad into a Big one
+                    if (canGrow)
+                    {
+                        level.setBlock(pos, SSBlocks.BIG_LILY_PAD.get().defaultBlockState().setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 0), 2);
+                        level.setBlock(pos.relative(direction), SSBlocks.BIG_LILY_PAD.get().defaultBlockState().setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 1), 2);
+                        level.setBlock(pos.relative(direction.getClockWise()), SSBlocks.BIG_LILY_PAD.get().defaultBlockState().setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 2), 2);
+                        level.setBlock(pos.relative(direction).relative(direction.getClockWise()), SSBlocks.BIG_LILY_PAD.get().defaultBlockState().setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 3), 2);
+                    }
                 }
             }
         }

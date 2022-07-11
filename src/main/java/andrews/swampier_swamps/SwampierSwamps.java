@@ -1,5 +1,6 @@
 package andrews.swampier_swamps;
 
+import andrews.swampier_swamps.config.SSConfigs;
 import andrews.swampier_swamps.network.SSNetwork;
 import andrews.swampier_swamps.registry.*;
 import andrews.swampier_swamps.util.PotionRecipeChanger;
@@ -24,6 +25,7 @@ public class SwampierSwamps
         SSBlocks.BLOCKS.register(modEventBus);
         SSFeatures.FEATURES.register(modEventBus);
         SSEntities.ENTITIES.register(modEventBus);
+        SSTrunkPlacers.TRUNK_PLACERS.register(modEventBus);
         SSTreeDecorators.TREE_DECORATORS.register(modEventBus);
         SSPlacements.PLACEMENT_MODIFIER.register(modEventBus);
 
@@ -32,14 +34,15 @@ public class SwampierSwamps
             modEventBus.addListener(this::setupClient);
         });
         modEventBus.addListener(this::setupCommon);
+
+        SSConfigs.registerConfigs();
     }
 
     void setupCommon(final FMLCommonSetupEvent event)
     {
         event.enqueueWork(() ->
         {
-            PotionRecipeChanger.alterLeapingPotionRecipe();
-            PotionRecipeChanger.registerRecipes();
+            PotionRecipeChanger.performChanges();
             SSEntities.registerSpawnPlacements();
             SSFlammables.registerFlammables();
         });

@@ -20,8 +20,7 @@ import java.util.Random;
 @Mixin(BoneMealItem.class)
 public class BoneMealItemMixin
 {
-    @Unique
-    private static Level level;
+    @Unique private static Level level;
     @Unique private static BlockPos pos;
 
     // I would use modifyArgs instead but for some reason its broken
