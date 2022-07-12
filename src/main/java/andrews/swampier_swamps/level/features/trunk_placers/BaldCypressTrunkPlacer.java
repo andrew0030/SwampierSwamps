@@ -58,7 +58,7 @@ public class BaldCypressTrunkPlacer extends TrunkPlacer
                     lowerBranchHeights.add(pos.above(i).getY());
         }
         if (lowerBranchHeights.isEmpty()) // If the branches list is empty we generate one
-            lowerBranchHeights.add(pos.getY() + rand.nextInt(height - 1) + 3);
+            lowerBranchHeights.add(pos.getY() + 4 /* We add 3 so it's above the lower part */ + rand.nextInt(height - 5));
 
         // The Logs around the center Log
         this.placeLogs(level, consumer, rand, 1, rand.nextInt(2) + 1, pos.north(), config);

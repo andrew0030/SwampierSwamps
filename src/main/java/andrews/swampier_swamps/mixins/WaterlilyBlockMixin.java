@@ -9,6 +9,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.WaterlilyBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -28,7 +29,7 @@ public class WaterlilyBlockMixin
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, CallbackInfo ci)
     {
         if (level instanceof ServerLevel && entity instanceof LivingEntity)
-            if(level.getBlockState(pos).is(((WaterlilyBlock)(Object)this)))
+            if(level.getBlockState(pos).is(((WaterlilyBlock)(Object)this)) && !(level.getBlockState(pos.below()).getMaterial() == Material.ICE))
                 level.scheduleTick(pos, ((WaterlilyBlock)(Object)this), SSConfigs.commonConfig.lilyPadSinkTimeStage1.get());
     }
 }

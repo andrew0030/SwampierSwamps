@@ -1,5 +1,6 @@
 package andrews.swampier_swamps.entities;
 
+import andrews.swampier_swamps.registry.SSEntities;
 import andrews.swampier_swamps.registry.SSTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -141,7 +142,7 @@ public class Dragonfly extends Animal implements FlyingAnimal
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob mob)
     {
-        return null;
+        return SSEntities.DRAGONFLY.get().create(level);
     }
 
     @Override

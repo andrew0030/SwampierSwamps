@@ -78,7 +78,7 @@ public class SmallLilyPadBlock extends WaterlilyBlock
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
         Level level = context.getLevel();
-        BlockState state = level.getBlockState(context.getClickedPos());
+        BlockState state = level.getBlockState(context.getClickedPos().below());
         FluidState fluidState = level.getFluidState(context.getClickedPos().below());
         FluidState fluidStateAbove = level.getFluidState(context.getClickedPos());
 
