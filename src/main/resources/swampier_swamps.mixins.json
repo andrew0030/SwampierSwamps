@@ -9,10 +9,14 @@
     "BlockBehaviourMixin",
     "BlockMixin",
     "BoneMealItemMixin",
-    "FrogMixin",
-    "WaterlilyBlockMixin"
+    "MobMixin",
+    "WaterlilyBlockMixin",
+    "frog.FrogAttackablesSensorMixin",
+    "frog.FrogMixin",
+    "frog.ShootTongueMixin"
   ],
   "client": [
+    "frog.FrogRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

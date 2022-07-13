@@ -1,4 +1,4 @@
-package andrews.swampier_swamps.mixins;
+package andrews.swampier_swamps.mixins.frog;
 
 import andrews.swampier_swamps.registry.SSFrogVariants;
 import andrews.swampier_swamps.registry.SSTags;
