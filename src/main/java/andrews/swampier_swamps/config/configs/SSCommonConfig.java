@@ -6,6 +6,8 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 public class SSCommonConfig
 {
+    // Frog
+    public ConfigValueListener<Double> waldoDamageModifier;
     // Brewing
     public ConfigValueListener<Boolean> alterRecipes;
     // Tree Stuff
@@ -21,6 +23,16 @@ public class SSCommonConfig
     {
         builder.comment(" Common Settings for Swampier Swamps")
                .push("Settings");
+
+        builder.push("Frog"); // Frog Start
+        waldoDamageModifier = subscriber.subscribe(builder
+                .comment("""
+                        This value is a Damage multiplier for the "Swallow Me Waldo" Frog, meaning \r
+                        the value used will be multiplied with the Waldo Frogs base damage. (10 by Default)\r
+                        This can get out of hand quickly, so be careful with it. Unless you want a\r
+                        Frog that can swallow a Wither.""".indent(1)
+                ).defineInRange("waldoDamageModifier", 2.0D, 1.0D, 100.0D));
+        builder.pop(); // Frog End
 
         builder.push("Brewing"); // Brewing Start
         alterRecipes = subscriber.subscribe(builder

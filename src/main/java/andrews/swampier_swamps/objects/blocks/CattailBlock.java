@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.Material;
@@ -25,19 +26,19 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class CattailBlock extends BushBlock
 {
-    protected static final VoxelShape SHAPE     = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
-    protected static final VoxelShape SHAPE_TOP = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 12.0D, 14.0D);
+    protected static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
+    public static final BooleanProperty LOWER = BooleanProperty.create("lower");
 
     public CattailBlock()
     {
         super(BlockBehaviour.Properties.of(Material.WATER_PLANT).noCollission().instabreak().sound(SoundType.WET_GRASS));
-        this.registerDefaultState(this.stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, true));
+        this.registerDefaultState(this.stateDefinition.any().setValue(BlockStateProperties.WATERLOGGED, true).setValue(LOWER, true));
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context)
     {
-        return state.getValue(BlockStateProperties.WATERLOGGED) ? SHAPE : SHAPE_TOP;
+        return SHAPE;
     }
 
     @Override
@@ -46,10 +47,14 @@ public class CattailBlock extends BushBlock
         super.onRemove(state, level, pos, state1, p_60519_);
         if(!state.getValue(BlockStateProperties.WATERLOGGED))
         {
+            if(level.getBlockState(pos.above()).is(this))
+                level.destroyBlock(pos.above(), false);
             if(level.getBlockState(pos.below()).is(this))
                 level.destroyBlock(pos.below(), false);
             if(level.getBlockState(pos.below(2)).is(this))
                 level.destroyBlock(pos.below(2), false);
+            if(level.getBlockState(pos.below(3)).is(this))
+                level.destroyBlock(pos.below(3), false);
         }
         else
         {
@@ -59,6 +64,8 @@ public class CattailBlock extends BushBlock
                 level.destroyBlock(pos.above(), false);
             if(level.getBlockState(pos.above(2)).is(this))
                 level.destroyBlock(pos.above(2), false);
+            if(level.getBlockState(pos.above(3)).is(this))
+                level.destroyBlock(pos.above(3), false);
         }
     }
 
@@ -68,15 +75,18 @@ public class CattailBlock extends BushBlock
         BlockState blockStateBelow1 = level.getBlockState(pos.below());
         BlockState blockStateAbove1 = level.getBlockState(pos.above());
         BlockState blockStateAbove2 = level.getBlockState(pos.above(2));
+        BlockState blockStateAbove3 = level.getBlockState(pos.above(3));
 
-        if (!blockStateBelow1.is(this) && blockStateAbove1.is(Blocks.WATER) && blockStateAbove2.is(Blocks.AIR))
+        if (!blockStateBelow1.is(this) && blockStateAbove1.is(Blocks.WATER) && blockStateAbove2.is(Blocks.AIR) && blockStateAbove3.is(Blocks.AIR))
         {
-            level.setBlock(pos.above(), this.defaultBlockState(), 2);                                                    // Middle Block (In Water)
-            level.setBlock(pos.above(2), this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false), 2); // Top Block (Above Water)
+            level.setBlock(pos.above(), this.defaultBlockState().setValue(LOWER, false), 2);                             // Middle Block In Water
+            level.setBlock(pos.above(2), this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false), 2); // First Block Above Water
+            level.setBlock(pos.above(3), this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(LOWER, false), 2); // Top Block Above Water
         }
-        else if (!blockStateBelow1.is(this) && blockStateAbove1.is(Blocks.AIR))
+        else if (!blockStateBelow1.is(this) && blockStateAbove1.is(Blocks.AIR) && blockStateAbove2.is(Blocks.AIR))
         {
-            level.setBlock(pos.above(), this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false), 2); // Top Block (Above Water)
+            level.setBlock(pos.above(), this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false), 2); // First Block Above Water
+            level.setBlock(pos.above(2), this.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, false).setValue(LOWER, false), 2); // Top Block Above Water
         }
     }
 
@@ -105,7 +115,7 @@ public class CattailBlock extends BushBlock
     @Override
     public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateDefinition)
     {
-        stateDefinition.add(BlockStateProperties.WATERLOGGED);
+        stateDefinition.add(BlockStateProperties.WATERLOGGED).add(LOWER);
     }
 
     @Override
@@ -141,11 +151,12 @@ public class CattailBlock extends BushBlock
         BlockState blockStateBelow1 = level.getBlockState(pos.below());
         BlockState blockStateAbove1 = level.getBlockState(pos.above());
         BlockState blockStateAbove2 = level.getBlockState(pos.above(2));
+        BlockState blockStateAbove3 = level.getBlockState(pos.above(3));
 
         if(fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == FluidState.AMOUNT_FULL)
         {
-            return (!blockStateBelow1.is(SSBlocks.CATTAIL.get()) && blockStateAbove1.is(Blocks.WATER) && blockStateAbove2.is(Blocks.AIR)) ||
-                    (!blockStateBelow1.is(SSBlocks.CATTAIL.get()) && blockStateAbove1.is(Blocks.AIR));
+            return (!blockStateBelow1.is(SSBlocks.CATTAIL.get()) && blockStateAbove1.is(Blocks.WATER) && blockStateAbove2.is(Blocks.AIR) && blockStateAbove3.is(Blocks.AIR)) ||
+                   (!blockStateBelow1.is(SSBlocks.CATTAIL.get()) && blockStateAbove1.is(Blocks.AIR) && blockStateAbove2.is(Blocks.AIR));
         }
         return false;
     }

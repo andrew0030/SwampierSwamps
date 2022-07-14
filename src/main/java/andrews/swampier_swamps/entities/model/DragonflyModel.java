@@ -57,9 +57,11 @@ public class DragonflyModel<E extends Dragonfly> extends EntityModel<E>
     {
         if (SSConfigs.clientConfig.randomizeDragonflySizes.get())
         {
-            this.body.xScale = 1.16F - (0.08F * entity.getDragonflyScale());
-            this.body.yScale = 1.16F - (0.08F * entity.getDragonflyScale());
-            this.body.zScale = 1.16F - (0.08F * entity.getDragonflyScale());
+            float value = SSConfigs.clientConfig.dragonflySizeModifier.get().floatValue();
+            float newScale = (1.0F + (value * 2)) - (value * entity.getDragonflyScale());
+            this.body.xScale = newScale;
+            this.body.yScale = newScale;
+            this.body.zScale = newScale;
         }
         else
         {

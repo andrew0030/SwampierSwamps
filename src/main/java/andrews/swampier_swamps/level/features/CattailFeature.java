@@ -1,5 +1,6 @@
 package andrews.swampier_swamps.level.features;
 
+import andrews.swampier_swamps.objects.blocks.CattailBlock;
 import andrews.swampier_swamps.registry.SSBlocks;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -44,13 +45,15 @@ public class CattailFeature extends Feature<ProbabilityFeatureConfiguration>
                 if (isTallCattail)
                 {
                     worldGenLevel.setBlock(posAtTarget, state, 2);
-                    worldGenLevel.setBlock(posAtTarget.above(), state, 2);
+                    worldGenLevel.setBlock(posAtTarget.above(), state.setValue(CattailBlock.LOWER, false), 2);
                     worldGenLevel.setBlock(posAtTarget.above(2), state.setValue(BlockStateProperties.WATERLOGGED, false), 2);
+                    worldGenLevel.setBlock(posAtTarget.above(3), state.setValue(BlockStateProperties.WATERLOGGED, false).setValue(CattailBlock.LOWER, false), 2);
                 }
                 else
                 {
                     worldGenLevel.setBlock(posAtTarget, state, 2);
                     worldGenLevel.setBlock(posAtTarget.above(), state.setValue(BlockStateProperties.WATERLOGGED, false), 2);
+                    worldGenLevel.setBlock(posAtTarget.above(2), state.setValue(BlockStateProperties.WATERLOGGED, false).setValue(CattailBlock.LOWER, false), 2);
                 }
                 placedCattail = true;
             }
@@ -64,11 +67,12 @@ public class CattailFeature extends Feature<ProbabilityFeatureConfiguration>
         BlockState blockStateBelow1 = level.getBlockState(pos.below());
         BlockState blockStateAbove1 = level.getBlockState(pos.above());
         BlockState blockStateAbove2 = level.getBlockState(pos.above(2));
+        BlockState blockStateAbove3 = level.getBlockState(pos.above(3));
 
         if(fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == FluidState.AMOUNT_FULL)
         {
-            return (!blockStateBelow1.is(SSBlocks.CATTAIL.get()) && blockStateAbove1.is(Blocks.WATER) && blockStateAbove2.is(Blocks.AIR)) ||
-                    (!blockStateBelow1.is(SSBlocks.CATTAIL.get()) && blockStateAbove1.is(Blocks.AIR));
+            return (!blockStateBelow1.is(SSBlocks.CATTAIL.get()) && blockStateAbove1.is(Blocks.WATER) && blockStateAbove2.is(Blocks.AIR) && blockStateAbove3.is(Blocks.AIR)) ||
+                   (!blockStateBelow1.is(SSBlocks.CATTAIL.get()) && blockStateAbove1.is(Blocks.AIR) && blockStateAbove2.is(Blocks.AIR));
         }
         return false;
     }

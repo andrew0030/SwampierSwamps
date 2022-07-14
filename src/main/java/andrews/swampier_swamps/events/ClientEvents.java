@@ -2,6 +2,7 @@ package andrews.swampier_swamps.events;
 
 import andrews.swampier_swamps.entities.model.DragonflyModel;
 import andrews.swampier_swamps.entities.renderer.DragonflyRenderer;
+import andrews.swampier_swamps.entities.renderer.SwampGasRenderer;
 import andrews.swampier_swamps.registry.SSBlocks;
 import andrews.swampier_swamps.registry.SSEntities;
 import andrews.swampier_swamps.util.Reference;
@@ -32,6 +33,7 @@ public class ClientEvents
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event)
     {
         event.registerEntityRenderer(SSEntities.DRAGONFLY.get(), DragonflyRenderer::new);
+        event.registerEntityRenderer(SSEntities.SWAMP_GAS.get(), SwampGasRenderer::new);
     }
 
     @SubscribeEvent

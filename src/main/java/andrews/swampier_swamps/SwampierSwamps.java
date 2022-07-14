@@ -5,7 +5,9 @@ import andrews.swampier_swamps.network.SSNetwork;
 import andrews.swampier_swamps.registry.*;
 import andrews.swampier_swamps.util.PotionRecipeChanger;
 import andrews.swampier_swamps.util.Reference;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
@@ -25,6 +27,7 @@ public class SwampierSwamps
         SSBlocks.BLOCKS.register(modEventBus);
         SSFeatures.FEATURES.register(modEventBus);
         SSEntities.ENTITIES.register(modEventBus);
+        SSParticles.PARTICLES.register(modEventBus);
         SSTrunkPlacers.TRUNK_PLACERS.register(modEventBus);
         SSTreeDecorators.TREE_DECORATORS.register(modEventBus);
         SSPlacements.PLACEMENT_MODIFIER.register(modEventBus);
@@ -32,6 +35,7 @@ public class SwampierSwamps
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
         {
             modEventBus.addListener(this::setupClient);
+            modEventBus.addListener(this::setupParticles);
         });
         modEventBus.addListener(this::setupCommon);
 
@@ -54,9 +58,14 @@ public class SwampierSwamps
     {
         event.enqueueWork(() ->
         {
-//            SSBlockEntities.registerBlockEntityRenderers();
+
         });
         // Thread Safe Stuff Bellow
         SSBlocks.registerBlockRenderTypes();
+    }
+
+    void setupParticles(final RegisterParticleProvidersEvent event)
+    {
+        SSParticles.registerParticles();
     }
 }
