@@ -6,7 +6,11 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 public class SSCommonConfig
 {
+    // Swamp Gas
+    public ConfigValueListener<Boolean> isFurnaceFuel;
+    public ConfigValueListener<Integer> burnTime;
     // Frog
+    public ConfigValueListener<Boolean> allowWaldo;
     public ConfigValueListener<Double> waldoDamageModifier;
     // Brewing
     public ConfigValueListener<Boolean> alterRecipes;
@@ -24,7 +28,22 @@ public class SSCommonConfig
         builder.comment(" Common Settings for Swampier Swamps")
                .push("Settings");
 
+        builder.push("Swamp Gas"); // Swamp Gas Start
+        isFurnaceFuel = subscriber.subscribe(builder
+                .comment("""
+                        This can be used to prevent Swamp Gas from being used as Furnace Fuel.""".indent(1)
+                ).define("isFurnaceFuel", true));
+        burnTime = subscriber.subscribe(builder
+                .comment("""
+                        How long the Swamp Gas fuels a Furnace. (Measured in Ticks)""".indent(1)
+                ).defineInRange("burnTime", 4000, 10, 60000));
+        builder.pop(); // Swamp Gas End
+
         builder.push("Frog"); // Frog Start
+        allowWaldo = subscriber.subscribe(builder
+                .comment("""
+                        This can be used to prevent Frogs from becoming "killers" when named Swallow Me Waldo""".indent(1)
+                ).define("allowWaldo", true));
         waldoDamageModifier = subscriber.subscribe(builder
                 .comment("""
                         This value is a Damage multiplier for the "Swallow Me Waldo" Frog, meaning \r

@@ -50,7 +50,9 @@ public class SSBlocks
     public static final RegistryObject<Block> BIG_LILY_PAD          = createWaterPlacementBlock("big_lily_pad", () -> new BigLilyPadBlock(BlockBehaviour.Properties.copy(Blocks.LILY_PAD).randomTicks()), CreativeModeTab.TAB_DECORATIONS);
     public static final RegistryObject<Block> SMALL_LILY_PAD        = createWaterPlacementBlock("small_lily_pad", () -> new SmallLilyPadBlock(BlockBehaviour.Properties.copy(Blocks.LILY_PAD).noCollission().randomTicks()), CreativeModeTab.TAB_DECORATIONS);
     // Kinda a Plant?
-    public static final RegistryObject<Block> DECAYING_KELP         = createBlock("decaying_kelp", () -> new DecayingKelpBlock(BlockBehaviour.Properties.copy(Blocks.DRIED_KELP_BLOCK)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final RegistryObject<Block> DECAYING_KELP         = createBlock("decaying_kelp", () -> new DecayingKelpBlock(BlockBehaviour.Properties.copy(Blocks.DRIED_KELP_BLOCK).randomTicks()), CreativeModeTab.TAB_BUILDING_BLOCKS);
+
+    public static final RegistryObject<Block> FERTILE_FARMLAND      = createBlock("fertile_farmland", () -> new FertileFarmlandBlock(BlockBehaviour.Properties.copy(Blocks.FARMLAND)), CreativeModeTab.TAB_DECORATIONS);
 
     /**
      * Used to register the RenderType for some Blocks

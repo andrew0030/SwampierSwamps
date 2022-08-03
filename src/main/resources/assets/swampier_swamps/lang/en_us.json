@@ -2,6 +2,7 @@
 "_comment1": "Items",
   "item.swampier_swamps.frog_leg": "Frog Leg",
   "item.swampier_swamps.cooked_frog_leg": "Cooked Frog Leg",
+  "item.swampier_swamps.gas_bottle": "Swamp Gas Bottle",
   "item.swampier_swamps.dragonfly_spawn_egg": "Dragonfly Spawn Egg",
 
 "_comment2": "Blocks",
@@ -26,6 +27,7 @@
   "block.swampier_swamps.big_lily_pad": "Big Lily Pad",
   "block.swampier_swamps.small_lily_pad": "Small Lily Pads",
   "block.swampier_swamps.decaying_kelp": "Decaying Kelp",
+  "block.swampier_swamps.fertile_farmland": "Fertile Farmland",
 
 "_comment3": "Entities",
   "entity.swampier_swamps.dragonfly": "Dragonfly"

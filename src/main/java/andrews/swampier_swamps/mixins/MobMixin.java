@@ -16,7 +16,7 @@ public class MobMixin
     {
         if (((Mob)(Object)this) instanceof Frog frog)
             if(frog.hasCustomName())
-                if(frog.getCustomName().getString().equals("Swallow Me Waldo"))
+                if(frog.getCustomName().getString().equals("Swallow Me Waldo") && SSConfigs.commonConfig.allowWaldo.get())
                 {
                     float damageMod = SSConfigs.commonConfig.waldoDamageModifier.get().floatValue();
                     return attackDamage * damageMod;

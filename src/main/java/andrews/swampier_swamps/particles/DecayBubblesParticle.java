@@ -12,6 +12,7 @@ public class DecayBubblesParticle extends TextureSheetParticle
     {
         super(clientLevel, x, y, z);
         this.setSize(0.02F, 0.02F);
+        this.scale(1.4F);
         this.quadSize *= this.random.nextFloat() * 0.6F + 0.2F;
         this.xd = speedX * 0.2D + (Math.random() * 2.0D - 1.0D) * 0.02D;
         this.yd = speedY * 0.2D + (Math.random() * 2.0D - 1.0D) * 0.02D;

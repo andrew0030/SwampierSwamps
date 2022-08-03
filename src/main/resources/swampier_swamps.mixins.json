@@ -9,6 +9,8 @@
     "BlockBehaviourMixin",
     "BlockMixin",
     "BoneMealItemMixin",
+    "BottleItemMixin",
+    "CropBlockMixin",
     "MobMixin",
     "WaterlilyBlockMixin",
     "frog.FrogAttackablesSensorMixin",
