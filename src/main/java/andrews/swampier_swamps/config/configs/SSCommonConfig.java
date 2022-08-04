@@ -6,6 +6,9 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 public class SSCommonConfig
 {
+    // Fertile Farmland
+    public ConfigValueListener<Integer> waterRange;
+    public ConfigValueListener<Integer> growthMultiplier;
     // Swamp Gas
     public ConfigValueListener<Boolean> isFurnaceFuel;
     public ConfigValueListener<Integer> burnTime;
@@ -27,6 +30,18 @@ public class SSCommonConfig
     {
         builder.comment(" Common Settings for Swampier Swamps")
                .push("Settings");
+
+        builder.push("Fertile Farmland"); // Fertile Farmland Start
+        waterRange = subscriber.subscribe(builder
+                .comment("""
+                        This can be used to adjust how far away from Water, Fertile Farmland\r
+                        can turn into Moist Fertile Farmland. Vanilla Farmland uses 4 as its value.""".indent(1)
+                ).defineInRange("waterRange", 3, 1, 8));
+        growthMultiplier = subscriber.subscribe(builder
+                .comment("""
+                        The multiplier used to speed up Crop growth.""".indent(1)
+                ).defineInRange("growthMultiplier", 6, 1, 10));
+        builder.pop(); // Fertile Farmland End
 
         builder.push("Swamp Gas"); // Swamp Gas Start
         isFurnaceFuel = subscriber.subscribe(builder

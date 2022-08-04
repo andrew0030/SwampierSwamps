@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -37,6 +38,14 @@ public class BlockBehaviourMixin
     @Inject(method = "randomTick", at = @At(value = "HEAD"))
     public void injectRandomTickHead(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand, CallbackInfo ci)
     {
+        if (state.is(Blocks.DRIED_KELP_BLOCK))
+        {
+            System.out.println("ticking");
+            if (rand.nextInt(25) == 0)
+                if(level.getFluidState(pos.above()).getType() == Fluids.WATER && level.getFluidState(pos.above()).getAmount() == FluidState.AMOUNT_FULL)
+                    level.setBlock(pos, SSBlocks.DECAYING_KELP.get().defaultBlockState(), 2);
+        }
+
         if(state.is(Blocks.LILY_PAD))
         {
             // We use this to prevent the code inside tick() from running without canceling randomTick

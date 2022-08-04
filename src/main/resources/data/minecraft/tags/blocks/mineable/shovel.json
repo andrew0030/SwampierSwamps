@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "swampier_swamps:mud_slab",
-    "swampier_swamps:mud_stairs"
+    "swampier_swamps:mud_stairs",
+    "swampier_swamps:decaying_kelp",
+    "swampier_swamps:fertile_farmland"
   ]
 }

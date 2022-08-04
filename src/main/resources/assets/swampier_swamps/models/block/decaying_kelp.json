@@ -1,6 +1,25 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "block/block",
   "textures": {
-    "all": "swampier_swamps:block/decaying_kelp"
-  }
+    "particle": "swampier_swamps:block/decaying_kelp",
+    "down": "swampier_swamps:block/decaying_kelp_top",
+    "up": "swampier_swamps:block/decaying_kelp_top",
+    "north": "swampier_swamps:block/decaying_kelp",
+    "east": "swampier_swamps:block/decaying_kelp",
+    "south": "swampier_swamps:block/decaying_kelp",
+    "west": "swampier_swamps:block/decaying_kelp"
+  },
+  "elements": [
+    {   "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "texture": "#down", "cullface": "down" },
+        "up":    { "texture": "#up", "cullface": "up" },
+        "north": { "texture": "#north", "cullface": "north" },
+        "south": { "uv": [16, 0, 0, 16], "texture": "#south", "cullface": "south" },
+        "west":  { "texture": "#west", "cullface": "west" },
+        "east":  { "uv": [16, 0, 0, 16], "texture": "#east", "cullface": "east" }
+      }
+    }
+  ]
 }
