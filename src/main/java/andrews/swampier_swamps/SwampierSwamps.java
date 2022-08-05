@@ -5,7 +5,6 @@ import andrews.swampier_swamps.network.SSNetwork;
 import andrews.swampier_swamps.registry.*;
 import andrews.swampier_swamps.util.PotionRecipeChanger;
 import andrews.swampier_swamps.util.Reference;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -28,6 +27,7 @@ public class SwampierSwamps
         SSFeatures.FEATURES.register(modEventBus);
         SSEntities.ENTITIES.register(modEventBus);
         SSParticles.PARTICLES.register(modEventBus);
+        SSBlockEntities.BLOCK_ENTITY_TYPES.register(modEventBus);
         SSTrunkPlacers.TRUNK_PLACERS.register(modEventBus);
         SSTreeDecorators.TREE_DECORATORS.register(modEventBus);
         SSPlacements.PLACEMENT_MODIFIER.register(modEventBus);

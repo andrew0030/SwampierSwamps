@@ -1,9 +1,6 @@
 package andrews.swampier_swamps.registry;
 
-import andrews.swampier_swamps.level.features.BigLilyPadFeature;
-import andrews.swampier_swamps.level.features.CattailFeature;
-import andrews.swampier_swamps.level.features.DecayingLogFeature;
-import andrews.swampier_swamps.level.features.MudPuddleFeature;
+import andrews.swampier_swamps.level.features.*;
 import andrews.swampier_swamps.util.Reference;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.RandomPatchFeature;
@@ -29,4 +26,6 @@ public class SSFeatures
     // Tree Stuff
     public static final RegistryObject<Feature<NoneFeatureConfiguration>>        DECAYING_LOG            = FEATURES.register("decaying_log", () -> new DecayingLogFeature(NoneFeatureConfiguration.CODEC));
     public static final RegistryObject<Feature<TreeConfiguration>>               BALD_CYPRESS            = FEATURES.register("bald_cypress", () -> new TreeFeature(TreeConfiguration.CODEC));
+    // Decaying Kelp
+    public static final RegistryObject<Feature<NoneFeatureConfiguration>>        DECAYING_KELP           = FEATURES.register("decaying_kelp", () -> new DecayingKelpFeature(NoneFeatureConfiguration.CODEC));
 }
