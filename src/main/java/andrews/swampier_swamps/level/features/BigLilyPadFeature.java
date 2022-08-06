@@ -34,17 +34,16 @@ public class BigLilyPadFeature extends Feature<ProbabilityFeatureConfiguration>
         int zOffset = randomSource.nextInt(10) - randomSource.nextInt(10);
         int heightInWorld = worldGenLevel.getHeight(Heightmap.Types.WORLD_SURFACE_WG, pos.getX() + xOffset, pos.getZ() + zOffset);
         BlockPos posAtTarget = new BlockPos(pos.getX() + xOffset, heightInWorld, pos.getZ() + zOffset);
-
-        if (worldGenLevel.getBlockState(posAtTarget.below()).is(Blocks.WATER) && worldGenLevel.getBlockState(posAtTarget).is(Blocks.AIR));
+    
+//        if (worldGenLevel.getBlockState(posAtTarget.below()).is(Blocks.WATER) && worldGenLevel.getBlockState(posAtTarget).is(Blocks.AIR));
         {
-            Direction direction;
-            switch (randomSource.nextInt(4))
+            Direction direction = switch (randomSource.nextInt(4))
             {
-                default -> direction = Direction.NORTH;
-                case 1 -> direction = Direction.SOUTH;
-                case 2 -> direction = Direction.WEST;
-                case 3 -> direction = Direction.EAST;
-            }
+                default -> Direction.NORTH;
+                case 1 -> Direction.SOUTH;
+                case 2 -> Direction.WEST;
+                case 3 -> Direction.EAST;
+            };
             boolean probabilityCheck = randomSource.nextDouble() < (double) probabilityfeatureconfiguration.probability;
             if (isValidPosition(worldGenLevel, posAtTarget, direction) && probabilityCheck)
             {
@@ -61,24 +60,15 @@ public class BigLilyPadFeature extends Feature<ProbabilityFeatureConfiguration>
 
     private boolean isValidPosition(WorldGenLevel level, BlockPos pos, Direction direction)
     {
-        FluidState fluidState = level.getFluidState(pos.below());
-        BlockState blockStateAbove = level.getBlockState(pos);
-        if(fluidState.is(FluidTags.WATER) && fluidState.getAmount() == FluidState.AMOUNT_FULL && blockStateAbove.is(Blocks.AIR))
-        {
-            FluidState fluidState1 = level.getFluidState(pos.below().relative(direction));
-            BlockState blockStateAbove1 = level.getBlockState(pos.relative(direction));
-            if(fluidState1.is(FluidTags.WATER) && fluidState1.getAmount() == FluidState.AMOUNT_FULL && blockStateAbove1.is(Blocks.AIR))
-            {
-                FluidState fluidState2 = level.getFluidState(pos.below().relative(direction.getClockWise()));
-                BlockState blockStateAbove2 = level.getBlockState(pos.relative(direction.getClockWise()));
-                if(fluidState2.is(FluidTags.WATER) && fluidState2.getAmount() == FluidState.AMOUNT_FULL && blockStateAbove2.is(Blocks.AIR))
-                {
-                    FluidState fluidState3 = level.getFluidState(pos.below().relative(direction).relative(direction.getClockWise()));
-                    BlockState blockStateAbove3 = level.getBlockState(pos.relative(direction).relative(direction.getClockWise()));
-                    return fluidState3.is(FluidTags.WATER) && fluidState3.getAmount() == FluidState.AMOUNT_FULL && blockStateAbove3.is(Blocks.AIR);
-                }
+        for (int i = 0; i < 4; i++) {
+            FluidState fluidState = level.getFluidState(pos.below());
+            BlockState blockStateAbove = level.getBlockState(pos);
+            if(!(fluidState.is(FluidTags.WATER) && fluidState.getAmount() == FluidState.AMOUNT_FULL && blockStateAbove.is(Blocks.AIR))) {
+                return false;
             }
+            pos = pos.relative(direction);
+            direction = direction.getClockWise();
         }
-        return false;
+        return true;
     }
 }
