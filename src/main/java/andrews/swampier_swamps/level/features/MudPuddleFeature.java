@@ -50,13 +50,13 @@ public class MudPuddleFeature extends Feature<NoneFeatureConfiguration>
 
                 for(int xOffset = 1; xOffset < 15; ++xOffset)
                 {
+                    double deltaX = ((double)xOffset - xMax) / (xMin / 2.0D);
                     for(int zOffset = 1; zOffset < 15; ++zOffset)
                     {
+                        double deltaZ = ((double)zOffset - zmax) / (zMin / 2.0D);
                         for(int yOffset = 1; yOffset < 7; ++yOffset)
                         {
-                            double deltaX = ((double)xOffset - xMax) / (xMin / 2.0D);
                             double deltaY = ((double)yOffset - yMax) / (yMin / 2.0D);
-                            double deltaZ = ((double)zOffset - zmax) / (zMin / 2.0D);
                             double range = deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ;
                             if (range < 1.0D)
                                 withinRange[(xOffset * 16 + zOffset) * 8 + yOffset] = true;

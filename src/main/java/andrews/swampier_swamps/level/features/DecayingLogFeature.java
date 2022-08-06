@@ -27,14 +27,13 @@ public class DecayingLogFeature extends Feature<NoneFeatureConfiguration>
         WorldGenLevel level = context.level();
         RandomSource rand = context.random();
 
-        Direction direction;
-        switch (rand.nextInt(4))
+        Direction direction =  switch (rand.nextInt(4))
         {
-            default -> direction = Direction.NORTH;
-            case 1 -> direction = Direction.SOUTH;
-            case 2 -> direction = Direction.WEST;
-            case 3 -> direction = Direction.EAST;
-        }
+            default -> Direction.NORTH;
+            case 1 -> Direction.SOUTH;
+            case 2 -> Direction.WEST;
+            case 3 -> Direction.EAST;
+        };
 
         if((level.getBlockState(pos).is(Blocks.AIR) || level.getBlockState(pos).is(BlockTags.REPLACEABLE_PLANTS)) && level.getBlockState(pos.below()).getMaterial().isSolid())
         {

@@ -10,9 +10,11 @@ import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.TallSeagrassBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.minecraft.world.level.levelgen.synth.SimplexNoise;
 
 public class DecayingKelpFeature extends Feature<NoneFeatureConfiguration>
 {
@@ -33,20 +35,23 @@ public class DecayingKelpFeature extends Feature<NoneFeatureConfiguration>
         int placementDepth = featureYPos - 3;
         int radius = 4;
         BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
-
+    
+        SimplexNoise noise = new SimplexNoise(new XoroshiroRandomSource(context.random().nextLong(), context.random().nextLong()));
+        
         for(BlockPos pos : BlockPos.betweenClosed(blockpos.offset(-radius, 0, -radius), blockpos.offset(radius, 0, radius)))
         {
             int xPos = pos.getX() - blockpos.getX();
             int zPos = pos.getZ() - blockpos.getZ();
             int distance = xPos * xPos + zPos * zPos;
             if (distance <= radius * radius)
-                placed |= this.placeColumn(level, rand, placementHeight, placementDepth, distance, mutablePos.set(pos));
+                placed |= this.placeColumn(level, rand, placementHeight, placementDepth, distance, mutablePos.set(pos), noise, xPos, zPos);
         }
         return placed;
     }
 
-    protected boolean placeColumn(WorldGenLevel level, RandomSource rand, int placementHeight, int placementDepth, int distance, BlockPos.MutableBlockPos mutableBlockPos)
+    protected boolean placeColumn(WorldGenLevel level, RandomSource rand, int placementHeight, int placementDepth, int distance, BlockPos.MutableBlockPos mutableBlockPos, SimplexNoise noise, int xPos, int zPos)
     {
+        double sqrtDist = Math.sqrt(distance);
         boolean placed = false;
         for(int height = placementHeight; height > placementDepth; --height)
         {
@@ -54,25 +59,25 @@ public class DecayingKelpFeature extends Feature<NoneFeatureConfiguration>
             if (level.isStateAtPosition(mutableBlockPos, state -> state.is(Blocks.DIRT) || state.is(Blocks.CLAY) || state.is(Blocks.GRAVEL) || state.is(Blocks.MUD)))
             {
                 BlockState state = Blocks.MUD.defaultBlockState();
-                if(Math.sqrt(distance) < 1)
+                if(sqrtDist < 1)
                 {
                     // The center Block, so basically the Decaying Kelp
                     state = SSBlocks.DECAYING_KELP.get().defaultBlockState();
                 }
-                else if(Math.sqrt(distance) > 0.5 && Math.sqrt(distance) < 2)
+                else if(sqrtDist < 2)
                 {
                     // The Rim next to the center
                     state = rand.nextInt(3) > 0 ? Blocks.MUDDY_MANGROVE_ROOTS.defaultBlockState() : state;
                 }
-                else if(Math.sqrt(distance) > 1.5 && Math.sqrt(distance) < 3.1)
+                else if(sqrtDist < 3.1)
                 {
                     // The next Rim, used to place Mud with Roots, but at a lower rate
                     state = rand.nextInt(4) == 0 ? Blocks.MUDDY_MANGROVE_ROOTS.defaultBlockState() : state;
                 }
-                else if (Math.sqrt(distance) > 3 && Math.sqrt(distance) < 5)
+                else if (sqrtDist < 5)
                 {
                     // Used to create a better looking fade-in
-                    for(int j = 0; j < 3; j++)
+                    for(int j = 0; j < ((int)(noise.getValue(zPos / 0.9, xPos / 3.) + 1) * 3) + 2; j++)
                     {
                         int xRimOffset = rand.nextInt(2) - rand.nextInt(2);
                         int zRimOffset = rand.nextInt(2) - rand.nextInt(2);
