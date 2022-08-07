@@ -35,21 +35,19 @@ public class DecayingKelpFeature extends Feature<NoneFeatureConfiguration>
         int placementDepth = featureYPos - 3;
         int radius = 4;
         BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
-    
-        SimplexNoise noise = new SimplexNoise(new XoroshiroRandomSource(context.random().nextLong(), context.random().nextLong()));
-        
+
         for(BlockPos pos : BlockPos.betweenClosed(blockpos.offset(-radius, 0, -radius), blockpos.offset(radius, 0, radius)))
         {
             int xPos = pos.getX() - blockpos.getX();
             int zPos = pos.getZ() - blockpos.getZ();
             int distance = xPos * xPos + zPos * zPos;
             if (distance <= radius * radius)
-                placed |= this.placeColumn(level, rand, placementHeight, placementDepth, distance, mutablePos.set(pos), noise, xPos, zPos);
+                placed |= this.placeColumn(level, rand, placementHeight, placementDepth, distance, mutablePos.set(pos));
         }
         return placed;
     }
 
-    protected boolean placeColumn(WorldGenLevel level, RandomSource rand, int placementHeight, int placementDepth, int distance, BlockPos.MutableBlockPos mutableBlockPos, SimplexNoise noise, int xPos, int zPos)
+    protected boolean placeColumn(WorldGenLevel level, RandomSource rand, int placementHeight, int placementDepth, int distance, BlockPos.MutableBlockPos mutableBlockPos)
     {
         double sqrtDist = Math.sqrt(distance);
         boolean placed = false;
@@ -77,7 +75,7 @@ public class DecayingKelpFeature extends Feature<NoneFeatureConfiguration>
                 else if (sqrtDist < 5)
                 {
                     // Used to create a better looking fade-in
-                    for(int j = 0; j < ((int)(noise.getValue(zPos / 0.9, xPos / 3.) + 1) * 3) + 2; j++)
+                    for(int j = 0; j < 3; j++)
                     {
                         int xRimOffset = rand.nextInt(2) - rand.nextInt(2);
                         int zRimOffset = rand.nextInt(2) - rand.nextInt(2);

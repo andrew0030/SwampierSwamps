@@ -35,26 +35,26 @@ public class BigLilyPadFeature extends Feature<ProbabilityFeatureConfiguration>
         int heightInWorld = worldGenLevel.getHeight(Heightmap.Types.WORLD_SURFACE_WG, pos.getX() + xOffset, pos.getZ() + zOffset);
         BlockPos posAtTarget = new BlockPos(pos.getX() + xOffset, heightInWorld, pos.getZ() + zOffset);
     
-//        if (worldGenLevel.getBlockState(posAtTarget.below()).is(Blocks.WATER) && worldGenLevel.getBlockState(posAtTarget).is(Blocks.AIR));
+//      if (worldGenLevel.getBlockState(posAtTarget.below()).is(Blocks.WATER) && worldGenLevel.getBlockState(posAtTarget).is(Blocks.AIR));
+//      {
+        Direction direction = switch (randomSource.nextInt(4))
         {
-            Direction direction = switch (randomSource.nextInt(4))
-            {
-                default -> Direction.NORTH;
-                case 1 -> Direction.SOUTH;
-                case 2 -> Direction.WEST;
-                case 3 -> Direction.EAST;
-            };
-            boolean probabilityCheck = randomSource.nextDouble() < (double) probabilityfeatureconfiguration.probability;
-            if (isValidPosition(worldGenLevel, posAtTarget, direction) && probabilityCheck)
-            {
-                BlockState state = SSBlocks.BIG_LILY_PAD.get().defaultBlockState();
-                worldGenLevel.setBlock(posAtTarget, state.setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 0), 2);
-                worldGenLevel.setBlock(posAtTarget.relative(direction), state.setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 1), 2);
-                worldGenLevel.setBlock(posAtTarget.relative(direction.getClockWise()), state.setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 2), 2);
-                worldGenLevel.setBlock(posAtTarget.relative(direction).relative(direction.getClockWise()), state.setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 3), 2);
-                placedBigLilyPad = true;
-            }
+            default -> Direction.NORTH;
+            case 1 -> Direction.SOUTH;
+            case 2 -> Direction.WEST;
+            case 3 -> Direction.EAST;
+        };
+        boolean probabilityCheck = randomSource.nextDouble() < (double) probabilityfeatureconfiguration.probability;
+        if (isValidPosition(worldGenLevel, posAtTarget, direction) && probabilityCheck)
+        {
+            BlockState state = SSBlocks.BIG_LILY_PAD.get().defaultBlockState();
+            worldGenLevel.setBlock(posAtTarget, state.setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 0), 2);
+            worldGenLevel.setBlock(posAtTarget.relative(direction), state.setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 1), 2);
+            worldGenLevel.setBlock(posAtTarget.relative(direction.getClockWise()), state.setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 2), 2);
+            worldGenLevel.setBlock(posAtTarget.relative(direction).relative(direction.getClockWise()), state.setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 3), 2);
+            placedBigLilyPad = true;
         }
+//      }
         return placedBigLilyPad;
     }
 

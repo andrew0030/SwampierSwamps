@@ -40,7 +40,6 @@ public class BlockBehaviourMixin
     {
         if (state.is(Blocks.DRIED_KELP_BLOCK))
         {
-            System.out.println("ticking");
             if (rand.nextInt(25) == 0)
                 if(level.getFluidState(pos.above()).getType() == Fluids.WATER && level.getFluidState(pos.above()).getAmount() == FluidState.AMOUNT_FULL)
                     level.setBlock(pos, SSBlocks.DECAYING_KELP.get().defaultBlockState(), 2);

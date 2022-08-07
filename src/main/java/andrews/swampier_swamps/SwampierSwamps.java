@@ -56,12 +56,8 @@ public class SwampierSwamps
 
     void setupClient(final FMLClientSetupEvent event)
     {
-        event.enqueueWork(() ->
-        {
-
-        });
+        event.enqueueWork(() -> {});
         // Thread Safe Stuff Bellow
-        SSBlocks.registerBlockRenderTypes();
     }
 
     void setupParticles(final RegisterParticleProvidersEvent event)

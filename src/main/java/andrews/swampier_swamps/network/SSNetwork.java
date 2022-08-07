@@ -26,7 +26,7 @@ public class SSNetwork
         CHANNEL.messageBuilder(MessageClientSplashParticles.class, id++)
                 .encoder(MessageClientSplashParticles::serialize)
                 .decoder(MessageClientSplashParticles::deserialize)
-                .consumer(MessageClientSplashParticles::handle)
+                .consumerMainThread(MessageClientSplashParticles::handle)
                 .add();
 
         //Server Messages

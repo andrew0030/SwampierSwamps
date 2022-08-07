@@ -10,6 +10,8 @@ public class SSCommonConfig
     public ConfigValueListener<Integer> waterRange;
     public ConfigValueListener<Integer> growthMultiplier;
     // Swamp Gas
+    public ConfigValueListener<Integer> collisionCheckRate;
+    public ConfigValueListener<Boolean> givesNegativeEffects;
     public ConfigValueListener<Boolean> isFurnaceFuel;
     public ConfigValueListener<Integer> burnTime;
     // Frog
@@ -20,6 +22,7 @@ public class SSCommonConfig
     // Tree Stuff
     public ConfigValueListener<Integer> growBaldCypressFromSaplings;
     // Lily Pad
+    public ConfigValueListener<Boolean> doLilyPadsBreak;
     public ConfigValueListener<Integer> shouldLilyPadsGrow;
     public ConfigValueListener<Integer> lilyPadSinkTimeStage1;
     public ConfigValueListener<Integer> lilyPadSinkTimeStage2;
@@ -44,6 +47,17 @@ public class SSCommonConfig
         builder.pop(); // Fertile Farmland End
 
         builder.push("Swamp Gas"); // Swamp Gas Start
+        collisionCheckRate = subscriber.subscribe(builder
+                .comment("""
+                        This can be used to alter the tick interval for collision checks the\r
+                        Swamp Gas Cloud does, this is used to trigger explosions from things\r
+                        like Fire Arrows.""".indent(1)
+                ).defineInRange("collisionCheckRate", 3, 1, 10));
+        givesNegativeEffects = subscriber.subscribe(builder
+                .comment("""
+                        Whether the Swamp Gas Cloud will give Living Entities negative effects,\r
+                        when they walk through it (for example Effects like Poison).""".indent(1)
+                ).define("givesNegativeEffects", true));
         isFurnaceFuel = subscriber.subscribe(builder
                 .comment("""
                         This can be used to prevent Swamp Gas from being used as Furnace Fuel.""".indent(1)
@@ -92,6 +106,14 @@ public class SSCommonConfig
         builder.pop(); // Tree Stuff End
 
         builder.push("Lily Pad");
+        doLilyPadsBreak = subscriber.subscribe(builder
+                .comment("""
+                        This is used to determine whether Lily Pads break once they reach their final sink stage.\r
+                        Values:\r
+                        true: Lily Pads will break\r
+                        false: Lily Pads wont break, and instead become collision-less (like dripleafs)""".indent(1)
+                ).define("doLilyPadsBreak", true));
+
         shouldLilyPadsGrow = subscriber.subscribe(builder
                 .comment("""
                         Whether Lily Pads should grow. To be specific, this makes Small Lily Pads grow into\r

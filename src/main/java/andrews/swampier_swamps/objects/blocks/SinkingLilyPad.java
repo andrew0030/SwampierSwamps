@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 import java.util.Map;
@@ -46,7 +47,9 @@ public class SinkingLilyPad extends WaterlilyBlock
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
-        return AABB_SHAPES.get(state.getValue(SINK_STAGE));
+        int sinkStage = state.getValue(SINK_STAGE);
+        VoxelShape shape = AABB_SHAPES.get(sinkStage);
+        return SSConfigs.commonConfig.doLilyPadsBreak.get() ? shape : sinkStage == 2 ? Shapes.empty() : shape;
     }
 
     @Override
@@ -73,7 +76,11 @@ public class SinkingLilyPad extends WaterlilyBlock
                 break;
             case 2:
                 if(getLivingEntitiesAtPos(level, pos) > 0) {
-                    level.destroyBlock(pos, true);
+                    if(SSConfigs.commonConfig.doLilyPadsBreak.get()) {
+                        level.destroyBlock(pos, true);
+                    } else {
+                        level.scheduleTick(pos, this, SSConfigs.commonConfig.lilyPadResetTime.get());
+                    }
                 } else { // If there aren't any LivingEntities over the block we revert to default (Lily Pad Block)
                     level.setBlock(pos, this.defaultBlockState().setValue(SINK_STAGE, 1), 2);
                     level.scheduleTick(pos, this, SSConfigs.commonConfig.lilyPadResetTime.get());
@@ -88,8 +95,8 @@ public class SinkingLilyPad extends WaterlilyBlock
         {
             if (entity instanceof LivingEntity livingEntity)
                 if (livingEntity.getBbHeight() > 1.2F)
-                    if(livingEntity.isOnGround())
-                        if(livingEntity.position().y > (double)((float)pos.below().getY() + 0.6875F))
+                    if(livingEntity.isOnGround() || livingEntity.isInWater())
+                        if(livingEntity.position().y > (double)((float)pos.below().getY() + 0.6875F) || !SSConfigs.commonConfig.doLilyPadsBreak.get())
                             ++livingEntityCount;
         }
         return livingEntityCount;

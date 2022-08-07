@@ -54,18 +54,6 @@ public class SSBlocks
 
     public static final RegistryObject<Block> FERTILE_FARMLAND      = createBlock("fertile_farmland", () -> new FertileFarmlandBlock(BlockBehaviour.Properties.copy(Blocks.FARMLAND)), CreativeModeTab.TAB_DECORATIONS);
 
-    /**
-     * Used to register the RenderType for some Blocks
-     */
-    public static void registerBlockRenderTypes()
-    {
-        ItemBlockRenderTypes.setRenderLayer(SWAMP_VINE.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(CATTAIL.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(SINKING_LILY_PAD.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(BIG_LILY_PAD.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(SMALL_LILY_PAD.get(), RenderType.cutout());
-    }
-
     private static <B extends Block> RegistryObject<B> createBlock(String name, Supplier<? extends B> supplier, CreativeModeTab group)
     {
         RegistryObject<B> block = createBlockNoItem(name, supplier);
