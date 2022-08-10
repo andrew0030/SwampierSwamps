@@ -1,7 +1,9 @@
 package andrews.swampier_swamps.entities;
 
 import andrews.swampier_swamps.config.SSConfigs;
+import andrews.swampier_swamps.network.NetworkUtil;
 import andrews.swampier_swamps.registry.SSParticles;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -113,8 +115,8 @@ public class SwampGas extends Entity
 
     private void handleCollisions()
     {
-        // We make sure the Entity is a Gas Cloud
-        if(this.isCould())
+        // We make sure the Entity is a Gas Cloud, and we are on the Server
+        if(!this.level.isClientSide && this.isCould())
         {
             if (this.tickCount % SSConfigs.commonConfig.collisionCheckRate.get() == 0) // Base check frequency on Config
             {
@@ -126,17 +128,8 @@ public class SwampGas extends Entity
                     {
                         if (arrow.isOnFire()) // We make sure the arrow is burning
                         {
-                            for (int i = 0; i < 20; i++)
-                            {
-                                double spawnX = this.getX() + random.nextInt(7) - 3 + random.nextDouble();
-                                double spawnY = this.getY() + random.nextInt(4) + random.nextDouble();
-                                double spawnZ = this.getZ() + random.nextInt(7) - 3 + random.nextDouble();
-
-                                level.addAlwaysVisibleParticle(ParticleTypes.FLAME, spawnX, spawnY, spawnZ, 0, 0, 0);
-                            }
-
-                            if(!level.isClientSide)
-                                level.explode(null, this.getX(), this.getY() + 0.5F, this.getZ(), 4.0F, true, Explosion.BlockInteraction.DESTROY);
+                            NetworkUtil.createGasExplosionParticlesAtPos(level, new BlockPos(this.position()));
+                            level.explode(null, this.getX(), this.getY() + 0.5F, this.getZ(), 4.0F, true, Explosion.BlockInteraction.DESTROY);
                             this.discard();
                         }
                     }

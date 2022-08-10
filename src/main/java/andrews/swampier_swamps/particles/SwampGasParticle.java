@@ -11,7 +11,7 @@ public class SwampGasParticle extends TextureSheetParticle
         super(clientLevel, x, y, z);
         this.scale(4.0F);
         this.setSize(0.25F, 0.25F);
-        this.lifetime = this.random.nextInt(20) + 20; // TODO adjust values
+        this.lifetime = this.random.nextInt(20) + 20;
         this.gravity = 3.0E-6F;
         this.xd = xSpeed + (double)((this.random.nextFloat() - 0.5F) / 100.0F);
         this.yd = ySpeed + (double)(this.random.nextFloat() / 100.0F);

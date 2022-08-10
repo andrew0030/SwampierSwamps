@@ -1,0 +1,15 @@
+{
+  "name": "swampier_swamps:village/swamp/town_centers",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "swampier_swamps:village/swamp/town_centers/meeting_point_1",
+        "processors": "minecraft:empty",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
+  ]
+}

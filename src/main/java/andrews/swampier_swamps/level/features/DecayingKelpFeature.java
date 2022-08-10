@@ -1,20 +1,18 @@
 package andrews.swampier_swamps.level.features;
 
 import andrews.swampier_swamps.registry.SSBlocks;
+import andrews.swampier_swamps.registry.SSTags;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DoublePlantBlock;
 import net.minecraft.world.level.block.TallSeagrassBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
-import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.levelgen.synth.SimplexNoise;
 
 public class DecayingKelpFeature extends Feature<NoneFeatureConfiguration>
 {
@@ -54,7 +52,7 @@ public class DecayingKelpFeature extends Feature<NoneFeatureConfiguration>
         for(int height = placementHeight; height > placementDepth; --height)
         {
             mutableBlockPos.setY(height);
-            if (level.isStateAtPosition(mutableBlockPos, state -> state.is(Blocks.DIRT) || state.is(Blocks.CLAY) || state.is(Blocks.GRAVEL) || state.is(Blocks.MUD)))
+            if (level.isStateAtPosition(mutableBlockPos, state -> state.is(SSTags.Blocks.DECAYING_KELP_CAN_REPLACE)))
             {
                 BlockState state = Blocks.MUD.defaultBlockState();
                 if(sqrtDist < 1)
@@ -81,7 +79,7 @@ public class DecayingKelpFeature extends Feature<NoneFeatureConfiguration>
                         int zRimOffset = rand.nextInt(2) - rand.nextInt(2);
                         BlockPos fadeInPos = mutableBlockPos.offset(xRimOffset, 0, zRimOffset);
                         BlockState stateAtRim = level.getBlockState(fadeInPos);
-                        if(stateAtRim.is(Blocks.GRAVEL) || stateAtRim.is(Blocks.DIRT) || stateAtRim.is(Blocks.CLAY))
+                        if(stateAtRim.is(SSTags.Blocks.DECAYING_KELP_CAN_REPLACE))
                         {
                             level.setBlock(fadeInPos, state, 2);
                             this.markAboveForPostProcessing(level, fadeInPos);

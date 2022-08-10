@@ -1,5 +1,6 @@
 package andrews.swampier_swamps.network;
 
+import andrews.swampier_swamps.network.client.MessageClientGasExplosionParticles;
 import andrews.swampier_swamps.network.client.MessageClientSplashParticles;
 import andrews.swampier_swamps.util.Reference;
 import net.minecraft.resources.ResourceLocation;
@@ -27,6 +28,12 @@ public class SSNetwork
                 .encoder(MessageClientSplashParticles::serialize)
                 .decoder(MessageClientSplashParticles::deserialize)
                 .consumerMainThread(MessageClientSplashParticles::handle)
+                .add();
+
+        CHANNEL.messageBuilder(MessageClientGasExplosionParticles.class, id++)
+                .encoder(MessageClientGasExplosionParticles::serialize)
+                .decoder(MessageClientGasExplosionParticles::deserialize)
+                .consumerMainThread(MessageClientGasExplosionParticles::handle)
                 .add();
 
         //Server Messages

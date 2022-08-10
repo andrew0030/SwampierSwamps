@@ -10,11 +10,11 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class MessageClientSplashParticles
+public class MessageClientGasExplosionParticles
 {
     public BlockPos pos;
 
-    public MessageClientSplashParticles(BlockPos pos)
+    public MessageClientGasExplosionParticles(BlockPos pos)
     {
         this.pos = pos;
     }
@@ -24,20 +24,20 @@ public class MessageClientSplashParticles
         buf.writeBlockPos(this.pos);
     }
 
-    public static MessageClientSplashParticles deserialize(FriendlyByteBuf buf)
+    public static MessageClientGasExplosionParticles deserialize(FriendlyByteBuf buf)
     {
         BlockPos pos = buf.readBlockPos();
-        return new MessageClientSplashParticles(pos);
+        return new MessageClientGasExplosionParticles(pos);
     }
 
-    public static void handle(MessageClientSplashParticles message, Supplier<NetworkEvent.Context> ctx)
+    public static void handle(MessageClientGasExplosionParticles message, Supplier<NetworkEvent.Context> ctx)
     {
         NetworkEvent.Context context = ctx.get();
         if(context.getDirection().getReceptionSide() == LogicalSide.CLIENT)
         {
             context.enqueueWork(() ->
             {
-                DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientPacketHandlerClass.handleSpawnSplashParticles(message, ctx));
+                DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientPacketHandlerClass.handleSpawnGasExplosionParticles(message, ctx));
             });
             context.setPacketHandled(true);
         }
