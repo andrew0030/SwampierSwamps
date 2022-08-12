@@ -1,14 +1,14 @@
 {
-  "structures": [
-    {
-      "structure": "swampier_swamps:village_swamp",
-      "weight": 1
-    }
-  ],
   "placement": {
     "type": "minecraft:random_spread",
     "salt": 361757362,
     "spacing": 34,
     "separation": 8
-  }
+  },
+  "structures": [
+    {
+      "structure": "swampier_swamps:village_swamp",
+      "weight": 1
+    }
+  ]
 }

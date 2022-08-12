@@ -51,8 +51,9 @@ public class SSBlocks
     public static final RegistryObject<Block> SMALL_LILY_PAD        = createWaterPlacementBlock("small_lily_pad", () -> new SmallLilyPadBlock(BlockBehaviour.Properties.copy(Blocks.LILY_PAD).noCollission().randomTicks()), CreativeModeTab.TAB_DECORATIONS);
     // Kinda a Plant?
     public static final RegistryObject<Block> DECAYING_KELP         = createBlock("decaying_kelp", () -> new DecayingKelpBlock(BlockBehaviour.Properties.copy(Blocks.DRIED_KELP_BLOCK)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-
+    // Util
     public static final RegistryObject<Block> FERTILE_FARMLAND      = createBlock("fertile_farmland", () -> new FertileFarmlandBlock(BlockBehaviour.Properties.copy(Blocks.FARMLAND)), CreativeModeTab.TAB_DECORATIONS);
+    public static final RegistryObject<Block> GAS_LAMP              = createBlock("gas_lamp", () -> new GasLampBlock(BlockBehaviour.Properties.copy(Blocks.LANTERN)), CreativeModeTab.TAB_DECORATIONS);
 
     private static <B extends Block> RegistryObject<B> createBlock(String name, Supplier<? extends B> supplier, CreativeModeTab group)
     {

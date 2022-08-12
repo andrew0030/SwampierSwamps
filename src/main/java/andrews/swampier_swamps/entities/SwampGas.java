@@ -11,6 +11,7 @@ import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
@@ -98,6 +99,21 @@ public class SwampGas extends Entity
     }
 
     @Override
+    public boolean hurt(DamageSource source, float amount)
+    {
+        if(source.isExplosion())
+        {
+            if (!this.isRemoved() && !this.level.isClientSide)
+            {
+                this.remove(Entity.RemovalReason.KILLED);
+                NetworkUtil.createGasExplosionParticlesAtPos(level, new BlockPos(this.position()));
+                level.explode(null, this.getX(), this.getY() + 0.5F, this.getZ(), 4.0F, true, Explosion.BlockInteraction.DESTROY);
+            }
+        }
+        return super.hurt(source, amount);
+    }
+
+    @Override
     public Packet<?> getAddEntityPacket()
     {
         return new ClientboundAddEntityPacket(this);
@@ -128,9 +144,9 @@ public class SwampGas extends Entity
                     {
                         if (arrow.isOnFire()) // We make sure the arrow is burning
                         {
+                            this.remove(Entity.RemovalReason.KILLED);
                             NetworkUtil.createGasExplosionParticlesAtPos(level, new BlockPos(this.position()));
                             level.explode(null, this.getX(), this.getY() + 0.5F, this.getZ(), 4.0F, true, Explosion.BlockInteraction.DESTROY);
-                            this.discard();
                         }
                     }
                 }
