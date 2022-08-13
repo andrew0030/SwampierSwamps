@@ -4,7 +4,6 @@ import andrews.swampier_swamps.config.SSConfigs;
 import andrews.swampier_swamps.network.NetworkUtil;
 import andrews.swampier_swamps.registry.SSParticles;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
@@ -15,7 +14,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -51,22 +49,41 @@ public class SwampGas extends Entity
             this.refreshDimensions(); // Updates the dimensions, note this only refreshes the size, the logic is handled below
         }
 
-        // Spawns the Particles
-        if (this.isCould() && random.nextInt(2) == 0)
+        if (this.isCould())
         {
-            for(int i = 0; i < 10; i++)
+            // Spawns the Particles
+            if (random.nextInt(2) == 0)
             {
-                double spawnX = this.getX() + random.nextInt(7) - 3 + random.nextDouble();
-                double spawnY = this.getY() + random.nextInt(4) + random.nextDouble();
-                double spawnZ = this.getZ() + random.nextInt(7) - 3 + random.nextDouble();
-                double distance = Math.sqrt((spawnY - this.getY()) * (spawnY - this.getY()) + (spawnX - this.getX()) * (spawnX - this.getX()) + (spawnZ - this.getZ()) * (spawnZ - this.getZ()));
+                for (int i = 0; i < 10; i++)
+                {
+                    double spawnX = this.getX() + random.nextInt(7) - 3 + random.nextDouble();
+                    double spawnY = this.getY() + random.nextInt(4) + random.nextDouble();
+                    double spawnZ = this.getZ() + random.nextInt(7) - 3 + random.nextDouble();
+                    double distance = Math.sqrt((spawnY - this.getY()) * (spawnY - this.getY()) + (spawnX - this.getX()) * (spawnX - this.getX()) + (spawnZ - this.getZ()) * (spawnZ - this.getZ()));
 
-                if(distance < 3.5)
-                    level.addParticle(SSParticles.SWAMP_GAS.get(), spawnX, spawnY, spawnZ, 0, 0, 0);
+                    if (distance < 3.5)
+                        level.addParticle(SSParticles.SWAMP_GAS.get(), spawnX, spawnY, spawnZ, 0, 0, 0);
+                }
+            }
+
+            // Gives Entities Effects
+            if (this.tickCount % 10 == 0) // Reduces the check rate to every 10 ticks
+            {
+                if(SSConfigs.commonConfig.givesNegativeEffects.get()) // Config Check
+                {
+                    List<LivingEntity> livingEntities = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox());
+                    if (!livingEntities.isEmpty()) // If we found living entities we continue
+                    {
+                        for (LivingEntity livingEntity : livingEntities) // We loop through the Entities and add the Effects
+                        {
+                            livingEntity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200));
+                            livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 100));
+                        }
+                    }
+                }
             }
         }
-        // Handles the Explosion Checks / Collision Logic
-        handleCollisions();
+
         // If the Entity is too Old we remove it
         if(this.tickCount > 400)
             this.discard();
@@ -101,13 +118,13 @@ public class SwampGas extends Entity
     @Override
     public boolean hurt(DamageSource source, float amount)
     {
-        if(source.isExplosion())
+        if(source.isExplosion() || source.isProjectile())
         {
             if (!this.isRemoved() && !this.level.isClientSide)
             {
                 this.remove(Entity.RemovalReason.KILLED);
                 NetworkUtil.createGasExplosionParticlesAtPos(level, new BlockPos(this.position()));
-                level.explode(null, this.getX(), this.getY() + 0.5F, this.getZ(), 4.0F, true, Explosion.BlockInteraction.DESTROY);
+                level.explode(null, this.getX(), this.getY() + 0.5F, this.getZ(), SSConfigs.commonConfig.explosionStrength.get(), true, Explosion.BlockInteraction.BREAK);
             }
         }
         return super.hurt(source, amount);
@@ -127,47 +144,5 @@ public class SwampGas extends Entity
     public void setIsCould(boolean value)
     {
         this.getEntityData().set(IS_CLOUD, value);
-    }
-
-    private void handleCollisions()
-    {
-        // We make sure the Entity is a Gas Cloud, and we are on the Server
-        if(!this.level.isClientSide && this.isCould())
-        {
-            if (this.tickCount % SSConfigs.commonConfig.collisionCheckRate.get() == 0) // Base check frequency on Config
-            {
-                // We get all the Arrow Entities within the Gas Cloud
-                List<Arrow> arrowEntities = this.level.getEntitiesOfClass(Arrow.class, this.getBoundingBox());
-                if (!arrowEntities.isEmpty()) // Makes sure there was at least 1 arrow
-                {
-                    for (Arrow arrow : arrowEntities)
-                    {
-                        if (arrow.isOnFire()) // We make sure the arrow is burning
-                        {
-                            this.remove(Entity.RemovalReason.KILLED);
-                            NetworkUtil.createGasExplosionParticlesAtPos(level, new BlockPos(this.position()));
-                            level.explode(null, this.getX(), this.getY() + 0.5F, this.getZ(), 4.0F, true, Explosion.BlockInteraction.DESTROY);
-                        }
-                    }
-                }
-            }
-
-            // Gives Entities Effects
-            if (this.tickCount % 5 == 0) // Reduces the check rate to every 5 ticks
-            {
-                if(SSConfigs.commonConfig.givesNegativeEffects.get()) // Config Check
-                {
-                    List<LivingEntity> livingEntities = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox());
-                    if (!livingEntities.isEmpty()) // If we found living entities we continue
-                    {
-                        for (LivingEntity livingEntity : livingEntities) // We loop through the Entities and add the Effects
-                        {
-                            livingEntity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200));
-                            livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, 100));
-                        }
-                    }
-                }
-            }
-        }
     }
 }

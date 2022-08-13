@@ -10,7 +10,7 @@ public class SSCommonConfig
     public ConfigValueListener<Integer> waterRange;
     public ConfigValueListener<Integer> growthMultiplier;
     // Swamp Gas
-    public ConfigValueListener<Integer> collisionCheckRate;
+    public ConfigValueListener<Integer> explosionStrength;
     public ConfigValueListener<Boolean> givesNegativeEffects;
     public ConfigValueListener<Boolean> isFurnaceFuel;
     public ConfigValueListener<Integer> burnTime;
@@ -47,12 +47,10 @@ public class SSCommonConfig
         builder.pop(); // Fertile Farmland End
 
         builder.push("Swamp Gas"); // Swamp Gas Start
-        collisionCheckRate = subscriber.subscribe(builder
+        explosionStrength = subscriber.subscribe(builder
                 .comment("""
-                        This can be used to alter the tick interval for collision checks the\r
-                        Swamp Gas Cloud does, this is used to trigger explosions from things\r
-                        like Fire Arrows.""".indent(1)
-                ).defineInRange("collisionCheckRate", 3, 1, 10));
+                        This can be used to alter how big the Swamp Gas explosions are.""".indent(1)
+                ).defineInRange("explosionStrength", 6, 1, 10));
         givesNegativeEffects = subscriber.subscribe(builder
                 .comment("""
                         Whether the Swamp Gas Cloud will give Living Entities negative effects,\r

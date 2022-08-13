@@ -1,7 +1,11 @@
 package andrews.swampier_swamps.objects.blocks;
 
+import andrews.swampier_swamps.registry.SSParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -71,6 +75,22 @@ public class GasLampBlock extends Block
             {
                 level.setBlock(pos, this.defaultBlockState(), 2);
             }
+        }
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource rand)
+    {
+        int signalStrength = state.getValue(POWER);
+        for (int i = 0; i < 2; i++)
+        {
+            double xPos = pos.getX() + 0.4 + (rand.nextDouble() * 0.2);
+            double zPos = pos.getZ() + 0.4 + (rand.nextDouble() * 0.2);
+            double yPos = pos.getY() + 0.3 + (rand.nextDouble() * 0.15);
+
+            if (signalStrength != 15)
+                if (rand.nextInt(1 + signalStrength) == 0)
+                    level.addParticle(ParticleTypes.SMALL_FLAME, xPos, yPos, zPos, 0, 0, 0);
         }
     }
 
