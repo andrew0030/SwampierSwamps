@@ -1,7 +1,100 @@
 {
   "variants": {
-    "": {
-      "model": "swampier_swamps:block/gas_lamp"
+    "hanging=false,power=0": {
+      "model": "swampier_swamps:block/gas_lamp_15"
+    },
+    "hanging=false,power=1": {
+      "model": "swampier_swamps:block/gas_lamp_0"
+    },
+    "hanging=false,power=2": {
+      "model": "swampier_swamps:block/gas_lamp_1"
+    },
+    "hanging=false,power=3": {
+      "model": "swampier_swamps:block/gas_lamp_2"
+    },
+    "hanging=false,power=4": {
+      "model": "swampier_swamps:block/gas_lamp_3"
+    },
+    "hanging=false,power=5": {
+      "model": "swampier_swamps:block/gas_lamp_4"
+    },
+    "hanging=false,power=6": {
+      "model": "swampier_swamps:block/gas_lamp_5"
+    },
+    "hanging=false,power=7": {
+      "model": "swampier_swamps:block/gas_lamp_6"
+    },
+    "hanging=false,power=8": {
+      "model": "swampier_swamps:block/gas_lamp_7"
+    },
+    "hanging=false,power=9": {
+      "model": "swampier_swamps:block/gas_lamp_8"
+    },
+    "hanging=false,power=10": {
+      "model": "swampier_swamps:block/gas_lamp_9"
+    },
+    "hanging=false,power=11": {
+      "model": "swampier_swamps:block/gas_lamp_10"
+    },
+    "hanging=false,power=12": {
+      "model": "swampier_swamps:block/gas_lamp_11"
+    },
+    "hanging=false,power=13": {
+      "model": "swampier_swamps:block/gas_lamp_12"
+    },
+    "hanging=false,power=14": {
+      "model": "swampier_swamps:block/gas_lamp_13"
+    },
+    "hanging=false,power=15": {
+      "model": "swampier_swamps:block/gas_lamp_14"
+    },
+    "hanging=true,power=0": {
+      "model": "swampier_swamps:block/gas_lamp_hanging_0"
+    },
+    "hanging=true,power=1": {
+      "model": "swampier_swamps:block/gas_lamp_hanging_1"
+    },
+    "hanging=true,power=2": {
+      "model": "swampier_swamps:block/gas_lamp_hanging_2"
+    },
+    "hanging=true,power=3": {
+      "model": "swampier_swamps:block/gas_lamp_hanging_3"
+    },
+    "hanging=true,power=4": {
+      "model": "swampier_swamps:block/gas_lamp_hanging_4"
+    },
+    "hanging=true,power=5": {
+      "model": "swampier_swamps:block/gas_lamp_hanging_5"
+    },
+    "hanging=true,power=6": {
+      "model": "swampier_swamps:block/gas_lamp_hanging_6"
+    },
+    "hanging=true,power=7": {
+      "model": "swampier_swamps:block/gas_lamp_hanging_7"
+    },
+    "hanging=true,power=8": {
+      "model": "swampier_swamps:block/gas_lamp_hanging_8"
+    },
+    "hanging=true,power=9": {
+      "model": "swampier_swamps:block/gas_lamp_hanging_9"
+    },
+    "hanging=true,power=10": {
+      "model": "swampier_swamps:block/gas_lamp_hanging_10"
+    },
+    "hanging=true,power=11": {
+      "model": "swampier_swamps:block/gas_lamp_hanging_11"
+    },
+    "hanging=true,power=12": {
+      "model": "swampier_swamps:block/gas_lamp_hanging_12"
+    },
+    "hanging=true,power=13": {
+      "model": "swampier_swamps:block/gas_lamp_hanging_13"
+    },
+    "hanging=true,power=14": {
+      "model": "swampier_swamps:block/gas_lamp_hanging_14"
+    },
+    "hanging=true,power=15": {
+      "model": "swampier_swamps:block/gas_lamp_hanging_15"
     }
   }
 }

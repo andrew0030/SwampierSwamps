@@ -1,21 +1,23 @@
 package andrews.swampier_swamps.objects.blocks;
 
-import andrews.swampier_swamps.registry.SSParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -24,15 +26,15 @@ import java.util.function.ToIntFunction;
 
 public class GasLampBlock extends Block
 {
-    private static final VoxelShape BASE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 9.0D, 11.0D);
-    private static final VoxelShape COVER = Block.box(4.0D, 7.0D, 4.0D, 12.0D, 8.0D, 12.0D);
-    private static final VoxelShape AABB = Shapes.or(BASE, COVER);
+    public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
+    protected static final VoxelShape AABB = Shapes.or(Block.box(5.0D, 0.0D, 5.0D, 11.0D, 9.0D, 11.0D), Block.box(4.0D, 7.0D, 4.0D, 12.0D, 8.0D, 12.0D));
+    protected static final VoxelShape HANGING_AABB = Shapes.or(Block.box(5.0D, 1.0D, 5.0D, 11.0D, 8.0D, 11.0D), Block.box(6.0D, 8.0D, 6.0D, 10.0D, 10.0D, 10.0D));
     public static final IntegerProperty POWER = BlockStateProperties.POWER;
 
     public GasLampBlock(Properties properties)
     {
         super(properties.lightLevel(litBlockEmission()));
-        this.registerDefaultState(this.stateDefinition.any().setValue(POWER, 0));
+        this.registerDefaultState(this.stateDefinition.any().setValue(HANGING, false).setValue(POWER, 0));
     }
 
     @Override
@@ -42,22 +44,50 @@ public class GasLampBlock extends Block
     }
 
     @Override
+    public PushReaction getPistonPushReaction(BlockState state)
+    {
+        return PushReaction.DESTROY;
+    }
+
+    @Override
+    public BlockState updateShape(BlockState state, Direction direction, BlockState state1, LevelAccessor level, BlockPos pos, BlockPos pos1)
+    {
+        return getConnectedDirection(state).getOpposite() == direction && !state.canSurvive(level, pos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, state1, level, pos, pos1);
+    }
+
+    @Override
     public void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateDefinition)
     {
-        stateDefinition.add(POWER);
+        stateDefinition.add(POWER, HANGING);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
-        BlockState state = this.defaultBlockState();
-        boolean hasNeighborSignal = context.getLevel().hasNeighborSignal(context.getClickedPos());
-        if(hasNeighborSignal)
+        for(Direction direction : context.getNearestLookingDirections())
         {
-            int signalStrength = context.getLevel().getBestNeighborSignal(context.getClickedPos());
-            return state.setValue(POWER, signalStrength);
+            if (direction.getAxis() == Direction.Axis.Y)
+            {
+                BlockState blockstate = this.defaultBlockState().setValue(HANGING, direction == Direction.UP);
+                if (blockstate.canSurvive(context.getLevel(), context.getClickedPos()))
+                {
+                    return blockstate.setValue(POWER, context.getLevel().getBestNeighborSignal(context.getClickedPos()));
+                }
+            }
         }
-        return state;
+        return null;
+    }
+
+    @Override
+    public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos)
+    {
+        Direction direction = getConnectedDirection(state).getOpposite();
+        return Block.canSupportCenter(level, pos.relative(direction), direction.getOpposite());
+    }
+
+    private static Direction getConnectedDirection(BlockState state)
+    {
+        return state.getValue(HANGING) ? Direction.DOWN : Direction.UP;
     }
 
     @Override
@@ -65,16 +95,7 @@ public class GasLampBlock extends Block
     {
         if (!level.isClientSide)
         {
-            boolean hasNeighborSignal = level.hasNeighborSignal(pos);
-            if(hasNeighborSignal)
-            {
-                int signalStrength = level.getBestNeighborSignal(pos);
-                level.setBlock(pos, this.defaultBlockState().setValue(POWER, signalStrength), 2);
-            }
-            else
-            {
-                level.setBlock(pos, this.defaultBlockState(), 2);
-            }
+            level.setBlock(pos, state.setValue(POWER, level.getBestNeighborSignal(pos)), 2);
         }
     }
 
@@ -94,9 +115,14 @@ public class GasLampBlock extends Block
         }
     }
 
+    @Override
+    public boolean isPathfindable(BlockState pState, BlockGetter pLevel, BlockPos pPos, PathComputationType pType)
+    {
+        return false;
+    }
+
     private static ToIntFunction<BlockState> litBlockEmission()
     {
         return (state) -> 15 - state.getValue(POWER);
     }
-
 }

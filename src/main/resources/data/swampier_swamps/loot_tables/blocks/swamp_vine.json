@@ -16,7 +16,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:vine"
+          "name": "swampier_swamps:swamp_vine"
         }
       ],
       "rolls": 1.0

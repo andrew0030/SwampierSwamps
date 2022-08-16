@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "swampier_swamps:swamp_vine",
+    "swampier_swamps:cattail",
+    "swampier_swamps:small_lily_pad",
+    "swampier_swamps:big_lily_pad"
+  ]
+}

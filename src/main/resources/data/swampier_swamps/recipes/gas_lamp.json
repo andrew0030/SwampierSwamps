@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "G": {
+      "item": "swampier_swamps:gas_bottle"
+    },
+    "F": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "P": {
+      "item": "minecraft:glass_pane"
+    }
+  },
+  "pattern": [
+    "CPC",
+    "CFC",
+    "CGC"
+  ],
+  "result": {
+    "item": "swampier_swamps:gas_lamp"
+  }
+}
