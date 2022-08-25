@@ -13,7 +13,7 @@
     {
       "element": {
         "element_type": "minecraft:feature_pool_element",
-        "feature": "minecraft:flower_swamp",
+        "feature": "swampier_swamps:flower_swamp_village",
         "projection": "rigid"
       },
       "weight": 2
