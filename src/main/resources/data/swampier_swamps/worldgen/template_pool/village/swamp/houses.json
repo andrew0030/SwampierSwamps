@@ -49,6 +49,60 @@
     },
     {
       "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "swampier_swamps:village/swamp/houses/big_house_1",
+        "processors": "swampier_swamps:animal_pen_swamp",
+        "projection": "rigid"
+      },
+      "weight": 5
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "swampier_swamps:village/swamp/houses/big_house_2",
+        "processors": "swampier_swamps:animal_pen_swamp",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "swampier_swamps:village/swamp/houses/butcher_shop_1",
+        "processors": "swampier_swamps:animal_pen_swamp",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "swampier_swamps:village/swamp/houses/butcher_shop_2",
+        "processors": "swampier_swamps:animal_pen_swamp",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "swampier_swamps:village/swamp/houses/cartographer_1",
+        "processors": "swampier_swamps:animal_pen_swamp",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "swampier_swamps:village/swamp/houses/fisher_cottage_1",
+        "processors": "swampier_swamps:animal_pen_swamp",
+        "projection": "rigid"
+      },
+      "weight": 2
+    },
+    {
+      "element": {
         "element_type": "minecraft:empty_pool_element"
       },
       "weight": 10

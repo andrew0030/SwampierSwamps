@@ -158,6 +158,15 @@
     {
       "element": {
         "element_type": "minecraft:legacy_single_pool_element",
+        "location": "swampier_swamps:village/swamp/streets/straight_07",
+        "processors": "swampier_swamps:street_swamp",
+        "projection": "terrain_matching"
+      },
+      "weight": 4
+    },
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
         "location": "swampier_swamps:village/swamp/streets/turn_01",
         "processors": "swampier_swamps:street_swamp",
         "projection": "terrain_matching"
