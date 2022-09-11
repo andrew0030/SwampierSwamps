@@ -108,7 +108,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 142
+      "weight": 2
     },
     {
       "element": {
