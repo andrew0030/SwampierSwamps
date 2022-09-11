@@ -19,7 +19,8 @@ public class VillageFrogFeature extends Feature<FrogVariantConfig>
 
     public boolean place(FeaturePlaceContext<FrogVariantConfig> context)
     {
-        BlockPos pos = context.origin().below();
+        BlockPos pos = context.origin().above();
+        context.level().setBlock(pos.below(), Blocks.COARSE_DIRT.defaultBlockState(), 2);
         Frog frog = EntityType.FROG.create(context.level().getLevel());
         frog.finalizeSpawn(context.level(), context.level().getCurrentDifficultyAt(pos), MobSpawnType.STRUCTURE, null, null);
         context.config().variant.ifPresent(frog::setVariant);
