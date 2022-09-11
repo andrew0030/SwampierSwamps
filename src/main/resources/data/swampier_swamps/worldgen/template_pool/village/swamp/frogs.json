@@ -1,0 +1,14 @@
+{
+  "name": "swampier_swamps:village/swamp/frogs",
+  "fallback": "swampier_swamps:village/swamp/frogs",
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:feature_pool_element",
+        "feature": "swampier_swamps:village_frog_white",
+        "projection": "rigid"
+      },
+      "weight": 1
+    }
+  ]
+}
