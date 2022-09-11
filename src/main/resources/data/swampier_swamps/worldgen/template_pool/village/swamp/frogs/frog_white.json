@@ -1,6 +1,6 @@
 {
   "name": "swampier_swamps:village/swamp/frogs/frog_white",
-  "fallback": "minecraft:empty",
+  "fallback": "swampier_swamps:village/swamp/frogs/frog_white",
   "elements": [
     {
       "element": {
