@@ -1,7 +1,7 @@
 plugins {
     id 'eclipse'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '5.+'
+    id 'net.minecraftforge.gradle' version '5.1.+'
     id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
@@ -13,7 +13,7 @@ archivesBaseName = 'swampier_swamps'
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 minecraft {
-    mappings channel: 'parchment', version: '1.18.2-2022.06.19-1.19'
+    mappings channel: 'parchment', version: '2022.09.04-1.19.2'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -58,12 +58,14 @@ mixin {
 
 repositories {
     maven { url "https://www.cursemaven.com" }
+    maven { url "https://nexus.resourcefulbees.com/repository/telepathicgrunt/" }
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.19.2-43.1.25'
     implementation fg.deobf("curse.maven:spark-361579:3828094")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    runtimeOnly fg.deobf("com.telepathicgrunt:CommandStructures-Forge:3.0.0+1.19")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
