@@ -184,6 +184,6 @@ public class MudPuddleFeature extends Feature<NoneFeatureConfiguration>
 
     private boolean canReplaceBlock(BlockState state)
     {
-        return !state.is(BlockTags.FEATURES_CANNOT_REPLACE);
+        return state.is(SSTags.Blocks.MUD_PUDDLE_CAN_REPLACE);
     }
 }
