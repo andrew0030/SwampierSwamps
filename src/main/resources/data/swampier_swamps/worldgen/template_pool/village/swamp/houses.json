@@ -45,7 +45,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 5
+      "weight": 10
     },
     {
       "element": {
@@ -54,7 +54,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 2
+      "weight": 4
     },
     {
       "element": {
@@ -90,7 +90,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 2
+      "weight": 4
     },
     {
       "element": {
@@ -99,7 +99,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 2
+      "weight": 8
     },
     {
       "element": {
@@ -108,7 +108,7 @@
         "processors": "swampier_swamps:farm_swamp",
         "projection": "rigid"
       },
-      "weight": 4
+      "weight": 8
     },
     {
       "element": {
@@ -117,7 +117,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 5
+      "weight": 10
     },
     {
       "element": {
@@ -126,7 +126,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 1
+      "weight": 2
     },
     {
       "element": {
@@ -144,7 +144,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 2
+      "weight": 4
     },
     {
       "element": {
@@ -153,7 +153,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 2
+      "weight": 4
     },
     {
       "element": {
@@ -162,7 +162,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 3
+      "weight": 5
     },
     {
       "element": {
@@ -171,7 +171,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 1
+      "weight": 2
     },
     {
       "element": {
@@ -180,7 +180,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 2
+      "weight": 4
     },
     {
       "element": {
@@ -270,7 +270,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 2
+      "weight": 4
     },
     {
       "element": {
@@ -279,7 +279,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 2
+      "weight": 4
     },
     {
       "element": {
@@ -288,7 +288,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 2
+      "weight": 3
     },
     {
       "element": {
@@ -297,7 +297,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 2
+      "weight": 3
     },
     {
       "element": {
@@ -306,7 +306,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 2
+      "weight": 3
     },
     {
       "element": {
@@ -315,7 +315,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 2
+      "weight": 5
     },
     {
       "element": {
@@ -324,7 +324,7 @@
         "processors": "swampier_swamps:animal_pen_swamp",
         "projection": "rigid"
       },
-      "weight": 2
+      "weight": 5
     },
     {
       "element": {

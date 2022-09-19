@@ -156,8 +156,11 @@ public class MudPuddleFeature extends Feature<NoneFeatureConfiguration>
                                     }
                                 }
                                 BlockPos posAtTarget = pos.offset(mudXOffset, mudYOffset, mudZOffset);
-                                level.setBlock(posAtTarget, rand.nextInt(15) == 0 ? mudRootState : mudState, 2);
-                                this.markAboveForPostProcessing(level, posAtTarget);
+                                if(level.getBlockState(posAtTarget).is(SSTags.Blocks.MUD_PUDDLE_CAN_REPLACE))
+                                {
+                                    level.setBlock(posAtTarget, rand.nextInt(15) == 0 ? mudRootState : mudState, 2);
+                                    this.markAboveForPostProcessing(level, posAtTarget);
+                                }
                             }
                         }
                     }
