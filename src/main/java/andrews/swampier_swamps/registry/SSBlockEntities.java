@@ -16,7 +16,6 @@ public class SSBlockEntities
 
     public static void registerBlockEntityRenderers()
     {
-        // TODO use for dynamic Swamp Gas display in Gas Lamp
-//        BlockEntityRenderers.register(ONLINE_DETECTOR.get(), OnlineDetectorBlockEntityRenderer::new);
+
     }
 }
