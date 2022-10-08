@@ -17,7 +17,7 @@ public class DecayingKelpBlockEntity extends BlockEntity
 
     public DecayingKelpBlockEntity(BlockPos pos, BlockState state)
     {
-        super(SSBlockEntities.DECAYING_KELP.get(), pos, state);
+        super(SSBlockEntities.DECAYING_KELP, pos, state);
         Random rand = new Random();
         ticksSinceLastGas = rand.nextInt(6000);
     }
@@ -31,7 +31,7 @@ public class DecayingKelpBlockEntity extends BlockEntity
             {
                 if(level.getFluidState(pos.above()).is(FluidTags.WATER))
                 {
-                    SwampGas swampGas = SSEntities.SWAMP_GAS.get().create(level);
+                    SwampGas swampGas = SSEntities.SWAMP_GAS.create(level);
                     swampGas.moveTo(pos.getX() + 0.5D, pos.getY() + 1.2D, pos.getZ() + 0.5D, 0.0F, 0.0F);
                     level.addFreshEntity(swampGas);
                 }

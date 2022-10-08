@@ -142,7 +142,7 @@ public class Dragonfly extends Animal implements FlyingAnimal
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob mob)
     {
-        return SSEntities.DRAGONFLY.get().create(level);
+        return SSEntities.DRAGONFLY.create(level);
     }
 
     @Override

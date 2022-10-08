@@ -50,7 +50,7 @@ public class BigLilyPadBlock extends WaterlilyBlock
 
                 for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-5, -1, -5), pos.offset(5, 1, 5)))
                 {
-                    if (level.getBlockState(blockpos).is(SSBlocks.SMALL_LILY_PAD.get()))
+                    if (level.getBlockState(blockpos).is(SSBlocks.SMALL_LILY_PAD))
                     {
                         --smallLilyPadLimit;
                         if (smallLilyPadLimit <= 0)
@@ -59,7 +59,7 @@ public class BigLilyPadBlock extends WaterlilyBlock
                 }
 
                 BlockPos randPosForPlacement = pos.offset(rand.nextInt(4) - rand.nextInt(4), 0, rand.nextInt(4) - rand.nextInt(4));
-                BlockState smallLilyPadState = SSBlocks.SMALL_LILY_PAD.get().defaultBlockState();
+                BlockState smallLilyPadState = SSBlocks.SMALL_LILY_PAD.defaultBlockState();
 
                 for (int i = 0; i < 4; ++i)
                 {
@@ -152,9 +152,9 @@ public class BigLilyPadBlock extends WaterlilyBlock
             if (level.getBlockState(pos).getValue(LILY_PAD_PART) == 0)
             {
                 Direction direction = state.getValue(FACING);
-                level.setBlock(pos.relative(direction), SSBlocks.BIG_LILY_PAD.get().defaultBlockState().setValue(FACING, direction).setValue(LILY_PAD_PART, 1), 2);
-                level.setBlock(pos.relative(direction.getClockWise()), SSBlocks.BIG_LILY_PAD.get().defaultBlockState().setValue(FACING, direction).setValue(LILY_PAD_PART, 2), 2);
-                level.setBlock(pos.relative(direction.getClockWise()).relative(direction), SSBlocks.BIG_LILY_PAD.get().defaultBlockState().setValue(FACING, direction).setValue(LILY_PAD_PART, 3), 2);
+                level.setBlock(pos.relative(direction), SSBlocks.BIG_LILY_PAD.defaultBlockState().setValue(FACING, direction).setValue(LILY_PAD_PART, 1), 2);
+                level.setBlock(pos.relative(direction.getClockWise()), SSBlocks.BIG_LILY_PAD.defaultBlockState().setValue(FACING, direction).setValue(LILY_PAD_PART, 2), 2);
+                level.setBlock(pos.relative(direction.getClockWise()).relative(direction), SSBlocks.BIG_LILY_PAD.defaultBlockState().setValue(FACING, direction).setValue(LILY_PAD_PART, 3), 2);
             }
         }
     }

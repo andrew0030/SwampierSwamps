@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "swampier_swamps",
+  "version": "${version}",
+
+  "name": "Swampier Swamps",
+  "description": "Swampier Swamps is a Mod that aims to overhaul and improve the Swamp Biome and some of the features added in the Wild Update.",
+  "authors": ["andrew0030"],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/swampier-swamps",
+    "sources": "https://github.com/andrew0030/SwampierSwamps",
+    "issues": "https://github.com/andrew0030/SwampierSwamps/issues"
+  },
+
+  "license": "GNU Lesser General Public License v3.0",
+  "icon": "logo.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": ["andrews.swampier_swamps.SwampierSwamps"],
+    "modmenu": [
+      "andrews.swampier_swamps.config.ModMenuConfig"
+    ],
+    "client": [
+      {
+        "value": "andrews.swampier_swamps.util.SSClientInit"
+      }
+    ]
+  },
+  "mixins": ["swampier_swamps.mixins.json"],
+  
+  "accessWidener" : "swampier_swamps.accesswidener",
+
+  "depends": {
+    "fabricloader": ">=0.14.8",
+    "fabric": "*",
+    "minecraft": "~1.19",
+    "java": ">=17",
+    "cloth-config2": ">=7.0.72"
+  }
+}

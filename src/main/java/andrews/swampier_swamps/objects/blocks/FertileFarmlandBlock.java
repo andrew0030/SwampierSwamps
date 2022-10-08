@@ -1,23 +1,21 @@
 package andrews.swampier_swamps.objects.blocks;
 
-import andrews.swampier_swamps.config.SSConfigs;
 import andrews.swampier_swamps.registry.SSBlocks;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.FarmlandWaterManager;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.IPlantable;
 
 public class FertileFarmlandBlock extends FarmBlock
 {
@@ -29,17 +27,17 @@ public class FertileFarmlandBlock extends FarmBlock
     @Override
     public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance)
     {
-        if (!level.isClientSide && ForgeHooks.onFarmlandTrample(level, pos, SSBlocks.DECAYING_KELP.get().defaultBlockState(), fallDistance, entity))
-        { // Forge: Move logic to Entity#canTrample
+        if (!level.isClientSide && level.random.nextFloat() < fallDistance - 0.5f && entity instanceof LivingEntity && (entity instanceof Player || level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) && entity.getBbWidth() * entity.getBbWidth() * entity.getBbHeight() > 0.512f)
+        {
             turnToDecayingKelp(state, level, pos);
         }
-        entity.causeFallDamage(fallDistance, 1.0F, DamageSource.FALL);
+        entity.causeFallDamage(fallDistance, 1.0f, DamageSource.FALL);
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
-        return !this.defaultBlockState().canSurvive(context.getLevel(), context.getClickedPos()) ? SSBlocks.DECAYING_KELP.get().defaultBlockState() : this.defaultBlockState();
+        return !this.defaultBlockState().canSurvive(context.getLevel(), context.getClickedPos()) ? SSBlocks.DECAYING_KELP.defaultBlockState() : this.defaultBlockState();
     }
 
     @Override
@@ -72,25 +70,24 @@ public class FertileFarmlandBlock extends FarmBlock
 
     public static void turnToDecayingKelp(BlockState state, Level level, BlockPos pos)
     {
-        level.setBlockAndUpdate(pos, pushEntitiesUp(state, SSBlocks.DECAYING_KELP.get().defaultBlockState(), level, pos));
+        level.setBlockAndUpdate(pos, pushEntitiesUp(state, SSBlocks.DECAYING_KELP.defaultBlockState(), level, pos));
     }
 
     private static boolean isNearWater(LevelReader level, BlockPos pos)
     {
-        int waterRange = SSConfigs.commonConfig.waterRange.get();
-        BlockState state = level.getBlockState(pos);
-        for(BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-waterRange, 0, -waterRange), pos.offset(waterRange, 1, waterRange)))
+        //int waterRange = SSConfigs.commonConfig.waterRange.get();
+        //for(BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-waterRange, 0, -waterRange), pos.offset(waterRange, 1, waterRange))) TODO fix config
+        for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-4, 0, -4), pos.offset(4, 1, 4)))
         {
-            if (state.canBeHydrated(level, pos, level.getFluidState(blockpos), blockpos))
+            if (level.getFluidState(blockpos).is(FluidTags.WATER))
                 return true;
         }
-        return FarmlandWaterManager.hasBlockWaterTicket(level, pos);
+        return false;
     }
 
     private static boolean isUnderCrops(BlockGetter level, BlockPos pos)
     {
-        BlockState plant = level.getBlockState(pos.above());
-        BlockState state = level.getBlockState(pos);
-        return plant.getBlock() instanceof IPlantable && state.canSustainPlant(level, pos, Direction.UP, (IPlantable)plant.getBlock());
+        Block block = level.getBlockState(pos.above()).getBlock();
+        return block instanceof CropBlock || block instanceof StemBlock || block instanceof AttachedStemBlock;
     }
 }

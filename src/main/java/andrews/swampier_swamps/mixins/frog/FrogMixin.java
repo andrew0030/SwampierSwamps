@@ -25,7 +25,7 @@ public class FrogMixin
         Holder<Biome> holder = serverLevelAccessor.getBiome(((Frog)(Object)this).blockPosition());
         if (holder.is(SSTags.Biomes.WHITE_FROG_BIOMES))
         {
-            ((Frog) (Object) this).setVariant(SSFrogVariants.WHITE_VARIANT.get());
+            ((Frog) (Object) this).setVariant(SSFrogVariants.WHITE_VARIANT);
         }
         else if (holder.is(SSTags.Biomes.ORANGE_FROG_BIOMES))
         {
@@ -33,27 +33,27 @@ public class FrogMixin
         }
         else if (holder.is(SSTags.Biomes.MAGENTA_FROG_BIOMES))
         {
-            ((Frog) (Object) this).setVariant(SSFrogVariants.MAGENTA_VARIANT.get());
+            ((Frog) (Object) this).setVariant(SSFrogVariants.MAGENTA_VARIANT);
         }
         else if (holder.is(SSTags.Biomes.LIGHT_BLUE_FROG_BIOMES))
         {
-            ((Frog) (Object) this).setVariant(SSFrogVariants.LIGHT_BLUE_VARIANT.get());
+            ((Frog) (Object) this).setVariant(SSFrogVariants.LIGHT_BLUE_VARIANT);
         }
         else if (holder.is(SSTags.Biomes.YELLOW_FROG_BIOMES))
         {
-            ((Frog) (Object) this).setVariant(SSFrogVariants.YELLOW_VARIANT.get());
+            ((Frog) (Object) this).setVariant(SSFrogVariants.YELLOW_VARIANT);
         }
         else if (holder.is(SSTags.Biomes.LIME_FROG_BIOMES))
         {
-            ((Frog) (Object) this).setVariant(SSFrogVariants.LIME_VARIANT.get());
+            ((Frog) (Object) this).setVariant(SSFrogVariants.LIME_VARIANT);
         }
         else if (holder.is(SSTags.Biomes.PINK_FROG_BIOMES))
         {
-            ((Frog) (Object) this).setVariant(SSFrogVariants.PINK_VARIANT.get());
+            ((Frog) (Object) this).setVariant(SSFrogVariants.PINK_VARIANT);
         }
         else if (holder.is(SSTags.Biomes.GRAY_FROG_BIOMES))
         {
-            ((Frog) (Object) this).setVariant(SSFrogVariants.GRAY_VARIANT.get());
+            ((Frog) (Object) this).setVariant(SSFrogVariants.GRAY_VARIANT);
         }
         else if (holder.is(SSTags.Biomes.LIGHT_GRAY_FROG_BIOMES))
         {
@@ -61,19 +61,19 @@ public class FrogMixin
         }
         else if (holder.is(SSTags.Biomes.CYAN_FROG_BIOMES))
         {
-            ((Frog) (Object) this).setVariant(SSFrogVariants.CYAN_VARIANT.get());
+            ((Frog) (Object) this).setVariant(SSFrogVariants.CYAN_VARIANT);
         }
         else if (holder.is(SSTags.Biomes.PURPLE_FROG_BIOMES))
         {
-            ((Frog) (Object) this).setVariant(SSFrogVariants.PURPLE_VARIANT.get());
+            ((Frog) (Object) this).setVariant(SSFrogVariants.PURPLE_VARIANT);
         }
         else if (holder.is(SSTags.Biomes.BLUE_FROG_BIOMES))
         {
-            ((Frog) (Object) this).setVariant(SSFrogVariants.BLUE_VARIANT.get());
+            ((Frog) (Object) this).setVariant(SSFrogVariants.BLUE_VARIANT);
         }
         else if (holder.is(SSTags.Biomes.BROWN_FROG_BIOMES))
         {
-            ((Frog) (Object) this).setVariant(SSFrogVariants.BROWN_VARIANT.get());
+            ((Frog) (Object) this).setVariant(SSFrogVariants.BROWN_VARIANT);
         }
         else if (holder.is(SSTags.Biomes.GREEN_FROG_BIOMES))
         {
@@ -81,11 +81,11 @@ public class FrogMixin
         }
         else if (holder.is(SSTags.Biomes.RED_FROG_BIOMES))
         {
-            ((Frog) (Object) this).setVariant(SSFrogVariants.RED_VARIANT.get());
+            ((Frog) (Object) this).setVariant(SSFrogVariants.RED_VARIANT);
         }
         else if (holder.is(SSTags.Biomes.BLACK_FROG_BIOMES))
         {
-            ((Frog) (Object) this).setVariant(SSFrogVariants.BLACK_VARIANT.get());
+            ((Frog) (Object) this).setVariant(SSFrogVariants.BLACK_VARIANT);
         }
     }
 }

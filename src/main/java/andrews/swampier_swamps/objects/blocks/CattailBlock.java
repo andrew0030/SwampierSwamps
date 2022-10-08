@@ -155,8 +155,8 @@ public class CattailBlock extends BushBlock
 
         if(fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == FluidState.AMOUNT_FULL)
         {
-            return (!blockStateBelow1.is(SSBlocks.CATTAIL.get()) && blockStateAbove1.is(Blocks.WATER) && blockStateAbove2.is(Blocks.AIR) && blockStateAbove3.is(Blocks.AIR)) ||
-                   (!blockStateBelow1.is(SSBlocks.CATTAIL.get()) && blockStateAbove1.is(Blocks.AIR) && blockStateAbove2.is(Blocks.AIR));
+            return (!blockStateBelow1.is(SSBlocks.CATTAIL) && blockStateAbove1.is(Blocks.WATER) && blockStateAbove2.is(Blocks.AIR) && blockStateAbove3.is(Blocks.AIR)) ||
+                   (!blockStateBelow1.is(SSBlocks.CATTAIL) && blockStateAbove1.is(Blocks.AIR) && blockStateAbove2.is(Blocks.AIR));
         }
         return false;
     }

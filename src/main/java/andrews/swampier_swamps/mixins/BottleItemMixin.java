@@ -32,7 +32,7 @@ public abstract class BottleItemMixin
             list.get(0).tickCount += 50; // We increase the age of the SwampGas Entity, effectively reducing its life span
             level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL_DRAGONBREATH, SoundSource.NEUTRAL, 1.0F, 1.0F);
             player.awardStat(Stats.ITEM_USED.get(Items.GLASS_BOTTLE));
-            ItemStack filledBottle = ItemUtils.createFilledResult(player.getItemInHand(hand), player, new ItemStack(SSItems.GAS_BOTTLE.get()), false);
+            ItemStack filledBottle = ItemUtils.createFilledResult(player.getItemInHand(hand), player, new ItemStack(SSItems.GAS_BOTTLE), false);
             cir.setReturnValue(InteractionResultHolder.sidedSuccess(filledBottle, level.isClientSide()));
         }
     }

@@ -3,17 +3,14 @@ package andrews.swampier_swamps.objects.blocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 public class MudStairsBlock extends StairBlock
@@ -60,10 +57,10 @@ public class MudStairsBlock extends StairBlock
         super(state, properties);
     }
 
-    public MudStairsBlock(Supplier<BlockState> state, Properties properties)
-    {
-        super(state, properties);
-    }
+//    public MudStairsBlock(Supplier<BlockState> state, Properties properties)
+//    {
+//        super(state, properties);
+//    }
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context)

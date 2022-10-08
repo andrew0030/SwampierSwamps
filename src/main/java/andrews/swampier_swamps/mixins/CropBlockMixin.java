@@ -18,14 +18,14 @@ public class CropBlockMixin
     @Inject(method = "mayPlaceOn", at = @At(value = "HEAD"), cancellable = true)
     public void injectMayPlace(BlockState state, BlockGetter level, BlockPos pos, CallbackInfoReturnable<Boolean> cir)
     {
-        if (state.is(SSBlocks.FERTILE_FARMLAND.get()))
+        if (state.is(SSBlocks.FERTILE_FARMLAND))
             cir.setReturnValue(true);
     }
 
     @Inject(method = "getGrowthSpeed", at = @At(value = "RETURN"), cancellable = true)
     private static void injectGetGrowthSpeed(Block block, BlockGetter level, BlockPos pos, CallbackInfoReturnable<Float> cir)
     {
-        if (level.getBlockState(pos.below()).is(SSBlocks.FERTILE_FARMLAND.get()))
+        if (level.getBlockState(pos.below()).is(SSBlocks.FERTILE_FARMLAND))
             cir.setReturnValue(cir.getReturnValue() * SSConfigs.commonConfig.growthMultiplier.get());
     }
 }

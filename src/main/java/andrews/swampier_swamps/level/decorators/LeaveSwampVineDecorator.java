@@ -26,7 +26,7 @@ public class LeaveSwampVineDecorator extends TreeDecorator
 
     protected TreeDecoratorType<?> type()
     {
-        return SSTreeDecorators.LEAVE_SWAMP_VINE.get();
+        return SSTreeDecorators.LEAVE_SWAMP_VINE;
     }
 
     public LeaveSwampVineDecorator(float probability, int length)
@@ -73,12 +73,12 @@ public class LeaveSwampVineDecorator extends TreeDecorator
 
     private void addHangingVine(BlockPos pos, BooleanProperty property, TreeDecorator.Context context)
     {
-        context.setBlock(pos, SSBlocks.SWAMP_VINE.get().defaultBlockState().setValue(property, true));
+        context.setBlock(pos, SSBlocks.SWAMP_VINE.defaultBlockState().setValue(property, true));
         int i = this.length;
 
         for(BlockPos blockpos = pos.below(); (context.isAir(blockpos) || context.level().isStateAtPosition(blockpos, state -> state.is(Blocks.WATER))) && i > 0; --i)
         {
-            context.setBlock(blockpos, SSBlocks.SWAMP_VINE.get().defaultBlockState().setValue(property, true).setValue(BlockStateProperties.WATERLOGGED, context.level().isStateAtPosition(blockpos, state -> state.is(Blocks.WATER))));
+            context.setBlock(blockpos, SSBlocks.SWAMP_VINE.defaultBlockState().setValue(property, true).setValue(BlockStateProperties.WATERLOGGED, context.level().isStateAtPosition(blockpos, state -> state.is(Blocks.WATER))));
             blockpos = blockpos.below();
         }
     }

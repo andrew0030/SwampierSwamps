@@ -15,8 +15,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.PlantType;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -84,14 +82,6 @@ public class HarvestFarmlandMixin
                         level.setBlockAndUpdate(aboveFarmlandPos, beetrootState);
                         level.gameEvent(GameEvent.BLOCK_PLACE, aboveFarmlandPos, GameEvent.Context.of(owner, beetrootState));
                         plantedSeed = true;
-                    }
-                    else if (itemstack.getItem() instanceof IPlantable plantable)
-                    {
-                        if (plantable.getPlantType(level, aboveFarmlandPos) == PlantType.CROP)
-                        {
-                            level.setBlock(aboveFarmlandPos, plantable.getPlant(level, aboveFarmlandPos), 3);
-                            plantedSeed = true;
-                        }
                     }
                 }
 

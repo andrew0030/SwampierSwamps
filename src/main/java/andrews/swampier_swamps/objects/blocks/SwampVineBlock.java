@@ -119,7 +119,7 @@ public class SwampVineBlock extends VineBlock implements SimpleWaterloggedBlock
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand)
     {
-        if (level.random.nextInt(4) == 0 && level.isAreaLoaded(pos, 4))
+        if (level.random.nextInt(4) == 0)
         {
             Direction direction = Direction.getRandom(rand);
             BlockPos blockpos = pos.above();

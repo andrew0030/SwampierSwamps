@@ -1,0 +1,18 @@
+accessWidener v1 named
+# We make these methods public in order to call them from SwampVineBlock
+accessible method net/minecraft/world/level/block/VineBlock hasHorizontalConnection (Lnet/minecraft/world/level/block/state/BlockState;)Z # hasHorizontalConnection
+accessible method net/minecraft/world/level/block/VineBlock copyRandomFaces (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/util/RandomSource;)Lnet/minecraft/world/level/block/state/BlockState; # copyRandomFaces
+
+# We make the Potion Mixes public so we can alter the Leaping Potion Recipe
+# accessible field net/minecraft/world/item/alchemy/PotionBrewing POTION_MIXES Ljava/util/List; # POTION_MIXES fuck me no publiv -f
+
+# Used to make some Blocks Flammable
+accessible method net/minecraft/world/level/block/FireBlock setFlammable (Lnet/minecraft/world/level/block/Block;II)V # setFlammable
+
+# Need to register Trunk Placer
+accessible method net/minecraft/world/level/levelgen/feature/trunkplacers/TrunkPlacerType <init> (Lcom/mojang/serialization/Codec;)V # TrunkPlacerType
+
+# Need to register Tree Decorator
+accessible method net/minecraft/world/level/levelgen/feature/treedecorators/TreeDecoratorType <init> (Lcom/mojang/serialization/Codec;)V # TreeDecoratorType
+
+accessible method net/minecraft/client/renderer/entity/LivingEntityRenderer addLayer (Lnet/minecraft/client/renderer/entity/layers/RenderLayer;)Z # addLayer

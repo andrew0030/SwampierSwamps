@@ -36,7 +36,7 @@ public class BoneMealItemMixin
     @ModifyArg(method = "growWaterPlant", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;I)Z"), index = 1)
     private static BlockState setBlock(BlockState state)
     {
-        BlockState cattailState = SSBlocks.CATTAIL.get().defaultBlockState();
+        BlockState cattailState = SSBlocks.CATTAIL.defaultBlockState();
         Random rand = new Random();
 
         if(level.getBiomeManager().getBiome(pos).is(Biomes.SWAMP) && rand.nextInt(3) == 0)

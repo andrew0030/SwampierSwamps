@@ -62,7 +62,7 @@ public class SwampGas extends Entity
                     double distance = Math.sqrt((spawnY - this.getY()) * (spawnY - this.getY()) + (spawnX - this.getX()) * (spawnX - this.getX()) + (spawnZ - this.getZ()) * (spawnZ - this.getZ()));
 
                     if (distance < 3.5)
-                        level.addParticle(SSParticles.SWAMP_GAS.get(), spawnX, spawnY, spawnZ, 0, 0, 0);
+                        level.addParticle(SSParticles.SWAMP_GAS, spawnX, spawnY, spawnZ, 0, 0, 0);
                 }
             }
 

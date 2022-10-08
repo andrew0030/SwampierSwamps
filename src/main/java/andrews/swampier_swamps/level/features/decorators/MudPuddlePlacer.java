@@ -23,7 +23,7 @@ public class MudPuddlePlacer extends PlacementModifier
     @Override
     public PlacementModifierType<?> type()
     {
-        return SSPlacements.MUD_PUDDLE_PLACER.get();
+        return SSPlacements.MUD_PUDDLE_PLACER;
     }
 
     @Override

@@ -32,7 +32,7 @@ public class FrogEyesLayer<T extends Frog> extends RenderLayer<T, FrogModel<T>>
     {
         if (frog.hasCustomName())
         {
-            if (frog.getCustomName().getString().equals("Swallow Me Waldo") && SSConfigs.commonConfig.allowWaldo.get())
+            if (frog.getCustomName().getString().equals("Swallow Me Waldo") && SSConfigs.commonConfig.allowWaldo)
             {
                 VertexConsumer vertexconsumer = buffer.getBuffer(hasBigEyes(frog) ? FROG_EYES_LARGE_BASE : FROG_EYES_SMALL_BASE);
                 this.getParentModel().renderToBuffer(poseStack, vertexconsumer, 15728640, OverlayTexture.NO_OVERLAY, 0.0F, 0.0F, 0.0F, 0.0F);
@@ -45,17 +45,17 @@ public class FrogEyesLayer<T extends Frog> extends RenderLayer<T, FrogModel<T>>
     private boolean hasBigEyes(Frog frog)
     {
         FrogVariant variant = frog.getVariant();
-        if(variant.equals(SSFrogVariants.BLUE_VARIANT.get()))
+        if(variant.equals(SSFrogVariants.BLUE_VARIANT))
             return true;
-        if(variant.equals(SSFrogVariants.CYAN_VARIANT.get()))
+        if(variant.equals(SSFrogVariants.CYAN_VARIANT))
             return true;
-        if(variant.equals(SSFrogVariants.LIGHT_BLUE_VARIANT.get()))
+        if(variant.equals(SSFrogVariants.LIGHT_BLUE_VARIANT))
             return true;
-        if(variant.equals(SSFrogVariants.LIME_VARIANT.get()))
+        if(variant.equals(SSFrogVariants.LIME_VARIANT))
             return true;
-        if(variant.equals(SSFrogVariants.RED_VARIANT.get()))
+        if(variant.equals(SSFrogVariants.RED_VARIANT))
             return true;
-        if(variant.equals(SSFrogVariants.YELLOW_VARIANT.get()))
+        if(variant.equals(SSFrogVariants.YELLOW_VARIANT))
             return true;
         return false;
     }

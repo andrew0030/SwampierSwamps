@@ -19,7 +19,7 @@ public class SSTags
 
         private static TagKey<Block> createTag(String name)
         {
-            return BlockTags.create(new ResourceLocation(Reference.MODID, name));
+            return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(Reference.MODID, name));
         }
     }
 

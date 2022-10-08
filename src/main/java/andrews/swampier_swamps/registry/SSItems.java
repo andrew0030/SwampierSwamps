@@ -2,24 +2,20 @@ package andrews.swampier_swamps.registry;
 
 import andrews.swampier_swamps.objects.items.GasBottleItem;
 import andrews.swampier_swamps.util.Reference;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 public class SSItems
 {
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MODID);
-
-    public static final RegistryObject<Item> FROG_LEG	            = ITEMS.register("frog_leg", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food((new FoodProperties.Builder()).nutrition(2).saturationMod(0.3F).meat().build())));
-    public static final RegistryObject<Item> COOKED_FROG_LEG	    = ITEMS.register("cooked_frog_leg", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food((new FoodProperties.Builder()).nutrition(6).saturationMod(0.6F).meat().build())));
-    public static final RegistryObject<Item> GAS_BOTTLE	            = ITEMS.register("gas_bottle", () -> new GasBottleItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1)));
+    public static final Item FROG_LEG	            = Registry.register(Registry.ITEM, new ResourceLocation(Reference.MODID, "frog_leg"), new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food((new FoodProperties.Builder()).nutrition(2).saturationMod(0.3F).meat().build())));
+    public static final Item COOKED_FROG_LEG	    = Registry.register(Registry.ITEM, new ResourceLocation(Reference.MODID, "cooked_frog_leg"), new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food((new FoodProperties.Builder()).nutrition(6).saturationMod(0.6F).meat().build())));
+    public static final Item GAS_BOTTLE	            = Registry.register(Registry.ITEM, new ResourceLocation(Reference.MODID, "gas_bottle"), new GasBottleItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1)));
     // Spawn Eggs
-    public static final RegistryObject<Item> DRAGONFLY_SPAWN_EGG    = ITEMS.register("dragonfly_spawn_egg", () -> new ForgeSpawnEggItem(SSEntities.DRAGONFLY, 0x2b3f8a, 0x94de2c, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+    //public static final Item DRAGONFLY_SPAWN_EGG    = Registry.register(Registry.ITEM, new ResourceLocation(Reference.MODID, "dragonfly_spawn_egg"), new ForgeSpawnEggItem(SSEntities.DRAGONFLY, 0x2b3f8a, 0x94de2c, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+    // TODO Fix spawn egg
+
+    public static void init() {}
 }

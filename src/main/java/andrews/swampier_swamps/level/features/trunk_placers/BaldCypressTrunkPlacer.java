@@ -1,7 +1,6 @@
 package andrews.swampier_swamps.level.features.trunk_placers;
 
 import andrews.swampier_swamps.registry.SSTrunkPlacers;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -21,7 +20,6 @@ import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import java.util.List;
 import java.util.OptionalInt;
 import java.util.function.BiConsumer;
-import java.util.function.Function;
 
 public class BaldCypressTrunkPlacer extends TrunkPlacer
 {
@@ -35,7 +33,7 @@ public class BaldCypressTrunkPlacer extends TrunkPlacer
     @Override
     protected TrunkPlacerType<?> type()
     {
-        return SSTrunkPlacers.BALD_CYPRESS_TRUNK_PLACER.get();
+        return SSTrunkPlacers.BALD_CYPRESS_TRUNK_PLACER;
     }
 
     @Override

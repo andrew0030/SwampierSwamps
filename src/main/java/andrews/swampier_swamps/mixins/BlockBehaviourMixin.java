@@ -32,7 +32,7 @@ public class BlockBehaviourMixin
     {
         if(!isRandomTicking.get())
             if(state.is(Blocks.LILY_PAD))
-                level.setBlock(pos, SSBlocks.SINKING_LILY_PAD.get().defaultBlockState(), 2);
+                level.setBlock(pos, SSBlocks.SINKING_LILY_PAD.defaultBlockState(), 2);
     }
 
     @Inject(method = "randomTick", at = @At(value = "HEAD"))
@@ -42,7 +42,7 @@ public class BlockBehaviourMixin
         {
             if (rand.nextInt(25) == 0)
                 if(level.getFluidState(pos.above()).getType() == Fluids.WATER && level.getFluidState(pos.above()).getAmount() == FluidState.AMOUNT_FULL)
-                    level.setBlock(pos, SSBlocks.DECAYING_KELP.get().defaultBlockState(), 2);
+                    level.setBlock(pos, SSBlocks.DECAYING_KELP.defaultBlockState(), 2);
         }
 
         if(state.is(Blocks.LILY_PAD))
@@ -61,7 +61,7 @@ public class BlockBehaviourMixin
                     // We check 8 Blocks in all directions
                     for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-8, -1, -8), pos.offset(8, 1, 8)))
                     {
-                        if (level.getBlockState(blockpos).is(SSBlocks.BIG_LILY_PAD.get()) && level.getBlockState(blockpos).getValue(BigLilyPadBlock.LILY_PAD_PART) == 0)
+                        if (level.getBlockState(blockpos).is(SSBlocks.BIG_LILY_PAD) && level.getBlockState(blockpos).getValue(BigLilyPadBlock.LILY_PAD_PART) == 0)
                         {
                             --lilyPadLimiter;
                             if (lilyPadLimiter <= 0)
@@ -95,10 +95,10 @@ public class BlockBehaviourMixin
                     // If everything went well we grow the Lily Pad into a Big one
                     if (canGrow)
                     {
-                        level.setBlock(pos, SSBlocks.BIG_LILY_PAD.get().defaultBlockState().setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 0), 2);
-                        level.setBlock(pos.relative(direction), SSBlocks.BIG_LILY_PAD.get().defaultBlockState().setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 1), 2);
-                        level.setBlock(pos.relative(direction.getClockWise()), SSBlocks.BIG_LILY_PAD.get().defaultBlockState().setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 2), 2);
-                        level.setBlock(pos.relative(direction).relative(direction.getClockWise()), SSBlocks.BIG_LILY_PAD.get().defaultBlockState().setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 3), 2);
+                        level.setBlock(pos, SSBlocks.BIG_LILY_PAD.defaultBlockState().setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 0), 2);
+                        level.setBlock(pos.relative(direction), SSBlocks.BIG_LILY_PAD.defaultBlockState().setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 1), 2);
+                        level.setBlock(pos.relative(direction.getClockWise()), SSBlocks.BIG_LILY_PAD.defaultBlockState().setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 2), 2);
+                        level.setBlock(pos.relative(direction).relative(direction.getClockWise()), SSBlocks.BIG_LILY_PAD.defaultBlockState().setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 3), 2);
                     }
                 }
             }
