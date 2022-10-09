@@ -1,9 +1,8 @@
 {
   "required": true,
-  "compatibilityLevel": "JAVA_16",
   "minVersion": "0.8",
   "package": "andrews.swampier_swamps.mixins",
-  "refmap": "swampier_swamps.refmap.json",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AbstractTreeGrowerMixin",
     "BlockBehaviourMixin",

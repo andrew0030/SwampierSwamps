@@ -1,6 +1,8 @@
 package andrews.swampier_swamps.mixins;
 
 import andrews.swampier_swamps.util.TheUnsafeHelper;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.MappingResolver;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import org.spongepowered.asm.mixin.Mixin;
@@ -9,6 +11,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import sun.misc.Unsafe;
 
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.lang.reflect.Field;
 
 @Mixin(Blocks.class)
@@ -24,7 +29,8 @@ public class BlocksMixin
 		{
 			try
 			{
-				Field f = clazz.getDeclaredField(ObfuscationReflectionHelper.remapName(INameMappingService.Domain.FIELD, "isRandomlyTicking"));
+				MappingResolver resolver = FabricLoader.getInstance().getMappingResolver();
+				Field f = clazz.getDeclaredField(resolver.mapFieldName("intermediary", resolver.unmapClassName("intermediary", clazz.getName()), "field_23161", "Z"));
 				long offset = theUnsafe.objectFieldOffset(f);
 				// this should always fail
 				// but I'm leaving it for the case that there's some JVM where it works
