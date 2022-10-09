@@ -20,14 +20,8 @@ public class SSParticles
 
     public static void init() {}
 
-    // Note call this on the client only
     public static void registerParticles()
     {
-        // We add the custom textures to the texture ATLAS
-        ClientSpriteRegistryCallback.event(InventoryMenu.BLOCK_ATLAS).register(((atlasTexture, registry) -> {
-            registry.register(new ResourceLocation(Reference.MODID, "particle/green_flame")); //TODO
-        }));
-
         ParticleFactoryRegistry.getInstance().register(DECAY_BUBBLES, DecayBubblesParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(SWAMP_GAS, SwampGasParticle.Factory::new);
     }

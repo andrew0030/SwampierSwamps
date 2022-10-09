@@ -2,17 +2,22 @@ accessWidener v1 named
 # We make these methods public in order to call them from SwampVineBlock
 accessible method net/minecraft/world/level/block/VineBlock hasHorizontalConnection (Lnet/minecraft/world/level/block/state/BlockState;)Z # hasHorizontalConnection
 accessible method net/minecraft/world/level/block/VineBlock copyRandomFaces (Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/util/RandomSource;)Lnet/minecraft/world/level/block/state/BlockState; # copyRandomFaces
-
-# We make the Potion Mixes public so we can alter the Leaping Potion Recipe
-# accessible field net/minecraft/world/item/alchemy/PotionBrewing POTION_MIXES Ljava/util/List; # POTION_MIXES fuck me no publiv -f
-
 # Used to make some Blocks Flammable
 accessible method net/minecraft/world/level/block/FireBlock setFlammable (Lnet/minecraft/world/level/block/Block;II)V # setFlammable
-
 # Need to register Trunk Placer
 accessible method net/minecraft/world/level/levelgen/feature/trunkplacers/TrunkPlacerType <init> (Lcom/mojang/serialization/Codec;)V # TrunkPlacerType
-
 # Need to register Tree Decorator
 accessible method net/minecraft/world/level/levelgen/feature/treedecorators/TreeDecoratorType <init> (Lcom/mojang/serialization/Codec;)V # TreeDecoratorType
-
+# We add Render Layers to the Frogs (Red Eyes if they are Waldo)
 accessible method net/minecraft/client/renderer/entity/LivingEntityRenderer addLayer (Lnet/minecraft/client/renderer/entity/layers/RenderLayer;)Z # addLayer
+# Adding and Altering Potions go BRRRR
+accessible method net/minecraft/world/item/alchemy/PotionBrewing addMix (Lnet/minecraft/world/item/alchemy/Potion;Lnet/minecraft/world/item/Item;Lnet/minecraft/world/item/alchemy/Potion;)V # addMix
+accessible field net/minecraft/world/item/alchemy/PotionBrewing POTION_MIXES Ljava/util/List;
+accessible class net/minecraft/world/item/alchemy/PotionBrewing$Mix
+accessible field net/minecraft/world/item/alchemy/PotionBrewing$Mix from Ljava/lang/Object;
+accessible field net/minecraft/world/item/alchemy/PotionBrewing$Mix ingredient Lnet/minecraft/world/item/crafting/Ingredient;
+accessible field net/minecraft/world/item/alchemy/PotionBrewing$Mix to Ljava/lang/Object;
+# For Entity Spawning
+accessible method net/minecraft/world/entity/SpawnPlacements register (Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacements$Type;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
+# Used so we can turn the Decaying Kelp into Fertile Farmland
+accessible field net/minecraft/world/item/HoeItem TILLABLES Ljava/util/Map;

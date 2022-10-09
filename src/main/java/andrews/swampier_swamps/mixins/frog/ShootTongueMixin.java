@@ -1,6 +1,6 @@
 package andrews.swampier_swamps.mixins.frog;
 
-import andrews.swampier_swamps.config.SSConfigs;
+import andrews.swampier_swamps.SwampierSwamps;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
@@ -24,7 +24,7 @@ public abstract class ShootTongueMixin
     {
         if(frog.hasCustomName())
         {
-            if (frog.getCustomName().getString().equals("Swallow Me Waldo") && SSConfigs.commonConfig.allowWaldo.get())
+            if (frog.getCustomName().getString().equals("Swallow Me Waldo") && SwampierSwamps.SS_CONFIG.SSCommonConfig.allowWaldo)
             {
                 if(frog.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).isPresent())
                 {

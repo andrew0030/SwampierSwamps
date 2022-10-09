@@ -23,7 +23,7 @@
     ],
     "client": [
       {
-        "value": "andrews.swampier_swamps.util.SSClientInit"
+        "value": "andrews.swampier_swamps.SwampierSwampsClient"
       }
     ]
   },

@@ -1,8 +1,7 @@
 package andrews.swampier_swamps.mixins.frog;
 
-import andrews.swampier_swamps.config.SSConfigs;
+import andrews.swampier_swamps.SwampierSwamps;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.FrogAttackablesSensor;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,7 +19,7 @@ public abstract class FrogAttackablesSensorMixin
     public void injectIsMatchingEntity(LivingEntity frog, LivingEntity target, CallbackInfoReturnable<Boolean> cir)
     {
         if(frog.hasCustomName()) // We make sure the Frog has a custom name to avoid NullPointers
-            if(frog.getCustomName().getString().equals("Swallow Me Waldo") && SSConfigs.commonConfig.allowWaldo.get()) // We check the name for Waldo
+            if(frog.getCustomName().getString().equals("Swallow Me Waldo") && SwampierSwamps.SS_CONFIG.SSCommonConfig.allowWaldo) // We check the name for Waldo
 //                if(!frog.getBrain().hasMemoryValue(MemoryModuleType.HAS_HUNTING_COOLDOWN))
                     if(Sensor.isEntityAttackable(frog, target) && !isUnreachableAttackTarget(frog, target))
                         if(target.closerThan(frog, 10.0D)) // We make all the standard checks while skipping "canEat"

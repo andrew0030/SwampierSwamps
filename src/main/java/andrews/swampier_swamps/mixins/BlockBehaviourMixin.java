@@ -1,6 +1,6 @@
 package andrews.swampier_swamps.mixins;
 
-import andrews.swampier_swamps.config.SSConfigs;
+import andrews.swampier_swamps.SwampierSwamps;
 import andrews.swampier_swamps.objects.blocks.BigLilyPadBlock;
 import andrews.swampier_swamps.registry.SSBlocks;
 import andrews.swampier_swamps.registry.SSTags;
@@ -53,7 +53,7 @@ public class BlockBehaviourMixin
             // We reduce how often the Block attempts to grow
             if (rand.nextInt(25) == 0)
             {
-                int configValue = SSConfigs.commonConfig.shouldLilyPadsGrow.get();
+                int configValue = SwampierSwamps.SS_CONFIG.SSCommonConfig.shouldLilyPadsGrow;
                 if ((configValue == 1 && level.getBiome(pos).is(SSTags.Biomes.CAN_LILY_PAD_GROW_IN)) || configValue == 2)
                 {
                     boolean canGrow = true;

@@ -47,7 +47,7 @@ public class BigLilyPadFeature extends Feature<ProbabilityFeatureConfiguration>
         boolean probabilityCheck = randomSource.nextDouble() < (double) probabilityfeatureconfiguration.probability;
         if (isValidPosition(worldGenLevel, posAtTarget, direction) && probabilityCheck)
         {
-            BlockState state = SSBlocks.BIG_LILY_PAD.get().defaultBlockState();
+            BlockState state = SSBlocks.BIG_LILY_PAD.defaultBlockState();
             worldGenLevel.setBlock(posAtTarget, state.setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 0), 2);
             worldGenLevel.setBlock(posAtTarget.relative(direction), state.setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 1), 2);
             worldGenLevel.setBlock(posAtTarget.relative(direction.getClockWise()), state.setValue(BigLilyPadBlock.FACING, direction).setValue(BigLilyPadBlock.LILY_PAD_PART, 2), 2);

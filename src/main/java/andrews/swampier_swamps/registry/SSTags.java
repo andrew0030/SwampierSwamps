@@ -27,6 +27,7 @@ public class SSTags
     {
         public static final TagKey<Biome> CAN_BALD_CYPRESS_GROW_IN  = createTag("can_bald_cypress_grow_in");
         public static final TagKey<Biome> CAN_LILY_PAD_GROW_IN      = createTag("can_lily_pad_grow_in");
+        public static final TagKey<Biome> HAS_DRAGONFLY             = createTag("has_dragonfly");
         // Frog Variants Spawning
         public static final TagKey<Biome> WHITE_FROG_BIOMES         = createFrogTag("white_frog_biomes");
         public static final TagKey<Biome> ORANGE_FROG_BIOMES        = createFrogTag("orange_frog_biomes");

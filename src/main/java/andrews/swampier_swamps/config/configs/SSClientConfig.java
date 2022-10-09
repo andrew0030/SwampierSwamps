@@ -1,32 +1,25 @@
 package andrews.swampier_swamps.config.configs;
 
-import andrews.swampier_swamps.config.util.ConfigHelper;
-import andrews.swampier_swamps.config.util.ConfigHelper.ConfigValueListener;
-import net.minecraftforge.common.ForgeConfigSpec;
+import me.shedaniel.autoconfig.ConfigData;
+import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
+import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
-public class SSClientConfig
+@Config(name = "Client")
+public class SSClientConfig implements ConfigData
 {
-    public ConfigValueListener<Boolean> randomizeDragonflySizes;
-    public ConfigValueListener<Double> dragonflySizeModifier;
-
-    public SSClientConfig(ForgeConfigSpec.Builder builder, ConfigHelper.Subscriber subscriber)
-    {
-        builder.comment(" Client Settings for Swampier Swamps")
-                .push("Settings");
-
-        builder.push("Dragonflies"); // Dragonflies Start
-        randomizeDragonflySizes = subscriber.subscribe(builder
-                .comment("""
+    @ConfigEntry.Gui.PrefixText
+    @ConfigEntry.Gui.Tooltip(count = 0)
+    @Comment(value = """
                         Toggles whether Dragonflies should be rendered with size variations. This\r
-                        setting is purely cosmetic, and does not affect the Hit Boxes.""".indent(1)
-                ).define("randomizeDragonflySizes", true));
-        dragonflySizeModifier = subscriber.subscribe(builder
-                .comment("""
-                        This value is used to Randomize the Dragonfly sizes, smaller values result\r
-                        in smaller difference in between the Dragonfly sizes.""".indent(1)
-                ).defineInRange("dragonflySizeModifier", 0.1D, 0.02D, 0.32D));
-        builder.pop(); // Dragonflies End
+                        setting is purely cosmetic, and does not affect the Hit Boxes.""")
+    public boolean randomizeDragonflySizes = true;
 
-        builder.pop();
-    }
+    @ConfigEntry.Gui.PrefixText
+    @ConfigEntry.Gui.Tooltip(count = 0)
+    @ConfigEntry.BoundedDiscrete(min = 2, max = 32)
+    @Comment(value = """
+                        This value is used to Randomize the Dragonfly sizes, smaller values result\r
+                        in smaller difference in between the Dragonfly sizes.""")
+    public int dragonflySizeModifier = 10;
 }

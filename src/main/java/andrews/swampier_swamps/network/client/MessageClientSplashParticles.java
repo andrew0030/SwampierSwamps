@@ -1,45 +1,30 @@
 package andrews.swampier_swamps.network.client;
 
 import andrews.swampier_swamps.network.client.util.ClientPacketHandlerClass;
+import andrews.swampier_swamps.util.Reference;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.network.NetworkEvent;
-
-import java.util.function.Supplier;
+import net.minecraft.resources.ResourceLocation;
 
 public class MessageClientSplashParticles
 {
-    public BlockPos pos;
+    public static ResourceLocation PACKET_ID = new ResourceLocation(Reference.MODID, "splash_particles_packet");
 
-    public MessageClientSplashParticles(BlockPos pos)
+    public static void registerPacket()
     {
-        this.pos = pos;
-    }
-
-    public void serialize(FriendlyByteBuf buf)
-    {
-        buf.writeBlockPos(this.pos);
-    }
-
-    public static MessageClientSplashParticles deserialize(FriendlyByteBuf buf)
-    {
-        BlockPos pos = buf.readBlockPos();
-        return new MessageClientSplashParticles(pos);
-    }
-
-    public static void handle(MessageClientSplashParticles message, Supplier<NetworkEvent.Context> ctx)
-    {
-        NetworkEvent.Context context = ctx.get();
-        if(context.getDirection().getReceptionSide() == LogicalSide.CLIENT)
+        ClientPlayNetworking.registerGlobalReceiver(PACKET_ID, (client, handler, buf, responseSender) ->
         {
-            context.enqueueWork(() ->
+            BlockPos pos = buf.readBlockPos();
+
+            client.execute(() ->
             {
-                DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientPacketHandlerClass.handleSpawnSplashParticles(message, ctx));
+                if(Minecraft.getInstance().level == null) {
+                    return;
+                }
+
+                ClientPacketHandlerClass.handleSpawnSplashParticles(pos);
             });
-            context.setPacketHandled(true);
-        }
+        });
     }
 }

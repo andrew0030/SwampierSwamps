@@ -1,6 +1,6 @@
 package andrews.swampier_swamps.objects.blocks;
 
-import andrews.swampier_swamps.config.SSConfigs;
+import andrews.swampier_swamps.SwampierSwamps;
 import andrews.swampier_swamps.registry.SSTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -42,7 +42,7 @@ public class SmallLilyPadBlock extends WaterlilyBlock
         // We reduce how often the Block attempts to grow
         if (rand.nextInt(25) == 0)
         {
-            int configValue = SSConfigs.commonConfig.shouldLilyPadsGrow.get();
+            int configValue = SwampierSwamps.SS_CONFIG.SSCommonConfig.shouldLilyPadsGrow;
             if ((configValue == 1 && level.getBiome(pos).is(SSTags.Biomes.CAN_LILY_PAD_GROW_IN)) || configValue == 2)
             {
                 int lilyPadLimiter = 5; // We use this to determine if there are less than a given amount of Lily Pads around

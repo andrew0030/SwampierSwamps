@@ -1,6 +1,6 @@
 package andrews.swampier_swamps.objects.blocks;
 
-import andrews.swampier_swamps.config.SSConfigs;
+import andrews.swampier_swamps.SwampierSwamps;
 import andrews.swampier_swamps.registry.SSBlocks;
 import andrews.swampier_swamps.registry.SSTags;
 import net.minecraft.core.BlockPos;
@@ -43,7 +43,7 @@ public class BigLilyPadBlock extends WaterlilyBlock
     {
         if (rand.nextInt(25) == 0)
         {
-            int configValue = SSConfigs.commonConfig.shouldLilyPadsGrow.get();
+            int configValue = SwampierSwamps.SS_CONFIG.SSCommonConfig.shouldLilyPadsGrow;
             if ((configValue == 1 && level.getBiome(pos).is(SSTags.Biomes.CAN_LILY_PAD_GROW_IN)) || configValue == 2)
             {
                 int smallLilyPadLimit = 30;

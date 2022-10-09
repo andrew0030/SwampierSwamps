@@ -58,7 +58,7 @@ public class DecayingKelpFeature extends Feature<NoneFeatureConfiguration>
                 if(sqrtDist < 1)
                 {
                     // The center Block, so basically the Decaying Kelp
-                    state = SSBlocks.DECAYING_KELP.get().defaultBlockState();
+                    state = SSBlocks.DECAYING_KELP.defaultBlockState();
                 }
                 else if(sqrtDist < 2)
                 {

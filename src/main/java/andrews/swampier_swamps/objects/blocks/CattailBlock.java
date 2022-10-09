@@ -107,7 +107,7 @@ public class CattailBlock extends BushBlock
     {
         BlockPos posBelow = pos.below();
         if (state.getBlock() == this)
-            return level.getBlockState(posBelow).canSustainPlant(level, posBelow, Direction.UP, this) || level.getBlockState(posBelow).is(this);
+            return this.mayPlaceOn(level.getBlockState(posBelow), level, posBelow) || level.getBlockState(posBelow).is(this);
 
         return this.mayPlaceOn(level.getBlockState(posBelow), level, posBelow);
     }

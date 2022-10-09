@@ -1,6 +1,6 @@
 package andrews.swampier_swamps.mixins;
 
-import andrews.swampier_swamps.config.SSConfigs;
+import andrews.swampier_swamps.SwampierSwamps;
 import andrews.swampier_swamps.registry.SSBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
@@ -26,6 +26,6 @@ public class CropBlockMixin
     private static void injectGetGrowthSpeed(Block block, BlockGetter level, BlockPos pos, CallbackInfoReturnable<Float> cir)
     {
         if (level.getBlockState(pos.below()).is(SSBlocks.FERTILE_FARMLAND))
-            cir.setReturnValue(cir.getReturnValue() * SSConfigs.commonConfig.growthMultiplier.get());
+            cir.setReturnValue(cir.getReturnValue() * SwampierSwamps.SS_CONFIG.SSCommonConfig.growthMultiplier);
     }
 }

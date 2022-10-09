@@ -1,5 +1,6 @@
 package andrews.swampier_swamps.objects.blocks;
 
+import andrews.swampier_swamps.SwampierSwamps;
 import andrews.swampier_swamps.registry.SSBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -75,9 +76,8 @@ public class FertileFarmlandBlock extends FarmBlock
 
     private static boolean isNearWater(LevelReader level, BlockPos pos)
     {
-        //int waterRange = SSConfigs.commonConfig.waterRange.get();
-        //for(BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-waterRange, 0, -waterRange), pos.offset(waterRange, 1, waterRange))) TODO fix config
-        for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-4, 0, -4), pos.offset(4, 1, 4)))
+        int waterRange = SwampierSwamps.SS_CONFIG.SSCommonConfig.waterRange;
+        for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-waterRange, 0, -waterRange), pos.offset(waterRange, 1, waterRange)))
         {
             if (level.getFluidState(blockpos).is(FluidTags.WATER))
                 return true;

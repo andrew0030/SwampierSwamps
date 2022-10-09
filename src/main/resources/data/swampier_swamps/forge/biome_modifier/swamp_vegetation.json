@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "minecraft:swamp",
-  "features": "swampier_swamps:swamp_vegetation",
-  "step": "vegetal_decoration"
-}

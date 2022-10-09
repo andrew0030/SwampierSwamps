@@ -2,6 +2,9 @@ package andrews.swampier_swamps.registry;
 
 import andrews.swampier_swamps.objects.blocks.*;
 import andrews.swampier_swamps.util.Reference;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
@@ -20,7 +23,7 @@ public class SSBlocks
 {
     // Mud Blocks
     public static final Block MUD_SLAB              = createBlock("mud_slab", new MudSlabBlock(BlockBehaviour.Properties.copy(Blocks.MUD)), CreativeModeTab.TAB_BUILDING_BLOCKS);
-    public static final Block MUD_STAIRS            = createBlock("mud_stairs", new MudStairsBlock(Blocks.MUD::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.MUD)), CreativeModeTab.TAB_BUILDING_BLOCKS);
+    public static final Block MUD_STAIRS            = createBlock("mud_stairs", new MudStairsBlock(Blocks.MUD.defaultBlockState(), BlockBehaviour.Properties.copy(Blocks.MUD)), CreativeModeTab.TAB_BUILDING_BLOCKS);
     // Frog Lights
     public static final Block WHITE_FROG_LIGHT      = createBlock("white_froglight", new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.FROGLIGHT, MaterialColor.SNOW).strength(0.3F).lightLevel((brightness) -> 15).sound(SoundType.FROGLIGHT)), CreativeModeTab.TAB_DECORATIONS);
     public static final Block MAGENTA_FROG_LIGHT    = createBlock("magenta_froglight", new RotatedPillarBlock(BlockBehaviour.Properties.of(Material.FROGLIGHT, MaterialColor.COLOR_MAGENTA).strength(0.3F).lightLevel((brightness) -> 15).sound(SoundType.FROGLIGHT)), CreativeModeTab.TAB_DECORATIONS);
@@ -49,6 +52,16 @@ public class SSBlocks
     public static final Block GAS_LAMP              = createBlock("gas_lamp", new GasLampBlock(BlockBehaviour.Properties.copy(Blocks.LANTERN)), CreativeModeTab.TAB_DECORATIONS);
 
     public static void init() {}
+
+    public static void registerBlockRenderTypes()
+    {
+        BlockRenderLayerMap.INSTANCE.putBlock(BIG_LILY_PAD, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(CATTAIL, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(GAS_LAMP, RenderType.translucent());
+        BlockRenderLayerMap.INSTANCE.putBlock(SINKING_LILY_PAD, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(SMALL_LILY_PAD, RenderType.cutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(SWAMP_VINE, RenderType.cutout());
+    }
 
     private static Block createBlock(String name, Block block, CreativeModeTab group)
     {

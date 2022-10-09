@@ -1,6 +1,0 @@
-{
-  "type": "forge:add_features",
-  "biomes": "minecraft:swamp",
-  "features": "swampier_swamps:decaying_kelp",
-  "step": "underground_ores"
-}

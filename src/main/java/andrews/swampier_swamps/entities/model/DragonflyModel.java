@@ -1,6 +1,7 @@
 package andrews.swampier_swamps.entities.model;
 
-import andrews.swampier_swamps.config.SSConfigs;
+import andrews.swampier_swamps.SwampierSwamps;
+import andrews.swampier_swamps.config.SSConfig;
 import andrews.swampier_swamps.entities.Dragonfly;
 import andrews.swampier_swamps.util.Reference;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -55,9 +56,9 @@ public class DragonflyModel<E extends Dragonfly> extends EntityModel<E>
     @Override
     public void setupAnim(E entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch)
     {
-        if (SSConfigs.clientConfig.randomizeDragonflySizes.get())
+        if (SwampierSwamps.SS_CONFIG.SSClientConfig.randomizeDragonflySizes)
         {
-            float value = SSConfigs.clientConfig.dragonflySizeModifier.get().floatValue();
+            float value = (SwampierSwamps.SS_CONFIG.SSClientConfig.dragonflySizeModifier / 100F);
             float newScale = (1.0F + (value * 2)) - (value * entity.getDragonflyScale());
             this.body.xScale = newScale;
             this.body.yScale = newScale;

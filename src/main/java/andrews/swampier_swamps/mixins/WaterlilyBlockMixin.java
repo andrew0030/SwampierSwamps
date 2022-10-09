@@ -1,6 +1,6 @@
 package andrews.swampier_swamps.mixins;
 
-import andrews.swampier_swamps.config.SSConfigs;
+import andrews.swampier_swamps.SwampierSwamps;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -30,6 +30,6 @@ public class WaterlilyBlockMixin
     {
         if (level instanceof ServerLevel && entity instanceof LivingEntity)
             if(level.getBlockState(pos).is(((WaterlilyBlock)(Object)this)) && !(level.getBlockState(pos.below()).getMaterial() == Material.ICE))
-                level.scheduleTick(pos, ((WaterlilyBlock)(Object)this), SSConfigs.commonConfig.lilyPadSinkTimeStage1.get());
+                level.scheduleTick(pos, ((WaterlilyBlock)(Object)this), SwampierSwamps.SS_CONFIG.SSCommonConfig.lilyPadSinkTimeStage1);
     }
 }

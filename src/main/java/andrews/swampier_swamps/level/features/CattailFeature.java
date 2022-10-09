@@ -40,7 +40,7 @@ public class CattailFeature extends Feature<ProbabilityFeatureConfiguration>
             boolean probabilityCheck = randomSource.nextDouble() < (double)probabilityfeatureconfiguration.probability;
             if (isValidCattailPosition(worldGenLevel, posAtTarget) && probabilityCheck)
             {
-                BlockState state = SSBlocks.CATTAIL.get().defaultBlockState();
+                BlockState state = SSBlocks.CATTAIL.defaultBlockState();
                 boolean isTallCattail = worldGenLevel.getBlockState(posAtTarget.above(2)).is(Blocks.AIR) && worldGenLevel.getBlockState(posAtTarget.above()).is(Blocks.WATER);
                 if (isTallCattail)
                 {
@@ -71,8 +71,8 @@ public class CattailFeature extends Feature<ProbabilityFeatureConfiguration>
 
         if(fluidstate.is(FluidTags.WATER) && fluidstate.getAmount() == FluidState.AMOUNT_FULL)
         {
-            return (!blockStateBelow1.is(SSBlocks.CATTAIL.get()) && blockStateAbove1.is(Blocks.WATER) && blockStateAbove2.is(Blocks.AIR) && blockStateAbove3.is(Blocks.AIR)) ||
-                   (!blockStateBelow1.is(SSBlocks.CATTAIL.get()) && blockStateAbove1.is(Blocks.AIR) && blockStateAbove2.is(Blocks.AIR));
+            return (!blockStateBelow1.is(SSBlocks.CATTAIL) && blockStateAbove1.is(Blocks.WATER) && blockStateAbove2.is(Blocks.AIR) && blockStateAbove3.is(Blocks.AIR)) ||
+                   (!blockStateBelow1.is(SSBlocks.CATTAIL) && blockStateAbove1.is(Blocks.AIR) && blockStateAbove2.is(Blocks.AIR));
         }
         return false;
     }

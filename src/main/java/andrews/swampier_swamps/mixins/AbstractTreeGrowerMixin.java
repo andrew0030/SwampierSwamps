@@ -1,6 +1,6 @@
 package andrews.swampier_swamps.mixins;
 
-import andrews.swampier_swamps.config.SSConfigs;
+import andrews.swampier_swamps.SwampierSwamps;
 import andrews.swampier_swamps.registry.SSTags;
 import andrews.swampier_swamps.util.Reference;
 import net.minecraft.core.BlockPos;
@@ -29,7 +29,7 @@ public class AbstractTreeGrowerMixin
     {
         if (state.is(Blocks.OAK_SAPLING))
         {
-            int configValue = SSConfigs.commonConfig.growBaldCypressFromSaplings.get();
+            int configValue = SwampierSwamps.SS_CONFIG.SSCommonConfig.growBaldCypressFromSaplings;
             if ((configValue == 1 && level.getBiome(pos).is(SSTags.Biomes.CAN_BALD_CYPRESS_GROW_IN)) || configValue == 2)
             {
                 for (int xOffset = 0; xOffset >= -1; --xOffset)

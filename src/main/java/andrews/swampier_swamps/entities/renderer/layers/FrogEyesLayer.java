@@ -1,6 +1,7 @@
 package andrews.swampier_swamps.entities.renderer.layers;
 
-import andrews.swampier_swamps.config.SSConfigs;
+import andrews.swampier_swamps.SwampierSwamps;
+import andrews.swampier_swamps.config.SSConfig;
 import andrews.swampier_swamps.registry.SSFrogVariants;
 import andrews.swampier_swamps.util.Reference;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -32,7 +33,7 @@ public class FrogEyesLayer<T extends Frog> extends RenderLayer<T, FrogModel<T>>
     {
         if (frog.hasCustomName())
         {
-            if (frog.getCustomName().getString().equals("Swallow Me Waldo") && SSConfigs.commonConfig.allowWaldo)
+            if (frog.getCustomName().getString().equals("Swallow Me Waldo") && SwampierSwamps.SS_CONFIG.SSCommonConfig.allowWaldo)
             {
                 VertexConsumer vertexconsumer = buffer.getBuffer(hasBigEyes(frog) ? FROG_EYES_LARGE_BASE : FROG_EYES_SMALL_BASE);
                 this.getParentModel().renderToBuffer(poseStack, vertexconsumer, 15728640, OverlayTexture.NO_OVERLAY, 0.0F, 0.0F, 0.0F, 0.0F);

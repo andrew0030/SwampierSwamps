@@ -1,13 +1,24 @@
 package andrews.swampier_swamps;
 
+import andrews.swampier_swamps.config.SSConfig;
+import andrews.swampier_swamps.entities.Dragonfly;
 import andrews.swampier_swamps.registry.*;
+import andrews.swampier_swamps.util.PotionRecipeChanger;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 
 public class SwampierSwamps implements ModInitializer
 {
+    public static SSConfig SS_CONFIG;
+
     @Override
     public void onInitialize()
     {
+        AutoConfig.register(SSConfig.class, JanksonConfigSerializer::new);
+        SS_CONFIG = AutoConfig.getConfigHolder(SSConfig.class).getConfig();
+
         SSFrogVariants.init();
         SSItems.init();
         SSBlocks.init();
@@ -19,43 +30,9 @@ public class SwampierSwamps implements ModInitializer
         SSTreeDecorators.init();
         SSPlacements.init();
 
-//        TTCNetwork.registerNetworkMessages();
+        PotionRecipeChanger.performChanges();
+        SSFlammables.registerFlammables();
+//        No Server Messages, maybe I will need this in the future!
+//        SSNetwork.registerNetworkMessages();
     }
-
-
-
-
-
-
-
-
-//    public SwampierSwamps()
-//    {
-//        DistExecutor.runWhenOn(Dist.CLIENT, () -> () ->
-//        {
-//            modEventBus.addListener(this::setupClient);
-//            modEventBus.addListener(this::setupParticles);
-//        });
-//        modEventBus.addListener(this::setupCommon);
-//
-//        SSConfigs.registerConfigs();
-//    }
-//
-//    void setupCommon(final FMLCommonSetupEvent event)
-//    {
-//        event.enqueueWork(() ->
-//        {
-//            PotionRecipeChanger.performChanges();
-//            SSEntities.registerSpawnPlacements();
-//            SSFlammables.registerFlammables();
-//        });
-//        //Thread Safe Stuff Bellow
-//        SSNetwork.setupMessages();
-//    }
-//
-//    void setupClient(final FMLClientSetupEvent event)
-//    {
-//        event.enqueueWork(() -> {});
-//        // Thread Safe Stuff Bellow
-//    }
 }

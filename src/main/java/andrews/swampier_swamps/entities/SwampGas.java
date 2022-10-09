@@ -1,6 +1,6 @@
 package andrews.swampier_swamps.entities;
 
-import andrews.swampier_swamps.config.SSConfigs;
+import andrews.swampier_swamps.SwampierSwamps;
 import andrews.swampier_swamps.network.NetworkUtil;
 import andrews.swampier_swamps.registry.SSParticles;
 import net.minecraft.core.BlockPos;
@@ -10,6 +10,7 @@ import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -69,7 +70,7 @@ public class SwampGas extends Entity
             // Gives Entities Effects
             if (this.tickCount % 10 == 0) // Reduces the check rate to every 10 ticks
             {
-                if(SSConfigs.commonConfig.givesNegativeEffects.get()) // Config Check
+                if(SwampierSwamps.SS_CONFIG.SSCommonConfig.givesNegativeEffects) // Config Check
                 {
                     List<LivingEntity> livingEntities = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox());
                     if (!livingEntities.isEmpty()) // If we found living entities we continue
@@ -120,11 +121,11 @@ public class SwampGas extends Entity
     {
         if(source.isExplosion() || source.isProjectile())
         {
-            if (!this.isRemoved() && !this.level.isClientSide)
+            if (!this.isRemoved() && this.level instanceof ServerLevel)
             {
                 this.remove(Entity.RemovalReason.KILLED);
-                NetworkUtil.createGasExplosionParticlesAtPos(level, new BlockPos(this.position()));
-                level.explode(null, this.getX(), this.getY() + 0.5F, this.getZ(), SSConfigs.commonConfig.explosionStrength.get(), true, Explosion.BlockInteraction.BREAK);
+                NetworkUtil.createGasExplosionParticlesAtPos((ServerLevel) level, new BlockPos(this.position()));
+                level.explode(null, this.getX(), this.getY() + 0.5F, this.getZ(), SwampierSwamps.SS_CONFIG.SSCommonConfig.explosionStrength, true, Explosion.BlockInteraction.BREAK);
             }
         }
         return super.hurt(source, amount);
