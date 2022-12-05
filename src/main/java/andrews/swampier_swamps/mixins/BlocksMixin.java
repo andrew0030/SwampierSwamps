@@ -26,7 +26,7 @@ public class BlocksMixin
 		{
 			try
 			{
-				Field f = clazz.getDeclaredField(ObfuscationReflectionHelper.remapName(INameMappingService.Domain.FIELD, "isRandomlyTicking"));
+				Field f = clazz.getDeclaredField(ObfuscationReflectionHelper.remapName(INameMappingService.Domain.FIELD, "f_60445_"));
 				long offset = theUnsafe.objectFieldOffset(f);
 				// this should always fail
 				// but I'm leaving it for the case that there's some JVM where it works

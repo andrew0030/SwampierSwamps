@@ -6,14 +6,14 @@ plugins {
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 
-version = '1.19-1.1.0'
+version = '1.19-1.1.1'
 group = 'com.andrews.swampier_swamps'
 archivesBaseName = 'swampier_swamps'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 minecraft {
-    mappings channel: 'parchment', version: '2022.09.04-1.19.2'
+    mappings channel: 'parchment', version: '2022.11.27-1.19.2'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -62,7 +62,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.2-43.1.25'
+    minecraft 'net.minecraftforge:forge:1.19.2-43.1.65'
     implementation fg.deobf("curse.maven:spark-361579:3828094")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     runtimeOnly fg.deobf("com.telepathicgrunt:CommandStructures-Forge:3.0.0+1.19")
