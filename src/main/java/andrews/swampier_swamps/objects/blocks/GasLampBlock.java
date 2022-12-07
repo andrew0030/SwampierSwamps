@@ -28,7 +28,7 @@ public class GasLampBlock extends Block
 {
     public static final BooleanProperty HANGING = BlockStateProperties.HANGING;
     protected static final VoxelShape AABB = Shapes.or(Block.box(5.0D, 0.0D, 5.0D, 11.0D, 9.0D, 11.0D), Block.box(4.0D, 7.0D, 4.0D, 12.0D, 8.0D, 12.0D));
-    protected static final VoxelShape HANGING_AABB = Shapes.or(Block.box(5.0D, 1.0D, 5.0D, 11.0D, 8.0D, 11.0D), Block.box(6.0D, 8.0D, 6.0D, 10.0D, 10.0D, 10.0D));
+    protected static final VoxelShape HANGING_AABB = Shapes.or(Block.box(5.0D, 1.0D, 5.0D, 11.0D, 10.0D, 11.0D), Block.box(4.0D, 8.0D, 4.0D, 12.0D, 9.0D, 12.0D));
     public static final IntegerProperty POWER = BlockStateProperties.POWER;
 
     public GasLampBlock(Properties properties)
@@ -40,7 +40,7 @@ public class GasLampBlock extends Block
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
-        return AABB;
+        return state.getValue(HANGING) ? HANGING_AABB : AABB;
     }
 
     @Override
