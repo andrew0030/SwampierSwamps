@@ -8,7 +8,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.sensing.SecondaryPoiSensor;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.level.Level;
-import org.apache.commons.compress.utils.Lists;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -16,13 +15,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mixin(SecondaryPoiSensor.class)
 public class SecondaryPoiSensorMixin
 {
     @Unique
-    private final List<GlobalPos> fertileFarmlandPosList = Lists.newArrayList();
+    private final List<GlobalPos> fertileFarmlandPosList = new ArrayList<>();
 
     @Inject(method = "doTick(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/npc/Villager;)V", at = @At(value = "HEAD"))
     public void injectDoTick(ServerLevel level, Villager entity, CallbackInfo ci)
