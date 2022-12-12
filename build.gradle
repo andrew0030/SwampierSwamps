@@ -13,7 +13,8 @@ archivesBaseName = 'swampier_swamps'
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 minecraft {
-    mappings channel: 'parchment', version: '2022.11.27-1.19.2'
+    mappings channel: 'parchment', version: '1.19.2-2022.11.27-1.19.3'
+//    mappings channel: 'official', version: '1.19.3'
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -57,15 +58,15 @@ mixin {
 // sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    maven { url "https://www.cursemaven.com" }
-    maven { url "https://nexus.resourcefulbees.com/repository/telepathicgrunt/" }
+//    maven { url "https://www.cursemaven.com" }
+//    maven { url "https://nexus.resourcefulbees.com/repository/telepathicgrunt/" }
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.2-43.1.65'
-    implementation fg.deobf("curse.maven:spark-361579:3828094")
+    minecraft 'net.minecraftforge:forge:1.19.3-44.0.11'
+//    implementation fg.deobf("curse.maven:spark-361579:3828094")
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    runtimeOnly fg.deobf("com.telepathicgrunt:CommandStructures-Forge:3.0.0+1.19")
+//    runtimeOnly fg.deobf("com.telepathicgrunt:CommandStructures-Forge:3.0.0+1.19")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

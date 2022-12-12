@@ -5,8 +5,6 @@ import andrews.swampier_swamps.network.NetworkUtil;
 import andrews.swampier_swamps.registry.SSParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -124,17 +122,17 @@ public class SwampGas extends Entity
             {
                 this.remove(Entity.RemovalReason.KILLED);
                 NetworkUtil.createGasExplosionParticlesAtPos(level, new BlockPos(this.position()));
-                level.explode(null, this.getX(), this.getY() + 0.5F, this.getZ(), SSConfigs.commonConfig.explosionStrength.get(), true, Explosion.BlockInteraction.BREAK);
+                level.explode(null, this.getX(), this.getY() + 0.5F, this.getZ(), SSConfigs.commonConfig.explosionStrength.get(), true, Level.ExplosionInteraction.MOB);
             }
         }
         return super.hurt(source, amount);
     }
 
-    @Override
-    public Packet<?> getAddEntityPacket()
-    {
-        return new ClientboundAddEntityPacket(this);
-    }
+//    @Override TODO fix this
+//    public Packet<?> getAddEntityPacket()
+//    {
+//        return new ClientboundAddEntityPacket(this);
+//    }
 
     public boolean isCould()
     {
