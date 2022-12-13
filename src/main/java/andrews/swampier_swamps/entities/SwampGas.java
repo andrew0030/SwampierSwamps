@@ -12,7 +12,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
@@ -127,12 +126,6 @@ public class SwampGas extends Entity
         }
         return super.hurt(source, amount);
     }
-
-//    @Override TODO fix this
-//    public Packet<?> getAddEntityPacket()
-//    {
-//        return new ClientboundAddEntityPacket(this);
-//    }
 
     public boolean isCould()
     {
