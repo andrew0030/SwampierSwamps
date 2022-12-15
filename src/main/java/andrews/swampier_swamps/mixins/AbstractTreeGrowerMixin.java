@@ -4,7 +4,7 @@ import andrews.swampier_swamps.SwampierSwamps;
 import andrews.swampier_swamps.registry.SSTags;
 import andrews.swampier_swamps.util.Reference;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -43,7 +43,7 @@ public class AbstractTreeGrowerMixin
                                 level.getBlockState(pos.offset(xOffset, 0, zOffset + 1)).is(block) &&
                                 level.getBlockState(pos.offset(xOffset + 1, 0, zOffset + 1)).is(block))
                         {
-                            Optional<ConfiguredFeature<?, ?>> baldCypressCF = level.registryAccess().registryOrThrow(Registry.CONFIGURED_FEATURE_REGISTRY).getOptional(new ResourceLocation(Reference.MODID, "bald_cypress"));
+                            Optional<ConfiguredFeature<?, ?>> baldCypressCF = level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).getOptional(new ResourceLocation(Reference.MODID, "bald_cypress"));
                             if (baldCypressCF.isPresent())
                             {
                                 BlockState blockstate = Blocks.AIR.defaultBlockState();

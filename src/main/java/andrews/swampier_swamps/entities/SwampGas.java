@@ -5,8 +5,6 @@ import andrews.swampier_swamps.network.NetworkUtil;
 import andrews.swampier_swamps.registry.SSParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -15,7 +13,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
@@ -125,16 +122,10 @@ public class SwampGas extends Entity
             {
                 this.remove(Entity.RemovalReason.KILLED);
                 NetworkUtil.createGasExplosionParticlesAtPos((ServerLevel) level, new BlockPos(this.position()));
-                level.explode(null, this.getX(), this.getY() + 0.5F, this.getZ(), SwampierSwamps.SS_CONFIG.SSCommonConfig.explosionStrength, true, Explosion.BlockInteraction.BREAK);
+                level.explode(null, this.getX(), this.getY() + 0.5F, this.getZ(), SwampierSwamps.SS_CONFIG.SSCommonConfig.explosionStrength, true, Level.ExplosionInteraction.MOB);
             }
         }
         return super.hurt(source, amount);
-    }
-
-    @Override
-    public Packet<?> getAddEntityPacket()
-    {
-        return new ClientboundAddEntityPacket(this);
     }
 
     public boolean isCould()

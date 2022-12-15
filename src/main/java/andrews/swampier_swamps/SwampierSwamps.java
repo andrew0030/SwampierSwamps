@@ -2,6 +2,7 @@ package andrews.swampier_swamps;
 
 import andrews.swampier_swamps.config.SSConfig;
 import andrews.swampier_swamps.entities.Dragonfly;
+import andrews.swampier_swamps.events.CreativeTabEvents;
 import andrews.swampier_swamps.registry.*;
 import andrews.swampier_swamps.util.PotionRecipeChanger;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -32,6 +33,7 @@ public class SwampierSwamps implements ModInitializer
 
         PotionRecipeChanger.performChanges();
         SSFlammables.registerFlammables();
+        CreativeTabEvents.init();
 //        No Server Messages, maybe I will need this in the future!
 //        SSNetwork.registerNetworkMessages();
     }

@@ -2,6 +2,7 @@ package andrews.swampier_swamps.registry;
 
 import andrews.swampier_swamps.util.Reference;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.animal.FrogVariant;
 
@@ -26,7 +27,7 @@ public class SSFrogVariants
 
     private static FrogVariant createFrogVariant(String name, String texture)
     {
-        return Registry.register(Registry.FROG_VARIANT, new ResourceLocation(Reference.MODID, name), new FrogVariant(new ResourceLocation(Reference.MODID, "textures/entity/frog/" + texture + ".png")));
+        return Registry.register(BuiltInRegistries.FROG_VARIANT, new ResourceLocation(Reference.MODID, name), new FrogVariant(new ResourceLocation(Reference.MODID, "textures/entity/frog/" + texture + ".png")));
     }
 
     public static void init() {}
