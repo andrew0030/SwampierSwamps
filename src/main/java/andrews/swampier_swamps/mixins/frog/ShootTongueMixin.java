@@ -14,10 +14,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ShootTongue.class)
-public abstract class ShootTongueMixin
+public class ShootTongueMixin
 {
-    @Shadow protected abstract boolean canPathfindToTarget(Frog frog, LivingEntity target);
-    @Shadow protected abstract void addUnreachableTargetToMemory(Frog frog, LivingEntity target);
+    @Shadow private boolean canPathfindToTarget(Frog frog, LivingEntity target) {return false;}
+    @Shadow private void addUnreachableTargetToMemory(Frog frog, LivingEntity target) {}
 
     @Inject(method = "checkExtraStartConditions(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/animal/frog/Frog;)Z", at = @At(value = "RETURN"), cancellable = true)
     public void injectCheckExtraStartConditions(ServerLevel level, Frog frog, CallbackInfoReturnable<Boolean> cir)
@@ -29,7 +29,7 @@ public abstract class ShootTongueMixin
                 if(frog.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).isPresent())
                 {
                     LivingEntity target = frog.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).get();
-                    boolean canPathFind = this.canPathfindToTarget(frog, target);
+                    boolean canPathFind = canPathfindToTarget(frog, target);
                     if (!canPathFind)
                     {
                         frog.getBrain().eraseMemory(MemoryModuleType.ATTACK_TARGET);
