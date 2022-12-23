@@ -11,9 +11,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FrogAttackablesSensor.class)
-public abstract class FrogAttackablesSensorMixin
+public class FrogAttackablesSensorMixin
 {
-    @Shadow protected abstract boolean isUnreachableAttackTarget(LivingEntity frog, LivingEntity target);
+    @Shadow private boolean isUnreachableAttackTarget(LivingEntity frog, LivingEntity target) {return false;}
 
     @Inject(method = "isMatchingEntity", at = @At(value = "HEAD"), cancellable = true)
     public void injectIsMatchingEntity(LivingEntity frog, LivingEntity target, CallbackInfoReturnable<Boolean> cir)

@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 
 @Mixin(BottleItem.class)
-public abstract class BottleItemMixin
+public class BottleItemMixin
 {
     @Inject(method = "use", at = @At(value = "HEAD"), cancellable = true)
     public void injectUse(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir)
