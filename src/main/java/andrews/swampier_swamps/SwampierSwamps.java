@@ -49,6 +49,7 @@ public class SwampierSwamps
             PotionRecipeChanger.performChanges();
             SSEntities.registerSpawnPlacements();
             SSFlammables.registerFlammables();
+            SSCompostable.registerCompostable();
         });
         //Thread Safe Stuff Bellow
         SSNetwork.setupMessages();
