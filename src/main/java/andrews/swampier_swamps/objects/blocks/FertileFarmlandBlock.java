@@ -33,7 +33,7 @@ public class FertileFarmlandBlock extends FarmBlock
         { // Forge: Move logic to Entity#canTrample
             turnToDecayingKelp(state, level, pos);
         }
-        entity.causeFallDamage(fallDistance, 1.0F, DamageSource.FALL);
+        entity.causeFallDamage(fallDistance, 1.0F, entity.damageSources().fall());
     }
 
     @Override

@@ -219,7 +219,7 @@ public class Dragonfly extends Animal implements FlyingAnimal
         {
             Vec3 vec3 = this.findPos();
             if (vec3 != null)
-                mob.getNavigation().moveTo(mob.getNavigation().createPath(new BlockPos(vec3), 1), 1.0D);
+                mob.getNavigation().moveTo(mob.getNavigation().createPath(BlockPos.containing(vec3), 1), 1.0D);
         }
 
         @Nullable
