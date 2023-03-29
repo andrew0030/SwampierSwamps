@@ -29,7 +29,7 @@ public class WaterlilyBlockMixin
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity, CallbackInfo ci)
     {
         if (level instanceof ServerLevel && entity instanceof LivingEntity)
-            if(level.getBlockState(pos).is(((WaterlilyBlock)(Object)this)) && !(level.getBlockState(pos.below()).getMaterial() == Material.ICE))
+            if(level.getBlockState(pos).is(((WaterlilyBlock)(Object)this)) && SwampierSwamps.SS_CONFIG.SSCommonConfig.doLilyPadsSink && !(level.getBlockState(pos.below()).getMaterial() == Material.ICE))
                 level.scheduleTick(pos, ((WaterlilyBlock)(Object)this), SwampierSwamps.SS_CONFIG.SSCommonConfig.lilyPadSinkTimeStage1);
     }
 }
