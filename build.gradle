@@ -6,7 +6,7 @@ plugins {
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 
-version = '1.19.3-2.0.2'
+version = '1.19.3-2.1.0'
 group = 'com.andrews.swampier_swamps'
 archivesBaseName = 'swampier_swamps'
 
@@ -61,7 +61,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.3-44.1.7'
+    minecraft 'net.minecraftforge:forge:1.19.3-44.1.23'
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 

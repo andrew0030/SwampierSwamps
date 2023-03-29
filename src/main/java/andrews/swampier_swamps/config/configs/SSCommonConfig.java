@@ -22,6 +22,7 @@ public class SSCommonConfig
     // Tree Stuff
     public ConfigValueListener<Integer> growBaldCypressFromSaplings;
     // Lily Pad
+    public ConfigValueListener<Boolean> doLilyPadsSink;
     public ConfigValueListener<Boolean> doLilyPadsBreak;
     public ConfigValueListener<Integer> shouldLilyPadsGrow;
     public ConfigValueListener<Integer> lilyPadSinkTimeStage1;
@@ -104,6 +105,13 @@ public class SSCommonConfig
         builder.pop(); // Tree Stuff End
 
         builder.push("Lily Pad");
+        doLilyPadsSink = subscriber.subscribe(builder
+                .comment("""
+                        This can be used to disable Lily Pad sinking completely.\r
+                        Values:\r
+                        true: Lily Pads will sink when a big Entity stands on them\r
+                        false: Lily Pads wont sink when any Entity stands on them""".indent(1)
+                ).define("doLilyPadsSink", true));
         doLilyPadsBreak = subscriber.subscribe(builder
                 .comment("""
                         This is used to determine whether Lily Pads break once they reach their final sink stage.\r
