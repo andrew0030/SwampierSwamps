@@ -1,11 +1,10 @@
 package andrews.swampier_swamps.registry;
 
 import andrews.swampier_swamps.util.Reference;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
@@ -55,6 +54,16 @@ public class SSTags
         private static TagKey<Biome> createFrogTag(String name)
         {
             return TagKey.create(Registries.BIOME, new ResourceLocation(Reference.MODID, "frog_variants/" + name));
+        }
+    }
+
+    public static class DamageTypes
+    {
+        public static final TagKey<DamageType> BLOWS_UP_SWAMP_GAS   = createTag("blows_up_swamp_gas");
+
+        private static TagKey<DamageType> createTag(String name)
+        {
+            return TagKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(Reference.MODID, name));
         }
     }
 }

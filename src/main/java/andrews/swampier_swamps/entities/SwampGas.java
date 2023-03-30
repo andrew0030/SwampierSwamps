@@ -3,6 +3,7 @@ package andrews.swampier_swamps.entities;
 import andrews.swampier_swamps.SwampierSwamps;
 import andrews.swampier_swamps.network.NetworkUtil;
 import andrews.swampier_swamps.registry.SSParticles;
+import andrews.swampier_swamps.registry.SSTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -116,12 +117,12 @@ public class SwampGas extends Entity
     @Override
     public boolean hurt(DamageSource source, float amount)
     {
-        if(source.isExplosion() || source.isProjectile())
+        if(source.is(SSTags.DamageTypes.BLOWS_UP_SWAMP_GAS))
         {
             if (!this.isRemoved() && this.level instanceof ServerLevel)
             {
                 this.remove(Entity.RemovalReason.KILLED);
-                NetworkUtil.createGasExplosionParticlesAtPos((ServerLevel) level, new BlockPos(this.position()));
+                NetworkUtil.createGasExplosionParticlesAtPos((ServerLevel) level, BlockPos.containing(this.position()));
                 level.explode(null, this.getX(), this.getY() + 0.5F, this.getZ(), SwampierSwamps.SS_CONFIG.SSCommonConfig.explosionStrength, true, Level.ExplosionInteraction.MOB);
             }
         }

@@ -6,7 +6,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -32,7 +31,7 @@ public class FertileFarmlandBlock extends FarmBlock
         {
             turnToDecayingKelp(state, level, pos);
         }
-        entity.causeFallDamage(fallDistance, 1.0f, DamageSource.FALL);
+        entity.causeFallDamage(fallDistance, 1.0f, entity.damageSources().fall());
     }
 
     @Override
