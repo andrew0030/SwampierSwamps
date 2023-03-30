@@ -95,6 +95,15 @@ public class SSCommonConfig implements ConfigData
     @ConfigEntry.Gui.PrefixText
     @ConfigEntry.Gui.Tooltip(count = 0)
     @Comment(value = """
+                        This can be used to disable Lily Pad sinking completely.\r
+                        Values:\r
+                        true: Lily Pads will sink when a big Entity stands on them\r
+                        false: Lily Pads wont sink when any Entity stands on them""")
+    public boolean doLilyPadsSink = true;
+
+    @ConfigEntry.Gui.PrefixText
+    @ConfigEntry.Gui.Tooltip(count = 0)
+    @Comment(value = """
                         This is used to determine whether Lily Pads break once they reach their final sink stage.\r
                         Values:\r
                         true: Lily Pads will break\r
