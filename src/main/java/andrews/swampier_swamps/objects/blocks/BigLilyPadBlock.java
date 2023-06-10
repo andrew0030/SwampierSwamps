@@ -10,17 +10,13 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.WaterlilyBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
@@ -96,10 +92,10 @@ public class BigLilyPadBlock extends WaterlilyBlock
         BlockPos pos3 = context.getClickedPos().relative(direction.getClockWise()).relative(direction);
         FluidState fluid3 = level.getFluidState(pos3.below());
 
-        if((((fluid.getType() == Fluids.WATER && fluid.getAmount() == FluidState.AMOUNT_FULL) || level.getBlockState(pos.below()).getMaterial() == Material.ICE) && level.getBlockState(pos).is(Blocks.AIR)) &&
-           (((fluid1.getType() == Fluids.WATER && fluid1.getAmount() == FluidState.AMOUNT_FULL) || level.getBlockState(pos1.below()).getMaterial() == Material.ICE) && level.getBlockState(pos1).is(Blocks.AIR)) &&
-           (((fluid2.getType() == Fluids.WATER && fluid2.getAmount() == FluidState.AMOUNT_FULL) || level.getBlockState(pos2.below()).getMaterial() == Material.ICE) && level.getBlockState(pos2).is(Blocks.AIR)) &&
-           (((fluid3.getType() == Fluids.WATER && fluid3.getAmount() == FluidState.AMOUNT_FULL) || level.getBlockState(pos3.below()).getMaterial() == Material.ICE) && level.getBlockState(pos3).is(Blocks.AIR)))
+        if((((fluid.getType() == Fluids.WATER && fluid.getAmount() == FluidState.AMOUNT_FULL) || level.getBlockState(pos.below()).getBlock() instanceof IceBlock) && level.getBlockState(pos).is(Blocks.AIR)) &&
+           (((fluid1.getType() == Fluids.WATER && fluid1.getAmount() == FluidState.AMOUNT_FULL) || level.getBlockState(pos1.below()).getBlock() instanceof IceBlock) && level.getBlockState(pos1).is(Blocks.AIR)) &&
+           (((fluid2.getType() == Fluids.WATER && fluid2.getAmount() == FluidState.AMOUNT_FULL) || level.getBlockState(pos2.below()).getBlock() instanceof IceBlock) && level.getBlockState(pos2).is(Blocks.AIR)) &&
+           (((fluid3.getType() == Fluids.WATER && fluid3.getAmount() == FluidState.AMOUNT_FULL) || level.getBlockState(pos3.below()).getBlock() instanceof IceBlock) && level.getBlockState(pos3).is(Blocks.AIR)))
             return this.defaultBlockState().setValue(FACING, direction);
         return null;
     }
@@ -164,7 +160,7 @@ public class BigLilyPadBlock extends WaterlilyBlock
     {
         FluidState fluidstate = level.getFluidState(pos);
         FluidState fluidstateAbove = level.getFluidState(pos.above());
-        return (fluidstate.getType() == Fluids.WATER || state.getMaterial() == Material.ICE) && fluidstateAbove.getType() == Fluids.EMPTY;
+        return (fluidstate.getType() == Fluids.WATER || state.getBlock() instanceof IceBlock) && fluidstateAbove.getType() == Fluids.EMPTY;
     }
 
     @Override

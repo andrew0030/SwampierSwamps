@@ -60,7 +60,7 @@ public class SwampGas extends Entity
                     double distance = Math.sqrt((spawnY - this.getY()) * (spawnY - this.getY()) + (spawnX - this.getX()) * (spawnX - this.getX()) + (spawnZ - this.getZ()) * (spawnZ - this.getZ()));
 
                     if (distance < 3.5)
-                        level.addParticle(SSParticles.SWAMP_GAS.get(), spawnX, spawnY, spawnZ, 0, 0, 0);
+                        this.level().addParticle(SSParticles.SWAMP_GAS.get(), spawnX, spawnY, spawnZ, 0, 0, 0);
                 }
             }
 
@@ -69,7 +69,7 @@ public class SwampGas extends Entity
             {
                 if(SSConfigs.commonConfig.givesNegativeEffects.get()) // Config Check
                 {
-                    List<LivingEntity> livingEntities = this.level.getEntitiesOfClass(LivingEntity.class, this.getBoundingBox());
+                    List<LivingEntity> livingEntities = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox());
                     if (!livingEntities.isEmpty()) // If we found living entities we continue
                     {
                         for (LivingEntity livingEntity : livingEntities) // We loop through the Entities and add the Effects
@@ -118,11 +118,11 @@ public class SwampGas extends Entity
     {
         if(source.is(SSTags.DamageTypes.BLOWS_UP_SWAMP_GAS))
         {
-            if (!this.isRemoved() && !this.level.isClientSide)
+            if (!this.isRemoved() && !this.level().isClientSide)
             {
                 this.remove(Entity.RemovalReason.KILLED);
-                NetworkUtil.createGasExplosionParticlesAtPos(level, BlockPos.containing(this.position()));
-                level.explode(null, this.getX(), this.getY() + 0.5F, this.getZ(), SSConfigs.commonConfig.explosionStrength.get(), true, Level.ExplosionInteraction.MOB);
+                NetworkUtil.createGasExplosionParticlesAtPos(this.level(), BlockPos.containing(this.position()));
+                this.level().explode(null, this.getX(), this.getY() + 0.5F, this.getZ(), SSConfigs.commonConfig.explosionStrength.get(), true, Level.ExplosionInteraction.MOB);
             }
         }
         return super.hurt(source, amount);

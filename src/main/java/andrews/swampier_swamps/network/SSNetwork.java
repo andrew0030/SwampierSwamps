@@ -24,19 +24,8 @@ public class SSNetwork
     {
         int id = -1;
         //Client Messages
-        CHANNEL.messageBuilder(MessageClientSplashParticles.class, id++)
-                .encoder(MessageClientSplashParticles::serialize)
-                .decoder(MessageClientSplashParticles::deserialize)
-                .consumerMainThread(MessageClientSplashParticles::handle)
-                .add();
-
-        CHANNEL.messageBuilder(MessageClientGasExplosionParticles.class, id++)
-                .encoder(MessageClientGasExplosionParticles::serialize)
-                .decoder(MessageClientGasExplosionParticles::deserialize)
-                .consumerMainThread(MessageClientGasExplosionParticles::handle)
-                .add();
-
+        CHANNEL.registerMessage(id++, MessageClientSplashParticles.class, MessageClientSplashParticles::serialize, MessageClientSplashParticles::deserialize, MessageClientSplashParticles::handle);
+        CHANNEL.registerMessage(id++, MessageClientGasExplosionParticles.class, MessageClientGasExplosionParticles::serialize, MessageClientGasExplosionParticles::deserialize, MessageClientGasExplosionParticles::handle);
         //Server Messages
-
     }
 }

@@ -16,6 +16,7 @@
     " TEMPERATE (Orange) as the selected Variant."
   ],
   "values": [
-    "minecraft:mushroom_fields"
+    "minecraft:mushroom_fields",
+    "minecraft:cherry_grove"
   ]
 }

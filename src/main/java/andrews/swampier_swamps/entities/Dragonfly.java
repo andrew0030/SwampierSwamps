@@ -154,7 +154,7 @@ public class Dragonfly extends Animal implements FlyingAnimal
     @Override
     public boolean isFlying()
     {
-        return !this.onGround;
+        return !this.onGround();
     }
 
     public int getDragonflyType()

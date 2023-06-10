@@ -3,13 +3,9 @@ package andrews.swampier_swamps.objects.blocks;
 import andrews.swampier_swamps.config.SSConfigs;
 import andrews.swampier_swamps.registry.SSTags;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -17,12 +13,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.IceBlock;
 import net.minecraft.world.level.block.WaterlilyBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -83,7 +78,7 @@ public class SmallLilyPadBlock extends WaterlilyBlock
         FluidState fluidState = level.getFluidState(context.getClickedPos().below());
         FluidState fluidStateAbove = level.getFluidState(context.getClickedPos());
 
-        if ((fluidState.getType() == Fluids.WATER || state.getMaterial() == Material.ICE) && fluidStateAbove.getType() == Fluids.EMPTY)
+        if ((fluidState.getType() == Fluids.WATER || state.getBlock() instanceof IceBlock) && fluidStateAbove.getType() == Fluids.EMPTY)
             return this.defaultBlockState();
         return null;
     }
@@ -103,6 +98,6 @@ public class SmallLilyPadBlock extends WaterlilyBlock
     {
         FluidState fluidState = level.getFluidState(pos);
         FluidState fluidStateAbove = level.getFluidState(pos.above());
-        return (fluidState.getType() == Fluids.WATER || state.getMaterial() == Material.ICE) && fluidStateAbove.getType() == Fluids.EMPTY;
+        return (fluidState.getType() == Fluids.WATER || state.getBlock() instanceof IceBlock) && fluidStateAbove.getType() == Fluids.EMPTY;
     }
 }

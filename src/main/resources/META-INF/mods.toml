@@ -1,12 +1,12 @@
 modLoader="javafml"
-loaderVersion="[45,)"
+loaderVersion="[46,)"
 issueTrackerURL="https://github.com/andrew0030/SwampierSwamps/issues"
 logoFile="logo.png"
 license="GNU Lesser General Public License v3.0"
 
 [[mods]]
     modId="swampier_swamps"
-    version="1.19.4-3.0.0"
+    version="1.20-4.0.0"
     displayName="Swampier Swamps"
     displayURL="https://www.curseforge.com/minecraft/mc-mods/swampier-swamps"
     credits=""
@@ -16,13 +16,13 @@ license="GNU Lesser General Public License v3.0"
 [[dependencies.swampier_swamps]]
     modId="forge"
     mandatory=true
-    versionRange="[45.0.0,)"
+    versionRange="[46.0.0,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.swampier_swamps]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.19.4,1.20)"
+    versionRange="[1.20,1.21)"
     ordering="NONE"
     side="BOTH"

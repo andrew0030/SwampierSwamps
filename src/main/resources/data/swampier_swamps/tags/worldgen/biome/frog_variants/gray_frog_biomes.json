@@ -16,6 +16,10 @@
     " TEMPERATE (Orange) as the selected Variant."
   ],
   "values": [
-    "minecraft:windswept_gravelly_hills"
+    "minecraft:windswept_gravelly_hills",
+    "minecraft:stony_peaks",
+    "minecraft:stony_shore",
+    "minecraft:windswept_hills",
+    "minecraft:windswept_forest"
   ]
 }

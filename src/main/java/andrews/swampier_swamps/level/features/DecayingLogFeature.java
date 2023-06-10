@@ -35,24 +35,22 @@ public class DecayingLogFeature extends Feature<NoneFeatureConfiguration>
             case 3 -> Direction.EAST;
         };
 
-        if((level.getBlockState(pos).is(Blocks.AIR) || level.getBlockState(pos).is(BlockTags.REPLACEABLE_PLANTS)) && level.getBlockState(pos.below()).getMaterial().isSolid())
+        if((level.getBlockState(pos).is(Blocks.AIR) || level.getBlockState(pos).is(BlockTags.REPLACEABLE)) && level.getBlockState(pos.below()).isSolid())
         {
             int logSize = rand.nextInt(2) + 4;
             // We make sure there is nothing in the way of the Log
             for (int i = 0; i < logSize; i++)
             {
                 BlockPos offsetPos = pos.relative(direction, i);
-                if (!(level.getBlockState(offsetPos).is(BlockTags.REPLACEABLE_PLANTS) || level.getBlockState(offsetPos).is(Blocks.AIR)))
-                {
+                if (!(level.getBlockState(offsetPos).is(BlockTags.REPLACEABLE) || level.getBlockState(offsetPos).is(Blocks.AIR)))
                     return false;
-                }
             }
             // We make sure this is at least 3 valid blocks under the Log
             int minValidGround = 2;
             for (int i = 0; i < logSize; i++)
             {
                 BlockPos offsetPos = pos.relative(direction, i);
-                if (!level.getBlockState(offsetPos.below()).getMaterial().isSolid())
+                if (!level.getBlockState(offsetPos.below()).isSolid())
                 {
                     --minValidGround;
                     if(minValidGround <= 0)

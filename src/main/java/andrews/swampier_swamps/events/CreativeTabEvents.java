@@ -4,7 +4,7 @@ import andrews.swampier_swamps.registry.SSBlocks;
 import andrews.swampier_swamps.registry.SSItems;
 import andrews.swampier_swamps.util.Reference;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -12,14 +12,14 @@ import net.minecraftforge.fml.common.Mod;
 public class CreativeTabEvents
 {
     @SubscribeEvent
-    public static void addItemsToTabs(CreativeModeTabEvent.BuildContents event)
+    public static void addItemsToTabs(BuildCreativeModeTabContentsEvent event)
     {
-        if(event.getTab().equals(CreativeModeTabs.BUILDING_BLOCKS))
+        if(event.getTabKey().equals(CreativeModeTabs.BUILDING_BLOCKS))
         {
             event.accept(SSBlocks.MUD_STAIRS);
             event.accept(SSBlocks.MUD_SLAB);
         }
-        else if(event.getTab().equals(CreativeModeTabs.NATURAL_BLOCKS))
+        else if(event.getTabKey().equals(CreativeModeTabs.NATURAL_BLOCKS))
         {
             event.accept(SSBlocks.DECAYING_KELP);
             event.accept(SSBlocks.FERTILE_FARMLAND);
@@ -41,24 +41,24 @@ public class CreativeTabEvents
             event.accept(SSBlocks.BIG_LILY_PAD);
             event.accept(SSBlocks.SMALL_LILY_PAD);
         }
-        else if(event.getTab().equals(CreativeModeTabs.FUNCTIONAL_BLOCKS))
+        else if(event.getTabKey().equals(CreativeModeTabs.FUNCTIONAL_BLOCKS))
         {
             event.accept(SSBlocks.GAS_LAMP);
         }
-        else if(event.getTab().equals(CreativeModeTabs.REDSTONE_BLOCKS))
+        else if(event.getTabKey().equals(CreativeModeTabs.REDSTONE_BLOCKS))
         {
             event.accept(SSBlocks.GAS_LAMP);
         }
-        else if(event.getTab().equals(CreativeModeTabs.FOOD_AND_DRINKS))
+        else if(event.getTabKey().equals(CreativeModeTabs.FOOD_AND_DRINKS))
         {
             event.accept(SSItems.FROG_LEG);
             event.accept(SSItems.COOKED_FROG_LEG);
         }
-        else if(event.getTab().equals(CreativeModeTabs.INGREDIENTS))
+        else if(event.getTabKey().equals(CreativeModeTabs.INGREDIENTS))
         {
             event.accept(SSItems.GAS_BOTTLE);
         }
-        else if(event.getTab().equals(CreativeModeTabs.SPAWN_EGGS))
+        else if(event.getTabKey().equals(CreativeModeTabs.SPAWN_EGGS))
         {
             event.accept(SSItems.DRAGONFLY_SPAWN_EGG);
         }

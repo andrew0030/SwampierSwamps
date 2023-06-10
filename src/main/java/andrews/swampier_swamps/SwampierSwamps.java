@@ -2,6 +2,8 @@ package andrews.swampier_swamps;
 
 import andrews.swampier_swamps.config.SSConfigs;
 import andrews.swampier_swamps.network.SSNetwork;
+import andrews.swampier_swamps.particles.DecayBubblesParticle;
+import andrews.swampier_swamps.particles.SwampGasParticle;
 import andrews.swampier_swamps.registry.*;
 import andrews.swampier_swamps.util.PotionRecipeChanger;
 import andrews.swampier_swamps.util.Reference;
@@ -63,6 +65,7 @@ public class SwampierSwamps
 
     void setupParticles(final RegisterParticleProvidersEvent event)
     {
-        SSParticles.registerParticles();
+        event.registerSpriteSet(SSParticles.DECAY_BUBBLES.get(), DecayBubblesParticle.Factory::new);
+        event.registerSpriteSet(SSParticles.SWAMP_GAS.get(), SwampGasParticle.Factory::new);
     }
 }

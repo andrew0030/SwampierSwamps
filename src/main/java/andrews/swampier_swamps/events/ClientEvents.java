@@ -7,7 +7,6 @@ import andrews.swampier_swamps.registry.SSBlocks;
 import andrews.swampier_swamps.registry.SSEntities;
 import andrews.swampier_swamps.util.Reference;
 import net.minecraft.client.color.block.BlockColors;
-import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.BiomeColors;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.BlockItem;
@@ -39,19 +38,15 @@ public class ClientEvents
     @SubscribeEvent
     public static void registerBlockColor(RegisterColorHandlersEvent.Block event)
     {
-        BlockColors blockcolors = event.getBlockColors();
-        blockcolors.register((state, level, pos, tintIndex) -> isNotNull(level, pos) ? BiomeColors.getAverageFoliageColor(level, pos) : FoliageColor.getDefaultColor(), SSBlocks.SWAMP_VINE.get());
-        blockcolors.register((state, level, pos, tintIndex) -> isNotNull(level, pos) ? 2129968 : 7455580, SSBlocks.SINKING_LILY_PAD.get(), SSBlocks.BIG_LILY_PAD.get(), SSBlocks.SMALL_LILY_PAD.get());
+        event.register((state, level, pos, tintIndex) -> isNotNull(level, pos) ? BiomeColors.getAverageFoliageColor(level, pos) : FoliageColor.getDefaultColor(), SSBlocks.SWAMP_VINE.get());
+        event.register((state, level, pos, tintIndex) -> isNotNull(level, pos) ? 2129968 : 7455580, SSBlocks.SINKING_LILY_PAD.get(), SSBlocks.BIG_LILY_PAD.get(), SSBlocks.SMALL_LILY_PAD.get());
     }
 
     @SubscribeEvent
     public static void registerBlockColor(RegisterColorHandlersEvent.Item event)
     {
         BlockColors blockcolors = event.getBlockColors();
-        ItemColors itemcolors = event.getItemColors();
-
-        itemcolors.register((stack, tintIndex) ->
-        {
+        event.register((stack, tintIndex) -> {
             BlockState blockstate = ((BlockItem)stack.getItem()).getBlock().defaultBlockState();
             return blockcolors.getColor(blockstate, null, null, tintIndex);
         }, SSBlocks.SWAMP_VINE.get(), SSBlocks.BIG_LILY_PAD.get(), SSBlocks.SMALL_LILY_PAD.get());
