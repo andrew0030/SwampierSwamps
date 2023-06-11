@@ -106,13 +106,15 @@ public class BaldCypressTrunkPlacer extends TrunkPlacer
 
     private void randomDiagonalLog(LevelSimulatedReader level, BiConsumer<BlockPos, BlockState> consumer, RandomSource rand, BlockPos pos, TreeConfiguration config)
     {
+        // Replaces all oak saplings in trunk range with air
+        if(level.isStateAtPosition(pos.above(), state -> state.is(Blocks.OAK_SAPLING)))
+            consumer.accept(pos.above(), Blocks.AIR.defaultBlockState());
+        // Places the Logs
         if(rand.nextInt(2) == 1)
         {
             setDirtAt(level, consumer, rand, pos, config);
-            //this.placeLog(level, consumer, rand, pos.above(), config); We manually do this in order to replace oak saplings if need be
-            if(TreeFeature.validTreePos(level, pos.above()) || level.isStateAtPosition(pos.above(), state -> state.is(Blocks.OAK_SAPLING)))
+            if(TreeFeature.validTreePos(level, pos.above()))
                 consumer.accept(pos.above(), config.trunkProvider.getState(rand, pos.above()));
-
         }
     }
 

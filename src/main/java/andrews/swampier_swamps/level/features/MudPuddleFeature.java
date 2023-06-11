@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
-import net.minecraft.world.level.material.Material;
 
 public class MudPuddleFeature extends Feature<NoneFeatureConfiguration>
 {
@@ -74,11 +73,11 @@ public class MudPuddleFeature extends Feature<NoneFeatureConfiguration>
                     {
                         boolean flag = !withinRange[(waterXOffset * 16 + waterZOffset) * 8 + waterYOffset] && (waterXOffset < 15 && withinRange[((waterXOffset + 1) * 16 + waterZOffset) * 8 + waterYOffset] || waterXOffset > 0 && withinRange[((waterXOffset - 1) * 16 + waterZOffset) * 8 + waterYOffset] || waterZOffset < 15 && withinRange[(waterXOffset * 16 + waterZOffset + 1) * 8 + waterYOffset] || waterZOffset > 0 && withinRange[(waterXOffset * 16 + (waterZOffset - 1)) * 8 + waterYOffset] || waterYOffset < 7 && withinRange[(waterXOffset * 16 + waterZOffset) * 8 + waterYOffset + 1] || waterYOffset > 0 && withinRange[(waterXOffset * 16 + waterZOffset) * 8 + (waterYOffset - 1)]);
                         if (flag) {
-                            Material material = level.getBlockState(pos.offset(waterXOffset, waterYOffset, waterZOffset)).getMaterial();
-                            if (waterYOffset >= 4 && material.isLiquid())
+                            BlockState state = level.getBlockState(pos.offset(waterXOffset, waterYOffset, waterZOffset));
+                            if (waterYOffset >= 4 && state.liquid())
                                 return false;
 
-                            if (waterYOffset < 4 && !material.isSolid() && level.getBlockState(pos.offset(waterXOffset, waterYOffset, waterZOffset)) != waterState)
+                            if (waterYOffset < 4 && !state.isSolid() && level.getBlockState(pos.offset(waterXOffset, waterYOffset, waterZOffset)) != waterState)
                                 return false;
                         }
                     }
@@ -102,7 +101,7 @@ public class MudPuddleFeature extends Feature<NoneFeatureConfiguration>
                                 if(level.getBlockState(posAtTarget.above()).is(Blocks.OAK_LOG) && level.getBlockState(posAtTarget.above()).getValue(RotatedPillarBlock.AXIS) == Direction.Axis.Y)
                                 {
                                     BlockPos extraLogsPos = posAtTarget;
-                                    while(!level.getBlockState(extraLogsPos).getMaterial().isSolid())
+                                    while(!level.getBlockState(extraLogsPos).isSolid())
                                     {
                                         level.setBlock(extraLogsPos, Blocks.OAK_LOG.defaultBlockState(), 2);
                                         extraLogsPos = extraLogsPos.below();
@@ -140,7 +139,7 @@ public class MudPuddleFeature extends Feature<NoneFeatureConfiguration>
                         if (flag2 && (mudYOffset < 4 || rand.nextInt(2) != 0))
                         {
                             BlockState stateAtTarget = level.getBlockState(pos.offset(mudXOffset, mudYOffset, mudZOffset));
-                            if (stateAtTarget.getMaterial().isSolid() && !stateAtTarget.is(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE))
+                            if (stateAtTarget.isSolid() && !stateAtTarget.is(BlockTags.LAVA_POOL_STONE_CANNOT_REPLACE))
                             {
                                 // Used to create a better looking fade-in
                                 for(int j = 0; j < 5; j++)

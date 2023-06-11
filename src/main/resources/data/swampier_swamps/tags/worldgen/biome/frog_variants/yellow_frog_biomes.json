@@ -16,6 +16,11 @@
     " TEMPERATE (Orange) as the selected Variant."
   ],
   "values": [
-    "minecraft:badlands"
+    "minecraft:badlands",
+    "minecraft:wooded_badlands",
+    "minecraft:eroded_badlands",
+    "minecraft:savanna",
+    "minecraft:savanna_plateau",
+    "minecraft:windswept_savanna"
   ]
 }

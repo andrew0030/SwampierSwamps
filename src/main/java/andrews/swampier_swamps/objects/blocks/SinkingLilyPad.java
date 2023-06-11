@@ -95,7 +95,7 @@ public class SinkingLilyPad extends WaterlilyBlock
         {
             if (entity instanceof LivingEntity livingEntity)
                 if (livingEntity.getBbHeight() > 1.2F)
-                    if(livingEntity.isOnGround() || livingEntity.isInWater())
+                    if(livingEntity.onGround() || livingEntity.isInWater())
                         if(livingEntity.position().y > (double)((float)pos.below().getY() + 0.6875F) || !SwampierSwamps.SS_CONFIG.SSCommonConfig.doLilyPadsBreak)
                             ++livingEntityCount;
         }
@@ -104,7 +104,7 @@ public class SinkingLilyPad extends WaterlilyBlock
 
     private boolean canEntitySink(BlockPos pos, Entity entity)
     {
-        return entity.isOnGround() && entity.position().y > (pos.getY() + 0.6875D);
+        return entity.onGround() && entity.position().y > (pos.getY() + 0.6875D);
     }
 
     private void setNextSinkStage(ServerLevel level, BlockPos pos, int stage, int ticks)

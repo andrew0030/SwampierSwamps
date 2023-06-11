@@ -16,6 +16,11 @@
     " TEMPERATE (Orange) as the selected Variant."
   ],
   "values": [
-
+    "minecraft:meadow",
+    "minecraft:birch_forest",
+    "minecraft:old_growth_birch_forest",
+    "minecraft:swamp",
+    "minecraft:beach",
+    "minecraft:desert"
   ]
 }

@@ -16,6 +16,7 @@
     " TEMPERATE (Orange) as the selected Variant."
   ],
   "values": [
-    "minecraft:flower_forest"
+    "minecraft:flower_forest",
+    "minecraft:sunflower_plains"
   ]
 }

@@ -13,11 +13,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.IceBlock;
 import net.minecraft.world.level.block.WaterlilyBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
@@ -78,7 +78,7 @@ public class SmallLilyPadBlock extends WaterlilyBlock
         FluidState fluidState = level.getFluidState(context.getClickedPos().below());
         FluidState fluidStateAbove = level.getFluidState(context.getClickedPos());
 
-        if ((fluidState.getType() == Fluids.WATER || state.getMaterial() == Material.ICE) && fluidStateAbove.getType() == Fluids.EMPTY)
+        if ((fluidState.getType() == Fluids.WATER || state.getBlock() instanceof IceBlock) && fluidStateAbove.getType() == Fluids.EMPTY)
             return this.defaultBlockState();
         return null;
     }
@@ -98,6 +98,6 @@ public class SmallLilyPadBlock extends WaterlilyBlock
     {
         FluidState fluidState = level.getFluidState(pos);
         FluidState fluidStateAbove = level.getFluidState(pos.above());
-        return (fluidState.getType() == Fluids.WATER || state.getMaterial() == Material.ICE) && fluidStateAbove.getType() == Fluids.EMPTY;
+        return (fluidState.getType() == Fluids.WATER || state.getBlock() instanceof IceBlock) && fluidStateAbove.getType() == Fluids.EMPTY;
     }
 }
